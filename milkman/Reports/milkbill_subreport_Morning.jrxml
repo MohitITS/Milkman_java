@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="milkbill_subreport_Morning" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2031ecdd-3af8-40a2-be1d-a8fdb05cbab0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Producer Id" class="java.lang.Integer"/>
+	<parameter name="fdate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tdate" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     mlkCollection.`ID` AS mlkCollection_ID,
+     mlkCollection.`trn_date` AS mlkCollection_trn_date,
+     mlkCollection.`shift_id` AS mlkCollection_shift_id,
+     mlkCollection.`prod_code` AS mlkCollection_prod_code,
+     mlkCollection.`sample_no` AS mlkCollection_sample_no,
+     mlkCollection.`mlkType_id` AS mlkCollection_mlkType_id,
+     mlkCollection.`weight` AS mlkCollection_weight,
+     mlkCollection.`fat` AS mlkCollection_fat,
+     mlkCollection.`degree` AS mlkCollection_degree,
+     mlkCollection.`snf` AS mlkCollection_snf,
+     mlkCollection.`rate` AS mlkCollection_rate,
+     mlkCollection.`smw` AS mlkCollection_smw,
+     mlkCollection.`smr` AS mlkCollection_smr,
+     mlkCollection.`bill_no` AS mlkCollection_bill_no,
+     mlkCollection.`totcan` AS mlkCollection_totcan,
+     mlkCollection.`dummyrate` AS mlkCollection_dummyrate,
+     mlkCollection.`prod_id` AS mlkCollection_prod_id
+FROM
+     `mlkCollection` mlkCollection
+WHERE
+     shift_id = 1
+ AND prod_id = $P!{Producer Id}
+ AND trn_date >= $P{fdate}
+ AND trn_date <= $P{tdate}
+ORDER BY
+     mlkCollection.trn_date ASC]]>
+	</queryString>
+	<field name="mlkCollection_ID" class="java.lang.Integer"/>
+	<field name="mlkCollection_trn_date" class="java.sql.Timestamp"/>
+	<field name="mlkCollection_shift_id" class="java.lang.Integer"/>
+	<field name="mlkCollection_prod_code" class="java.lang.Integer"/>
+	<field name="mlkCollection_sample_no" class="java.lang.Integer"/>
+	<field name="mlkCollection_mlkType_id" class="java.lang.Integer"/>
+	<field name="mlkCollection_weight" class="java.lang.Double"/>
+	<field name="mlkCollection_fat" class="java.lang.Double"/>
+	<field name="mlkCollection_degree" class="java.lang.Double"/>
+	<field name="mlkCollection_snf" class="java.lang.Double"/>
+	<field name="mlkCollection_rate" class="java.lang.Double"/>
+	<field name="mlkCollection_smw" class="java.lang.Double"/>
+	<field name="mlkCollection_smr" class="java.lang.Double"/>
+	<field name="mlkCollection_bill_no" class="java.lang.Integer"/>
+	<field name="mlkCollection_totcan" class="java.lang.Integer"/>
+	<field name="mlkCollection_dummyrate" class="java.lang.Double"/>
+	<field name="mlkCollection_prod_id" class="java.lang.Integer"/>
+	<variable name="var_amt" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{mlkCollection_weight}*$F{mlkCollection_rate}]]></variableExpression>
+	</variable>
+	<group name="mlkCollection_trn_date">
+		<groupExpression><![CDATA[$F{mlkCollection_trn_date}]]></groupExpression>
+	</group>
+	<group name="Producer Id">
+		<groupExpression><![CDATA[$F{mlkCollection_prod_id}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField pattern="dd/MM">
+				<reportElement uuid="7d1637e3-ca2a-4888-9dd9-0d10d593dcd5" x="16" y="0" width="29" height="15"/>
+				<box bottomPadding="0" rightPadding="2">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mlkCollection_trn_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0;-###0.0">
+				<reportElement uuid="c775f798-a978-43a8-9a63-a3f2e9c63e43" x="45" y="0" width="36" height="15"/>
+				<box bottomPadding="0" rightPadding="2">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mlkCollection_weight}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0;-###0.0">
+				<reportElement uuid="2b79f4e7-bb5a-4463-a491-82c3c70c0ba3" x="81" y="0" width="25" height="15"/>
+				<box bottomPadding="0" rightPadding="2">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mlkCollection_fat}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0;-###0.0">
+				<reportElement uuid="b866006c-8f58-4384-96b6-145ba23ba4ad" x="106" y="0" width="36" height="15"/>
+				<box bottomPadding="0" rightPadding="2">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mlkCollection_degree}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0;-###0.0">
+				<reportElement uuid="29459b31-5c06-4372-9e99-625329312e6c" x="142" y="0" width="27" height="15"/>
+				<box bottomPadding="0" rightPadding="2">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mlkCollection_snf}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="37e73cba-1750-4541-a94f-1838a47ac6e4" x="169" y="0" width="38" height="15"/>
+				<box bottomPadding="0" rightPadding="2">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mlkCollection_rate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="cb591e51-cb61-4781-8d33-4cd637d4a9bc" x="207" y="0" width="56" height="15"/>
+				<box bottomPadding="0" rightPadding="2">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{var_amt}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

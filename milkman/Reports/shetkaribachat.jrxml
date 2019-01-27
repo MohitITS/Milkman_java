@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="shetkaribachat" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="77858cd3-cb42-426a-a492-eaab1f3ba692">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fdate" class="java.lang.String"/>
+	<parameter name="tdate" class="java.lang.String"/>
+	<parameter name="wherecondition" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     config.`ID` AS config_ID,
+     config.`firmname` AS config_firmname,
+     config.`address` AS config_address,
+     config.`contatno` AS config_contatno,
+     prodbilldeduction.`ID` AS prodbilldeduction_ID,
+     prodbilldeduction.`deddate` AS prodbilldeduction_deddate,
+     prodbilldeduction.`dedfromdate` AS prodbilldeduction_dedfromdate,
+     prodbilldeduction.`dedtodate` AS prodbilldeduction_dedtodate,
+     prodbilldeduction.`pro_code` AS prodbilldeduction_pro_code,
+     prodbilldeduction.`totamilk` AS prodbilldeduction_totamilk,
+     prodbilldeduction.`amount` AS prodbilldeduction_amount,
+     prodbilldeduction.`rebate` AS prodbilldeduction_rebate,
+     prodbilldeduction.`shareanamat` AS prodbilldeduction_shareanamat,
+     prodbilldeduction.`chilingcharges` AS prodbilldeduction_chilingcharges,
+     producer.`ID` AS producer_ID,
+     producer.`pro_name` AS producer_pro_name,
+     producer.`prod_id` AS producer_prod_id
+FROM
+     `prodbilldeduction` prodbilldeduction INNER JOIN `producer` producer ON prodbilldeduction.`pro_code` = producer.`prod_id`,
+     `config` config
+WHERE
+     $P!{wherecondition}
+ORDER BY
+     prodbilldeduction.dedfromdate]]>
+	</queryString>
+	<field name="config_ID" class="java.lang.Integer"/>
+	<field name="config_firmname" class="java.lang.String"/>
+	<field name="config_address" class="java.lang.String"/>
+	<field name="config_contatno" class="java.lang.String"/>
+	<field name="prodbilldeduction_ID" class="java.lang.Integer"/>
+	<field name="prodbilldeduction_deddate" class="java.sql.Timestamp"/>
+	<field name="prodbilldeduction_dedfromdate" class="java.sql.Timestamp"/>
+	<field name="prodbilldeduction_dedtodate" class="java.sql.Timestamp"/>
+	<field name="prodbilldeduction_pro_code" class="java.lang.Integer"/>
+	<field name="prodbilldeduction_totamilk" class="java.lang.Double"/>
+	<field name="prodbilldeduction_amount" class="java.lang.Double"/>
+	<field name="prodbilldeduction_rebate" class="java.lang.Double"/>
+	<field name="prodbilldeduction_shareanamat" class="java.lang.Double"/>
+	<field name="prodbilldeduction_chilingcharges" class="java.lang.Double"/>
+	<field name="producer_ID" class="java.lang.Integer"/>
+	<field name="producer_pro_name" class="java.lang.String"/>
+	<field name="producer_prod_id" class="java.lang.Integer"/>
+	<variable name="PT_totmilk" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{prodbilldeduction_totamilk}]]></variableExpression>
+	</variable>
+	<variable name="GT_totmilk" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{prodbilldeduction_totamilk}]]></variableExpression>
+	</variable>
+	<variable name="PT_amount" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{prodbilldeduction_amount}]]></variableExpression>
+	</variable>
+	<variable name="GT_amount" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{prodbilldeduction_amount}]]></variableExpression>
+	</variable>
+	<variable name="PT_bachat" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{prodbilldeduction_rebate}]]></variableExpression>
+	</variable>
+	<variable name="GT_bachat" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{prodbilldeduction_rebate}]]></variableExpression>
+	</variable>
+	<group name="prodbilldeduction_pro_code" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{prodbilldeduction_pro_code}]]></groupExpression>
+		<groupHeader>
+			<band height="40">
+				<staticText>
+					<reportElement uuid="1d0e7604-d9d4-4ee0-9f2d-700fe9cb1f87" mode="Transparent" x="12" y="0" width="118" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="12" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[उत्पादकाचे कोड व नाव :]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="41ed0542-4a72-41b3-9955-ef6b69b97983" x="170" y="0" width="385" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{producer_pro_name}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="7b55cd43-6269-4878-9ec6-a2d278023684" x="130" y="0" width="40" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{prodbilldeduction_pro_code}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="c4e9af2e-61fe-4e7f-9ced-5e0d755de4da" mode="Transparent" x="12" y="20" width="118" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[दिनांक]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="065ce88b-01ad-45ea-a882-9cba45e32706" mode="Transparent" x="130" y="20" width="133" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[एकूण दुध]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="6d48381d-e166-4f91-b94e-dbcda0b73e35" mode="Transparent" x="263" y="20" width="157" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[रक्कम]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="5175a759-438d-46ce-a643-067a3b590de2" mode="Transparent" x="420" y="20" width="135" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[बचत]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="103" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="c745944b-e037-4857-91fd-013fa3238ec6" mode="Transparent" x="12" y="73" width="543" height="30" backcolor="#FFFFFF"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="13" isBold="false" isItalic="false" isUnderline="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[शेतकरी बचत रजिस्टर]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="b86726c3-20d0-40cc-b88b-ce2cfb985f42" x="378" y="53" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{fdate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="7e59ae7e-0a05-4187-9a1f-9ae11efabb9d" x="478" y="53" width="15" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ते]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="f7837de6-f58b-4109-b3d4-bf11746a5f69" x="493" y="53" width="62" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{tdate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="015e5d06-2220-4faa-81a2-2981a8050d2f" x="10" y="0" width="555" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_firmname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="40288d7f-c64b-40be-b457-ff6fe388acbf" x="12" y="53" width="305" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_contatno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a38d55b2-bcf8-4d54-8ba8-2f6969d9a3a2" x="10" y="26" width="555" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_address}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="1352d78b-9b49-4c6f-8b6a-4bee8f1282c6" x="130" y="0" width="133" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{prodbilldeduction_totamilk}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="419c2b26-4d39-4ab0-ab78-508c66888430" x="263" y="0" width="157" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{prodbilldeduction_amount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="b93fcfe3-1690-4405-8b40-58c66ac94c1b" x="420" y="0" width="135" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{prodbilldeduction_rebate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="6b5c9db1-2e81-4aed-8e1c-c0bc7c1d70c3" x="12" y="0" width="118" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{prodbilldeduction_dedtodate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="91961d74-744b-4b22-b30c-19d3db21e00f" x="12" y="20" width="118" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grant Total : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="018af9dc-ff83-455d-90b5-dc803b6ec327" x="12" y="0" width="118" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Page Total : ]]></text>
+			</staticText>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="8621bcda-b16e-4b35-ad0d-8ec4b15095be" x="130" y="0" width="133" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PT_totmilk}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="e0feb14c-0c34-4c27-a3bf-e4cf40735362" x="130" y="20" width="133" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{GT_totmilk}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="04d7a14e-7f9c-4d86-aec3-bcc0af8038e8" x="263" y="0" width="157" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PT_amount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="dd6ba2c6-5370-4585-b4f9-96c3180642ca" x="263" y="20" width="157" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{GT_amount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="5b905492-d94d-490b-b8e1-751479c3fdc2" x="420" y="0" width="135" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PT_bachat}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="828e5756-e353-4cc1-94af-3c1c245ac457" x="420" y="20" width="135" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{GT_bachat}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="shiftreport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9eff3d3d-9437-4b53-982f-a3a7f0f78d32">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="wherecondition" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     config.`ID` AS config_ID,
+     config.`firmname` AS config_firmname,
+     config.`address` AS config_address,
+     config.`contatno` AS config_contatno,
+     mlkCollection.`ID` AS mlkCollection_ID,
+     mlkCollection.`trn_date` AS mlkCollection_trn_date,
+     mlkCollection.`shift_id` AS mlkCollection_shift_id,
+     mlkCollection.`prod_code` AS mlkCollection_prod_code,
+     mlkCollection.`sample_no` AS mlkCollection_sample_no,
+     mlkCollection.`mlkType_id` AS mlkCollection_mlkType_id,
+     mlkCollection.`weight` AS mlkCollection_weight,
+     mlkCollection.`fat` AS mlkCollection_fat,
+     mlkCollection.`degree` AS mlkCollection_degree,
+     mlkCollection.`snf` AS mlkCollection_snf,
+     mlkCollection.`rate` AS mlkCollection_rate,
+     mlkCollection.`smw` AS mlkCollection_smw,
+     mlkCollection.`smr` AS mlkCollection_smr,
+     producer.`ID` AS producer_ID,
+     producer.`pro_name` AS producer_pro_name,
+     producer.`prod_id` AS producer_prod_id,
+     mlkCollection.`prod_id` AS mlkCollection_prod_id,
+     producer.`producergroupid` AS producer_producergroupid
+FROM
+     `producer` producer INNER JOIN `mlkCollection` mlkCollection ON producer.`prod_id` = mlkCollection.`prod_id`,
+     `config` config
+WHERE
+     $P!{wherecondition}
+ORDER BY
+     producer.producergroupid, producer.ID ASC]]>
+	</queryString>
+	<field name="config_ID" class="java.lang.Integer"/>
+	<field name="config_firmname" class="java.lang.String"/>
+	<field name="config_address" class="java.lang.String"/>
+	<field name="config_contatno" class="java.lang.String"/>
+	<field name="mlkCollection_ID" class="java.lang.Integer"/>
+	<field name="mlkCollection_trn_date" class="java.sql.Timestamp"/>
+	<field name="mlkCollection_shift_id" class="java.lang.Integer"/>
+	<field name="mlkCollection_prod_code" class="java.lang.Integer"/>
+	<field name="mlkCollection_sample_no" class="java.lang.Integer"/>
+	<field name="mlkCollection_mlkType_id" class="java.lang.Integer"/>
+	<field name="mlkCollection_weight" class="java.lang.Double"/>
+	<field name="mlkCollection_fat" class="java.lang.Double"/>
+	<field name="mlkCollection_degree" class="java.lang.Double"/>
+	<field name="mlkCollection_snf" class="java.lang.Double"/>
+	<field name="mlkCollection_rate" class="java.lang.Double"/>
+	<field name="mlkCollection_smw" class="java.lang.Double"/>
+	<field name="mlkCollection_smr" class="java.lang.Double"/>
+	<field name="producer_ID" class="java.lang.Integer"/>
+	<field name="producer_pro_name" class="java.lang.String"/>
+	<field name="producer_prod_id" class="java.lang.Integer"/>
+	<field name="mlkCollection_prod_id" class="java.lang.Integer"/>
+	<field name="producer_producergroupid" class="java.lang.Integer"/>
+	<variable name="Shift" class="java.lang.String">
+		<variableExpression><![CDATA[]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="Morning" class="java.lang.String">
+		<variableExpression><![CDATA["MORNING"]]></variableExpression>
+	</variable>
+	<variable name="mlkCollection_shift_id_1" class="java.lang.Integer" resetType="Page" calculation="Variance">
+		<variableExpression><![CDATA[$F{mlkCollection_shift_id}]]></variableExpression>
+	</variable>
+	<variable name="amount" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{mlkCollection_weight}*$F{mlkCollection_rate}]]></variableExpression>
+	</variable>
+	<variable name="EVENING" class="java.lang.String">
+		<variableExpression><![CDATA["EVENING"]]></variableExpression>
+	</variable>
+	<variable name="COW" class="java.lang.String"/>
+	<variable name="BUFF" class="java.lang.String"/>
+	<variable name="sum_amt" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$V{amount}]]></variableExpression>
+	</variable>
+	<variable name="tot_milk" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{mlkCollection_weight}]]></variableExpression>
+	</variable>
+	<variable name="tot_cm" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{mlkCollection_weight}]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="fatwet" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{mlkCollection_fat}*$F{mlkCollection_weight}]]></variableExpression>
+	</variable>
+	<variable name="avg_fat" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{fatwet}/$V{tot_milk}]]></variableExpression>
+	</variable>
+	<variable name="tot_amt" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$V{amount}]]></variableExpression>
+	</variable>
+	<variable name="avg_rate" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{tot_amt}/$V{tot_milk}]]></variableExpression>
+	</variable>
+	<group name="Producer Group" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{producer_producergroupid}]]></groupExpression>
+		<groupHeader>
+			<band height="15">
+				<textField>
+					<reportElement uuid="a51c9fed-c204-40f9-bc3d-97650757a8a5" x="0" y="0" width="210" height="15"/>
+					<textElement>
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Producer Group : "+ $F{producer_producergroupid}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="162">
+			<textField>
+				<reportElement uuid="dcb5cd6c-c952-4075-8565-911a974667c4" mode="Opaque" x="0" y="56" width="555" height="21"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" isUnderline="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_contatno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="de4acf65-1472-4e17-ae34-4809d890f93c" x="0" y="29" width="555" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="09f7d343-ac31-4d60-8c33-76c4bf91b17e" mode="Opaque" x="0" y="0" width="555" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_firmname}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="29b05f59-c215-4993-91b0-c26bf4e398d4" mode="Opaque" x="0" y="77" width="555" height="27" backcolor="#CCFFFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[शिफ्ट रिपोर्ट]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0ae349ad-86ae-42f0-8ed4-03999504be3a" x="0" y="110" width="229" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[दिनांक : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d0a5bf0f-4610-4270-b8b2-6fc8826e282e" x="330" y="110" width="37" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[शिफ्ट : ]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="c332d433-1ffd-4e40-bc66-1697fb962e5e" x="229" y="110" width="101" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Copperplate Gothic Bold" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mlkCollection_trn_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="5292c304-5979-4d07-9f87-8c5668e3a211" x="0" y="139" width="225" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[PRODUCER NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="97bdef2b-fedb-407a-aa08-288477cb9dd2" x="409" y="139" width="54" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[RATE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="80f9a7bf-8b4d-49c0-a41a-218d0781fa9b" x="463" y="139" width="92" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[AMOUNT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b122a92-408f-4dee-b9d1-19a16e64a785" x="225" y="140" width="46" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[WEIGHT]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="6be004ab-59a0-42ea-be61-060aca305875" x="0" y="161" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="00119347-5542-4e09-a3de-f37e18dd8c56" x="271" y="139" width="46" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[FAT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d04cf0e5-d4fe-4d87-8611-e2b54baabc03" x="317" y="139" width="46" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[CLR]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="76fe0b64-e5bd-41ee-83f3-1aab401f49b3" x="0" y="135" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="f426a490-5449-472b-ae60-63ecf54104d7" x="363" y="139" width="46" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[SNF]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="1808f3f4-9577-494e-941d-9fd502f19d90" x="367" y="110" width="70" height="20">
+					<printWhenExpression><![CDATA[$F{mlkCollection_shift_id}==1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["MORNING"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2d0203aa-56be-4f3c-a8a0-6c74142ad1b1" x="367" y="110" width="74" height="20">
+					<printWhenExpression><![CDATA[$F{mlkCollection_shift_id}==2]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["EVENING"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="69c65d53-d0ca-4b7d-bee6-635ad8e7cf79" x="0" y="0" width="198" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mlkCollection_prod_code} + " - " + $F{producer_pro_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0;-###0.0">
+				<reportElement uuid="757bf103-9b42-4237-8201-7479d07b5057" x="225" y="0" width="46" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{mlkCollection_weight}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0;-###0.0">
+				<reportElement uuid="fd5eff93-7307-49f5-9910-0d257f2f279b" x="271" y="0" width="46" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{mlkCollection_fat}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0;-###0.0">
+				<reportElement uuid="fa4a2b63-6709-45a3-9fe9-8c584817b0db" x="317" y="0" width="46" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{mlkCollection_degree}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="41e7ea8b-9555-4579-93f0-0fc1b9ce4049" x="409" y="0" width="54" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{mlkCollection_rate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="bfcb504a-b22c-400d-bc7e-6ebfe3bf52e3" x="463" y="0" width="92" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{amount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0;-###0.0">
+				<reportElement uuid="7f88f279-0276-4a01-9cf5-83236e88f517" x="363" y="0" width="46" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{mlkCollection_snf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c94d8685-75d0-43d1-945f-42ad29d1e7dd" x="198" y="0" width="27" height="20">
+					<printWhenExpression><![CDATA[$F{mlkCollection_mlkType_id}==1]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["C"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="81ff7c8e-b027-4e4b-93e6-6a0f350d6746" x="198" y="0" width="27" height="20">
+					<printWhenExpression><![CDATA[$F{mlkCollection_mlkType_id}==2]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["B"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="f221b8e4-3161-4ff1-b75b-360b988720eb" x="0" y="10" width="198" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[PAGE TOTAL]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="df1a12c0-1dc6-4ed3-b47c-48677686a32f" x="0" y="4" width="555" height="1"/>
+			</line>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="b87dc3cd-dc0f-43bc-b37e-37f5b835dfc6" x="463" y="10" width="92" height="20"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum_amt}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="106" splitType="Stretch">
+			<line>
+				<reportElement uuid="f81fa655-de52-478b-aff7-b9e2cae17aa3" x="0" y="5" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="3623495a-93c5-4512-93f1-53b2716a2661" x="0" y="6" width="198" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true" isUnderline="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[SUMMURY :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="847ed66c-c616-4296-b284-d6bd436b9c96" x="0" y="26" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" isUnderline="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL MILK :]]></text>
+			</staticText>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="1158e468-2cbb-4396-b670-85799f664a8a" x="100" y="26" width="98" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{tot_milk}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c013e86e-b7f3-4028-a1f6-75ab72edd7e9" x="330" y="26" width="62" height="20" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" isUnderline="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[COW MILK :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7d31cf03-bf26-4cba-8e67-1aa9dc70ef15" x="401" y="26" width="75" height="20" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" isUnderline="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[BUFF MILK :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="25435d6a-7954-4576-82ec-7a9b24de8b93" x="0" y="46" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" isUnderline="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[AVG FAT :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e957890f-e3e3-446c-a57c-04d87b274787" x="0" y="66" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" isUnderline="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[AVG RATE :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2499193c-3441-4061-a860-9a33a6849000" x="0" y="86" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" isUnderline="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[AMOUNT :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="577a31c4-91f1-4b91-b503-0b44d4fcd13b" x="225" y="46" width="100" height="20" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{fatwet}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0;-###0.0">
+				<reportElement uuid="4f664373-86f8-48e0-8e5e-7a610e0bbb4f" x="100" y="46" width="98" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{avg_fat}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="20e56992-852d-45bb-ac2a-acf0b04b907b" x="100" y="86" width="98" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{tot_amt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="d994e065-544c-4cd2-b10a-614074bee512" x="100" y="66" width="98" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{avg_rate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

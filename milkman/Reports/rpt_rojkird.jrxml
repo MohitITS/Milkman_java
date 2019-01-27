@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_rojkird" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="507848b2-bee2-4dbe-93ac-a56cf32a532d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="wherecondition" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["E:\\Java Projects\\milkman\\Reports\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     config.`firmname` AS config_firmname,
+     config.`address` AS config_address,
+     config.`contatno` AS config_contatno,
+     dailytrn.`ID` AS dailytrn_ID,
+     dailytrn.`trndate` AS dailytrn_trndate,
+     dailytrn.`voucherid` AS dailytrn_voucherid,
+     dailytrn.`chalanno` AS dailytrn_chalanno,
+     dailytrn.`accid` AS dailytrn_accid,
+     dailytrn.`prodid` AS dailytrn_prodid,
+     dailytrn.`shiftid` AS dailytrn_shiftid,
+     dailytrn.`dramt` AS dailytrn_dramt,
+     dailytrn.`cramt` AS dailytrn_cramt,
+     dailytrn.`posting` AS dailytrn_posting,
+     dailytrn.`naration` AS dailytrn_naration,
+     account.`ID` AS account_ID,
+     account.`accname` AS account_accname,
+     account.`acctypeid` AS account_acctypeid
+FROM
+     `dailytrn` dailytrn INNER JOIN `account` account ON dailytrn.`accid` = account.`ID`,
+     `config` config
+WHERE
+     dailytrn.posting = true and $P!{wherecondition}]]>
+	</queryString>
+	<field name="config_firmname" class="java.lang.String"/>
+	<field name="config_address" class="java.lang.String"/>
+	<field name="config_contatno" class="java.lang.String"/>
+	<field name="dailytrn_ID" class="java.lang.Integer"/>
+	<field name="dailytrn_trndate" class="java.sql.Timestamp"/>
+	<field name="dailytrn_voucherid" class="java.lang.Integer"/>
+	<field name="dailytrn_chalanno" class="java.lang.Integer"/>
+	<field name="dailytrn_accid" class="java.lang.Integer"/>
+	<field name="dailytrn_prodid" class="java.lang.Integer"/>
+	<field name="dailytrn_shiftid" class="java.lang.Integer"/>
+	<field name="dailytrn_dramt" class="java.lang.Double"/>
+	<field name="dailytrn_cramt" class="java.lang.Double"/>
+	<field name="dailytrn_posting" class="java.lang.Boolean"/>
+	<field name="dailytrn_naration" class="java.lang.String"/>
+	<field name="account_ID" class="java.lang.Integer"/>
+	<field name="account_accname" class="java.lang.String"/>
+	<field name="account_acctypeid" class="java.lang.Integer"/>
+	<variable name="totaldramt" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{dailytrn_dramt}]]></variableExpression>
+	</variable>
+	<variable name="totcramt" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{dailytrn_cramt}]]></variableExpression>
+	</variable>
+	<group name="dailytrn_trndate" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{dailytrn_trndate}]]></groupExpression>
+	</group>
+	<group name="dailytrn_chalanno">
+		<groupExpression><![CDATA[$F{dailytrn_chalanno}]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<textField pattern="###0;-###0">
+					<reportElement uuid="04f849bb-d236-4dd4-958d-f14267159c53" x="58" y="0" width="100" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{dailytrn_chalanno}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="1b070133-1274-4a13-8407-18fc9a50e052" x="3" y="0" width="55" height="20"/>
+					<box>
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[चलन नं : ]]></text>
+				</staticText>
+				<subreport>
+					<reportElement uuid="305ca97e-733c-4183-805f-79f6043f1f7e" x="0" y="20" width="274" height="30"/>
+					<subreportParameter name="trn_date">
+						<subreportParameterExpression><![CDATA[$F{dailytrn_trndate}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="chalan_no">
+						<subreportParameterExpression><![CDATA[$F{dailytrn_chalanno}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "rpt_rojkird_subreport_dr.jasper"]]></subreportExpression>
+				</subreport>
+				<subreport>
+					<reportElement uuid="ed8cdb73-1646-4bb4-b50b-7cfa1f858289" x="284" y="20" width="271" height="30"/>
+					<subreportParameter name="trn_date">
+						<subreportParameterExpression><![CDATA[$F{dailytrn_trndate}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="chalan_no">
+						<subreportParameterExpression><![CDATA[$F{dailytrn_chalanno}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "rpt_rojkird_subreport_Cr.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+			<band height="4">
+				<line>
+					<reportElement uuid="0caebf71-1c9e-4c4d-9aac-703a0b60021e" x="0" y="3" width="555" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineStyle="Dotted"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="101" splitType="Stretch">
+			<textField>
+				<reportElement uuid="dc296d43-a71d-47b4-bc62-b69550e6d00b" x="0" y="29" width="555" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="76350a23-44d9-4cac-8ba6-506c77916446" mode="Opaque" x="0" y="56" width="555" height="21"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" isUnderline="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_contatno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5a50a7c0-4c64-43e9-9045-b7615d1f3603" mode="Opaque" x="0" y="0" width="555" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_firmname}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="5e0f7089-2445-41f8-b418-8505acca6a63" x="35" y="77" width="520" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dailytrn_trndate}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="9d53343d-f430-437d-9497-5a28c2919905" x="0" y="100" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="ca64beb6-468f-4c95-ade7-775e368ec29f" x="135" y="77" width="123" height="20"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[दिनांक : ]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="69105ee9-119e-48fa-8e97-7cd343749d21" x="0" y="0" width="184" height="20"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[तपशील]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bd77aaf9-b9f0-43db-ae7e-a06d630b5c2b" x="184" y="0" width="90" height="20"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[जमा (Dr) रक्कम]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e3a0e030-e4c3-4357-9a55-7a22fa4d5df5" x="284" y="0" width="181" height="20"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[तपशील]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="917f9b54-be6d-4c69-8961-f0657440100d" x="465" y="0" width="90" height="20"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[नावे (Cr) रक्कम]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="adafb1a2-6810-48d2-8422-af432b4445ca" x="0" y="20" width="555" height="1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<pageFooter>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="79197922-7719-46a4-9dbd-36de274c60d7" x="0" y="11" width="55" height="20"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[एकूण : ]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="e8a5b0ed-0524-405f-bbfa-9454cf578cf8" x="0" y="4" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="897d74dd-9bb9-4d26-a5f3-00c2d2c69441" x="284" y="11" width="55" height="20"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[एकूण : ]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="39dd38f1-48c2-49e0-9157-fdca65e81002" x="0" y="41" width="555" height="1"/>
+			</line>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="54bb2eee-e4ee-423c-b1ed-ed04a9a783b9" x="184" y="11" width="90" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{totaldramt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="250c1ccc-f018-42ff-96e1-6a299a564b3e" x="465" y="11" width="90" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{totcramt}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

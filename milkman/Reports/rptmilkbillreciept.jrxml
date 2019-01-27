@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="288" pageHeight="288" columnWidth="274" leftMargin="7" rightMargin="7" topMargin="7" bottomMargin="7" uuid="2328178f-7e0e-4058-b210-e5cc7369af8b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="wherecondition" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     config.`firmname` AS config_firmname,
+     config.`address` AS config_address,
+     config.`contatno` AS config_contatno,
+     config.`ID` AS config_ID,
+     producer.`prod_id` AS producer_prod_id,
+     producer.`ID` AS producer_ID,
+     producer.`pro_name` AS producer_pro_name,
+     producer.`m_name` AS producer_m_name,
+     mlkCollection.`ID` AS mlkCollection_ID,
+     mlkCollection.`trn_date` AS mlkCollection_trn_date,
+     mlkCollection.`shift_id` AS mlkCollection_shift_id,
+     mlkCollection.`prod_id` AS mlkCollection_prod_id,
+     mlkCollection.`prod_code` AS mlkCollection_prod_code,
+     mlkCollection.`sample_no` AS mlkCollection_sample_no,
+     mlkCollection.`mlkType_id` AS mlkCollection_mlkType_id,
+     mlkCollection.`weight` AS mlkCollection_weight,
+     mlkCollection.`fat` AS mlkCollection_fat,
+     mlkCollection.`degree` AS mlkCollection_degree,
+     mlkCollection.`snf` AS mlkCollection_snf,
+     mlkCollection.`rate` AS mlkCollection_rate
+FROM
+     `producer` producer INNER JOIN `mlkCollection` mlkCollection ON producer.`ID` = mlkCollection.`prod_code`,
+     `config` config
+WHERE
+     $P!{wherecondition}]]>
+	</queryString>
+	<field name="config_firmname" class="java.lang.String"/>
+	<field name="config_address" class="java.lang.String"/>
+	<field name="config_contatno" class="java.lang.String"/>
+	<field name="config_ID" class="java.lang.Integer"/>
+	<field name="producer_prod_id" class="java.lang.Integer"/>
+	<field name="producer_ID" class="java.lang.Integer"/>
+	<field name="producer_pro_name" class="java.lang.String"/>
+	<field name="producer_m_name" class="java.lang.String"/>
+	<field name="mlkCollection_ID" class="java.lang.Integer"/>
+	<field name="mlkCollection_trn_date" class="java.sql.Timestamp"/>
+	<field name="mlkCollection_shift_id" class="java.lang.Integer"/>
+	<field name="mlkCollection_prod_id" class="java.lang.Integer"/>
+	<field name="mlkCollection_prod_code" class="java.lang.Integer"/>
+	<field name="mlkCollection_sample_no" class="java.lang.Integer"/>
+	<field name="mlkCollection_mlkType_id" class="java.lang.Integer"/>
+	<field name="mlkCollection_weight" class="java.lang.Double"/>
+	<field name="mlkCollection_fat" class="java.lang.Double"/>
+	<field name="mlkCollection_degree" class="java.lang.Double"/>
+	<field name="mlkCollection_snf" class="java.lang.Double"/>
+	<field name="mlkCollection_rate" class="java.lang.Double"/>
+	<group name="mlkCollection_trn_date">
+		<groupExpression><![CDATA[$F{mlkCollection_trn_date}]]></groupExpression>
+	</group>
+	<group name="mlkCollection_shift_id">
+		<groupExpression><![CDATA[$F{mlkCollection_shift_id}]]></groupExpression>
+	</group>
+	<group name="mlkCollection_prod_code">
+		<groupExpression><![CDATA[$F{mlkCollection_prod_code}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="124" splitType="Stretch">
+			<textField>
+				<reportElement uuid="ed4891da-19ca-43b4-a10c-850ec14691c0" mode="Transparent" x="0" y="0" width="274" height="20"/>
+				<textElement>
+					<font pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_firmname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="91a5780d-d6d1-4529-990d-2ff4dea5a350" mode="Transparent" x="0" y="20" width="274" height="20"/>
+				<textElement>
+					<font pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ddf734b1-ebf4-4eb6-8870-32619b2dbdd9" mode="Transparent" x="0" y="40" width="274" height="20"/>
+				<textElement>
+					<font pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_contatno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fc1adc45-b4c9-4e1e-b74c-d496c95e53e8" x="0" y="60" width="274" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Date :" + $F{mlkCollection_trn_date}.getDate() +"/"+$F{mlkCollection_trn_date}.getMonth()+"/"+$F{mlkCollection_trn_date}.getYear()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2d8159ac-7954-444c-91b9-db80e565f742" x="0" y="80" width="274" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["CODE & NAME :" + $F{producer_ID} + " - " + $F{producer_pro_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5191cb16-4130-4245-a23b-8f919af4bb6f" x="0" y="100" width="274" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Milk : COW"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

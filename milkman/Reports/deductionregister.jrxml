@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="deductionregister" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a339d854-f64f-483d-8fd4-5585ae8b3be8">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["E:\\Java Projects\\milkman\\Reports\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fdate" class="java.lang.String"/>
+	<parameter name="tdate" class="java.lang.String"/>
+	<parameter name="wherecondition" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     config.`firmname` AS config_firmname,
+     config.`address` AS config_address,
+     config.`contatno` AS config_contatno,
+     milkCollectionBill.`bill_date` AS milkCollectionBill_bill_date,
+     milkCollectionBill.`from_date` AS milkCollectionBill_from_date,
+     milkCollectionBill.`to_date` AS milkCollectionBill_to_date,
+     milkCollectionBill.`prod_code` AS milkCollectionBill_prod_code,
+     milkCollectionBill.`prod_name` AS milkCollectionBill_prod_name,
+     milkCollectionBill.`tot_milk` AS milkCollectionBill_tot_milk,
+     milkCollectionBill.`avg_FAT` AS milkCollectionBill_avg_FAT,
+     milkCollectionBill.`avg_rate` AS milkCollectionBill_avg_rate,
+     milkCollectionBill.`tot_milkamount` AS milkCollectionBill_tot_milkamount,
+     milkCollectionBill.`tot_commision` AS milkCollectionBill_tot_commision,
+     milkCollectionBill.`tot_sh_anamat` AS milkCollectionBill_tot_sh_anamat,
+     milkCollectionBill.`tot_ribet` AS milkCollectionBill_tot_ribet,
+     milkCollectionBill.`chiling_charges` AS milkCollectionBill_chiling_charges,
+     milkCollectionBill.`travalingexp` AS milkCollectionBill_travalingexp,
+     milkCollectionBill.`pashukhadya` AS milkCollectionBill_pashukhadya,
+     milkCollectionBill.`mlkbilladv` AS milkCollectionBill_mlkbilladv,
+     milkCollectionBill.`otherded` AS milkCollectionBill_otherded,
+     milkCollectionBill.`docfee` AS milkCollectionBill_docfee,
+     milkCollectionBill.`sourmlkamt` AS milkCollectionBill_sourmlkamt,
+     milkCollectionBill.`amt_payable` AS milkCollectionBill_amt_payable,
+     milkCollectionBill.`AddedByFK` AS milkCollectionBill_AddedByFK
+FROM
+     `config` config,
+     `milkCollectionBill` milkCollectionBill
+WHERE
+     $P!{wherecondition}]]>
+	</queryString>
+	<field name="config_firmname" class="java.lang.String"/>
+	<field name="config_address" class="java.lang.String"/>
+	<field name="config_contatno" class="java.lang.String"/>
+	<field name="milkCollectionBill_bill_date" class="java.sql.Timestamp"/>
+	<field name="milkCollectionBill_from_date" class="java.sql.Timestamp"/>
+	<field name="milkCollectionBill_to_date" class="java.sql.Timestamp"/>
+	<field name="milkCollectionBill_prod_code" class="java.lang.Integer"/>
+	<field name="milkCollectionBill_prod_name" class="java.lang.String"/>
+	<field name="milkCollectionBill_tot_milk" class="java.lang.Double"/>
+	<field name="milkCollectionBill_avg_FAT" class="java.lang.Double"/>
+	<field name="milkCollectionBill_avg_rate" class="java.lang.Double"/>
+	<field name="milkCollectionBill_tot_milkamount" class="java.lang.Double"/>
+	<field name="milkCollectionBill_tot_commision" class="java.lang.Double"/>
+	<field name="milkCollectionBill_tot_sh_anamat" class="java.lang.Double"/>
+	<field name="milkCollectionBill_tot_ribet" class="java.lang.Double"/>
+	<field name="milkCollectionBill_chiling_charges" class="java.lang.Double"/>
+	<field name="milkCollectionBill_travalingexp" class="java.lang.Double"/>
+	<field name="milkCollectionBill_pashukhadya" class="java.lang.Double"/>
+	<field name="milkCollectionBill_mlkbilladv" class="java.lang.Double"/>
+	<field name="milkCollectionBill_otherded" class="java.lang.Double"/>
+	<field name="milkCollectionBill_docfee" class="java.lang.Double"/>
+	<field name="milkCollectionBill_sourmlkamt" class="java.lang.Double"/>
+	<field name="milkCollectionBill_amt_payable" class="java.lang.Double"/>
+	<field name="milkCollectionBill_AddedByFK" class="java.lang.Integer"/>
+	<variable name="total_deduction" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{milkCollectionBill_tot_sh_anamat} + $F{milkCollectionBill_tot_ribet} + $F{milkCollectionBill_chiling_charges} + $F{milkCollectionBill_travalingexp} + $F{milkCollectionBill_pashukhadya} + $F{milkCollectionBill_mlkbilladv} + $F{milkCollectionBill_otherded} + $F{milkCollectionBill_docfee}]]></variableExpression>
+	</variable>
+	<variable name="var_TotalAdvance" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{milkCollectionBill_mlkbilladv}]]></variableExpression>
+	</variable>
+	<variable name="var_TotalPashukhadya" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{milkCollectionBill_pashukhadya}]]></variableExpression>
+	</variable>
+	<variable name="var_TotalDoctorFee" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{milkCollectionBill_docfee}]]></variableExpression>
+	</variable>
+	<variable name="var_TotalOtherDeduction" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{milkCollectionBill_otherded}]]></variableExpression>
+	</variable>
+	<variable name="Var_TotalDeduction" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$V{total_deduction}]]></variableExpression>
+	</variable>
+	<group name="producer_code">
+		<groupExpression><![CDATA[$F{milkCollectionBill_prod_code}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="84" splitType="Stretch">
+			<line>
+				<reportElement uuid="a8198624-be60-4398-b60a-3d945272f491" x="0" y="83" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="07ee4e21-be1a-449a-a8b4-da7f34d444ca" x="458" y="55" width="15" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ते]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="65bb6a87-3868-42db-ad4b-c19ee3e4e687" x="-115" y="-69" width="555" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fc298ac7-2f30-4381-aafd-fe885c0233f8" x="0" y="0" width="555" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_firmname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="57baa33b-d785-4d7f-ba98-46d080a5cbbc" x="0" y="56" width="305" height="27"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_contatno}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="07d263ab-ebaf-4b4d-9abe-9e8fcea360d3" x="358" y="55" width="100" height="28"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{fdate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="d34a16eb-7104-4e8b-b0d0-e8412363dd73" x="473" y="55" width="82" height="27"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{tdate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="57" splitType="Stretch">
+			<line>
+				<reportElement uuid="a9bd0802-6f21-445b-8954-dea9b49e1f9b" x="0" y="56" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="b694e10f-efc0-4e54-a5e6-7e7ae02ff83b" x="0" y="29" width="180" height="27"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[उत्पादकाचे नाव]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="05955b11-d7ff-4cc0-a451-793f86f7cc6e" x="182" y="28" width="65" height="27"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[पशुखाद्य]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3dff45d4-b3cc-4be8-8683-ed3533e95f4e" x="249" y="28" width="59" height="27"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[अडव्हांस]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="02785fc2-e5df-4149-b715-8f5d029a4a35" x="311" y="28" width="60" height="27"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[डॉ. फी.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1f40c800-9168-4e0d-b1e7-4bdbff76f5fa" x="375" y="28" width="62" height="27"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[इतर]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="19470ff7-ac50-4660-85df-19c72e828f65" mode="Opaque" x="0" y="1" width="555" height="28" backcolor="#CCFFFF"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="false" isItalic="false" isUnderline="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[कपात रजिस्टर]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="49df2623-e236-44a3-b0eb-2cab17922dea" x="440" y="30" width="108" height="27"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[एकूण कपात]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<printWhenExpression><![CDATA[$V{total_deduction} != 0]]></printWhenExpression>
+			<line>
+				<reportElement uuid="e0f095d6-1212-4532-bf42-53eacc475ba9" x="0" y="19" width="555" height="1"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="be776e87-409c-4dac-be8f-e347fd0a1ac0" x="0" y="0" width="180" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{milkCollectionBill_prod_code} + " - " + $F{milkCollectionBill_prod_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0594246a-030c-4eae-8965-99d168941df8" x="182" y="0" width="65" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{milkCollectionBill_pashukhadya}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1e9fec74-5c5d-4855-a516-668099d72a48" x="249" y="0" width="59" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{milkCollectionBill_mlkbilladv}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7d53c424-259e-4ef1-9234-0098e583fec8" x="311" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{milkCollectionBill_docfee}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4d430f41-0089-4ac0-8fad-e72639c43943" x="375" y="0" width="62" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{milkCollectionBill_otherded}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="51414879-6756-4acb-9ca6-8f28a59e2f54" x="440" y="0" width="108" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{total_deduction}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="43" splitType="Stretch">
+			<textField>
+				<reportElement uuid="f7013a6c-1107-450f-90c4-903947379fd6" x="473" y="22" width="47" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="ac8c1567-5d23-4d87-aec1-2d914d7799cf" x="520" y="22" width="28" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="836b7c7f-27f2-41f1-a190-08c6722e4866" x="0" y="1" width="119" height="21"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grant Total : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="4cbedb7c-73e9-4b88-bee3-e737df624e00" x="249" y="3" width="59" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{var_TotalAdvance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="874dd03d-7232-4038-98ef-877e92955602" x="311" y="3" width="60" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{var_TotalDoctorFee}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="44592285-91da-4da9-90fa-7356065aefaf" x="375" y="3" width="62" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{var_TotalOtherDeduction}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b7945951-8012-4795-ae09-7fd05c64b1a9" x="440" y="3" width="108" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{Var_TotalDeduction}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

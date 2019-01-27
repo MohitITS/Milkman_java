@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bankpaymentreg" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="79fad6f5-3a14-43d1-8ec4-c4e4dbeca963">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="parmdramt" class="java.lang.Double">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="pardate" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="wherecondition" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     config.`ID` AS config_ID,
+     config.`firmname` AS config_firmname,
+     config.`address` AS config_address,
+     config.`contatno` AS config_contatno,
+     milkCollectionBill.`from_date` AS milkCollectionBill_from_date,
+     milkCollectionBill.`prod_name` AS milkCollectionBill_prod_name,
+     milkCollectionBill.`amt_payable` AS milkCollectionBill_amt_payable,
+     milkCollectionBill.`to_date` AS milkCollectionBill_to_date,
+     milkCollectionBill.`prod_code` AS milkCollectionBill_prod_code,
+     producer.`ID` AS producer_ID,
+     producer.`bankid` AS producer_bankid,
+     producer.`acno` AS producer_acno,
+     config.`bank` AS config_bank,
+     config.`bankacno` AS config_bankacno,
+     milkCollectionBill.`bill_date` AS milkCollectionBill_bill_date
+FROM
+     `milkCollectionBill` milkCollectionBill INNER JOIN `producer` producer ON milkCollectionBill.`prod_code` = producer.`ID`,
+     `config` config
+WHERE
+     producer.bankid IS NOT null
+ AND producer.acno IS NOT null
+ AND milkCollectionBill.amt_payable <> 0
+ AND $P!{wherecondition}]]>
+	</queryString>
+	<field name="config_ID" class="java.lang.Integer"/>
+	<field name="config_firmname" class="java.lang.String"/>
+	<field name="config_address" class="java.lang.String"/>
+	<field name="config_contatno" class="java.lang.String"/>
+	<field name="milkCollectionBill_from_date" class="java.sql.Timestamp"/>
+	<field name="milkCollectionBill_prod_name" class="java.lang.String"/>
+	<field name="milkCollectionBill_amt_payable" class="java.lang.Double"/>
+	<field name="milkCollectionBill_to_date" class="java.sql.Timestamp"/>
+	<field name="milkCollectionBill_prod_code" class="java.lang.Integer"/>
+	<field name="producer_ID" class="java.lang.Integer"/>
+	<field name="producer_bankid" class="java.lang.Integer"/>
+	<field name="producer_acno" class="java.lang.String"/>
+	<field name="config_bank" class="java.lang.String"/>
+	<field name="config_bankacno" class="java.lang.String"/>
+	<field name="milkCollectionBill_bill_date" class="java.sql.Timestamp"/>
+	<variable name="var_pagetotal" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{milkCollectionBill_amt_payable}]]></variableExpression>
+	</variable>
+	<variable name="var_grandtotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{milkCollectionBill_amt_payable}]]></variableExpression>
+	</variable>
+	<variable name="varpagetotal" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{milkCollectionBill_amt_payable}]]></variableExpression>
+	</variable>
+	<variable name="varpagetotal_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{milkCollectionBill_amt_payable}]]></variableExpression>
+	</variable>
+	<variable name="vardate" class="java.util.Date">
+		<variableExpression><![CDATA[$P{pardate}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="151" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="4764cd7c-f7b8-4108-b11c-c15e16769819" mode="Opaque" x="465" y="0" width="90" height="131" backcolor="#66FF66"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement rotation="Left">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="56789a6c-bbce-4e11-91ff-f5d54b036ce2" mode="Opaque" x="425" y="0" width="40" height="131" backcolor="#66FF66"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement rotation="Left">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[D/C]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="88df2132-2ecd-482d-92a0-ed555cad6a8a" mode="Opaque" x="208" y="0" width="170" height="131" backcolor="#66FF66"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement rotation="Left">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="428623cf-fa97-426e-a575-3cae326f4a54" mode="Opaque" x="378" y="0" width="47" height="131" backcolor="#66FF66"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement rotation="Left">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Currency]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="86fe036f-168d-49f7-8242-859939f7fe7f" mode="Opaque" x="0" y="0" width="74" height="131" backcolor="#66FF66"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement rotation="Left">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tran Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="705b2df3-bdfc-4657-a909-756ff29b2551" mode="Opaque" x="74" y="0" width="134" height="131" backcolor="#66FF66"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement rotation="Left">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Account Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3e9703b2-9f32-4c48-a2fc-ee4dcdd70296" x="425" y="131" width="40" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[D]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="aef112c0-4b3d-45dc-9126-a4c96dc30b10" x="208" y="131" width="170" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[DAIRY PAYMENT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6bb4d05b-3c74-4b50-a16e-cf8d674c4183" x="378" y="131" width="47" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[INR]]></text>
+			</staticText>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="e2a4c0cd-2824-4e57-8c93-9bfed3d75115" x="465" y="131" width="90" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{parmdramt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="101f278e-52a3-48c6-9520-1ad60f3d03dc" x="0" y="131" width="74" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pardate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2329f0c2-01d0-4f94-bd90-30713ba0ca5e" x="74" y="131" width="134" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_bankacno}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="20">
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="5ec8faf6-969d-4e00-955f-573f75d19788" x="465" y="0" width="90" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{milkCollectionBill_amt_payable}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="2e3da297-5dca-4d0a-971c-380493d2262c" x="208" y="0" width="170" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[DAIRY PAYMENT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a840e286-cdeb-4206-812e-752ce82d19ea" x="378" y="0" width="47" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[INR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f72469ad-7ede-42c6-a99c-efa3425d20c4" x="425" y="0" width="40" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[C]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="4b9c5ee0-3094-4b0f-811c-ca5616fd2a33" x="0" y="0" width="74" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vardate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="46382e24-70dd-4c75-b728-492dbf2d426b" x="74" y="0" width="134" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{producer_acno}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="21">
+			<staticText>
+				<reportElement uuid="286cdc77-0575-491b-89e1-cd15e98937da" x="425" y="0" width="40" height="21"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total : ]]></text>
+			</staticText>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="1c38ecd9-a979-4b60-9c69-86b2dec4a581" x="465" y="0" width="90" height="21"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{varpagetotal_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

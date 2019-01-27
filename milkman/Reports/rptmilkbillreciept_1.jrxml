@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptmilkbillreciept" language="groovy" pageWidth="288" pageHeight="324" columnWidth="260" leftMargin="14" rightMargin="14" topMargin="14" bottomMargin="14" uuid="3a6c8dd6-9240-4687-ae64-1d37317e3226">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="wherecondition" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     config.`ID` AS config_ID,
+     config.`firmname` AS config_firmname,
+     config.`address` AS config_address,
+     config.`contatno` AS config_contatno,
+     mlkCollection.`ID` AS mlkCollection_ID,
+     mlkCollection.`trn_date` AS mlkCollection_trn_date,
+     mlkCollection.`shift_id` AS mlkCollection_shift_id,
+     mlkCollection.`prod_code` AS mlkCollection_prod_code,
+     mlkCollection.`sample_no` AS mlkCollection_sample_no,
+     mlkCollection.`mlkType_id` AS mlkCollection_mlkType_id,
+     mlkCollection.`weight` AS mlkCollection_weight,
+     mlkCollection.`fat` AS mlkCollection_fat,
+     mlkCollection.`degree` AS mlkCollection_degree,
+     mlkCollection.`snf` AS mlkCollection_snf,
+     mlkCollection.`rate` AS mlkCollection_rate,
+     producer.`ID` AS producer_ID,
+     producer.`pro_name` AS producer_pro_name,
+     producer.`m_name` AS producer_m_name
+FROM
+     `mlkCollection` mlkCollection INNER JOIN `producer` producer ON mlkCollection.`prod_code` = producer.`ID`,
+     `config` config
+WHERE
+     $P!{wherecondition}]]>
+	</queryString>
+	<field name="config_ID" class="java.lang.Integer"/>
+	<field name="config_firmname" class="java.lang.String"/>
+	<field name="config_address" class="java.lang.String"/>
+	<field name="config_contatno" class="java.lang.String"/>
+	<field name="mlkCollection_ID" class="java.lang.Integer"/>
+	<field name="mlkCollection_trn_date" class="java.sql.Timestamp"/>
+	<field name="mlkCollection_shift_id" class="java.lang.Integer"/>
+	<field name="mlkCollection_prod_code" class="java.lang.Integer"/>
+	<field name="mlkCollection_sample_no" class="java.lang.Integer"/>
+	<field name="mlkCollection_mlkType_id" class="java.lang.Integer"/>
+	<field name="mlkCollection_weight" class="java.lang.Double"/>
+	<field name="mlkCollection_fat" class="java.lang.Double"/>
+	<field name="mlkCollection_degree" class="java.lang.Double"/>
+	<field name="mlkCollection_snf" class="java.lang.Double"/>
+	<field name="mlkCollection_rate" class="java.lang.Double"/>
+	<field name="producer_ID" class="java.lang.Integer"/>
+	<field name="producer_pro_name" class="java.lang.String"/>
+	<field name="producer_m_name" class="java.lang.String"/>
+	<variable name="amount" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{mlkCollection_weight}*$F{mlkCollection_rate}]]></variableExpression>
+	</variable>
+	<group name="mlkCollection_trn_date">
+		<groupExpression><![CDATA[$F{mlkCollection_trn_date}]]></groupExpression>
+	</group>
+	<group name="mlkCollection_shift_id">
+		<groupExpression><![CDATA[$F{mlkCollection_shift_id}]]></groupExpression>
+	</group>
+	<group name="mlkCollection_prod_code" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{mlkCollection_prod_code}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="248">
+			<textField pattern="">
+				<reportElement uuid="79d9440e-434c-4776-8895-4172c790f0ed" mode="Opaque" x="0" y="0" width="260" height="20"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="10" isStrikeThrough="false" pdfFontName="Helvetica" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_firmname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="57e95577-aaf5-4ca2-8c6b-a016156a5231" x="0" y="20" width="260" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{config_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="420dbe25-9514-4eac-8841-33eb94f206be" x="0" y="40" width="260" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{config_contatno}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="04f80298-1008-4995-9a86-d85546658fcf" x="0" y="60" width="260" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="1cc43985-f152-4083-b45e-fefee9f0d4dd" x="0" y="73" width="57" height="20"/>
+				<textElement/>
+				<text><![CDATA[Date :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="eded7563-2c4f-4322-b0c4-805e281a7112" x="57" y="73" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{mlkCollection_trn_date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

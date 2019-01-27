@@ -1,0 +1,1130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="moneytransfer_reg" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2d809b17-cfe1-42b6-b1ca-b08aa9ed3b7d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fdate" class="java.lang.String"/>
+	<parameter name="tdate" class="java.lang.String"/>
+	<parameter name="wherecondition" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     config.`ID` AS config_ID,
+     config.`firmname` AS config_firmname,
+     config.`address` AS config_address,
+     config.`contatno` AS config_contatno,
+     moneytransfer.`ID` AS moneytransfer_ID,
+     moneytransfer.`mtdate` AS moneytransfer_mtdate,
+     moneytransfer.`fromdate` AS moneytransfer_fromdate,
+     moneytransfer.`todate` AS moneytransfer_todate,
+     moneytransfer.`snaghcode` AS moneytransfer_snaghcode,
+     moneytransfer.`totalmilksend` AS moneytransfer_totalmilksend,
+     moneytransfer.`totalmilkamt` AS moneytransfer_totalmilkamt,
+     moneytransfer.`totalcomm` AS moneytransfer_totalcomm,
+     moneytransfer.`sharededuct` AS moneytransfer_sharededuct,
+     moneytransfer.`rebatededuct` AS moneytransfer_rebatededuct,
+     moneytransfer.`otherdeduct` AS moneytransfer_otherdeduct,
+     moneytransfer.`totalamtrecieved` AS moneytransfer_totalamtrecieved,
+     moneytransfer.`bankcurrentbal` AS moneytransfer_bankcurrentbal,
+     moneytransfer.`bankwithdrawamt` AS moneytransfer_bankwithdrawamt,
+     moneytransfer.`bankbalance` AS moneytransfer_bankbalance,
+     moneytransfer.`anamatrecieved` AS moneytransfer_anamatrecieved,
+     moneytransfer.`netpayment` AS moneytransfer_netpayment,
+     moneytransfer.`anamatpaid` AS moneytransfer_anamatpaid,
+     moneytransfer.`totalexpences` AS moneytransfer_totalexpences,
+     moneytransfer.`cashinhand` AS moneytransfer_cashinhand,
+     moneytransfer.`profitorloss` AS moneytransfer_profitorloss,
+     moneytransfer.`entrydate` AS moneytransfer_entrydate,
+     moneytransfer.`modificationdate` AS moneytransfer_modificationdate,
+     sangh.`ID` AS sangh_ID,
+     sangh.`sname` AS sangh_sname,
+     sangh.`cno` AS sangh_cno,
+     sangh.`address` AS sangh_address,
+     sangh.`rtc_no` AS sangh_rtc_no,
+     sangh.`comission` AS sangh_comission,
+     sangh.`shareanamat` AS sangh_shareanamat,
+     sangh.`rebate` AS sangh_rebate,
+     sangh.`DateAdded` AS sangh_DateAdded,
+     sangh.`AddedByFK` AS sangh_AddedByFK,
+     sangh.`DateModified` AS sangh_DateModified,
+     sangh.`LastUserFK` AS sangh_LastUserFK,
+     moneytransfer.`banckwidhrawdate` AS moneytransfer_banckwidhrawdate,
+     moneytransfer.`shetkaribachat` AS moneytransfer_shetkaribachat
+FROM
+     `moneytransfer` moneytransfer INNER JOIN `sangh` sangh ON moneytransfer.`snaghcode` = sangh.`ID`,
+     `config` config
+WHERE
+     $P!{wherecondition}
+ORDER BY moneytransfer.mtdate]]>
+	</queryString>
+	<field name="config_ID" class="java.lang.Integer"/>
+	<field name="config_firmname" class="java.lang.String"/>
+	<field name="config_address" class="java.lang.String"/>
+	<field name="config_contatno" class="java.lang.String"/>
+	<field name="moneytransfer_ID" class="java.lang.Integer"/>
+	<field name="moneytransfer_mtdate" class="java.sql.Timestamp"/>
+	<field name="moneytransfer_fromdate" class="java.sql.Timestamp"/>
+	<field name="moneytransfer_todate" class="java.sql.Timestamp"/>
+	<field name="moneytransfer_snaghcode" class="java.lang.Integer"/>
+	<field name="moneytransfer_totalmilksend" class="java.lang.Double"/>
+	<field name="moneytransfer_totalmilkamt" class="java.lang.Double"/>
+	<field name="moneytransfer_totalcomm" class="java.lang.Double"/>
+	<field name="moneytransfer_sharededuct" class="java.lang.Double"/>
+	<field name="moneytransfer_rebatededuct" class="java.lang.Double"/>
+	<field name="moneytransfer_otherdeduct" class="java.lang.Double"/>
+	<field name="moneytransfer_totalamtrecieved" class="java.lang.Double"/>
+	<field name="moneytransfer_bankcurrentbal" class="java.lang.Double"/>
+	<field name="moneytransfer_bankwithdrawamt" class="java.lang.Double"/>
+	<field name="moneytransfer_bankbalance" class="java.lang.Double"/>
+	<field name="moneytransfer_anamatrecieved" class="java.lang.Double"/>
+	<field name="moneytransfer_netpayment" class="java.lang.Double"/>
+	<field name="moneytransfer_anamatpaid" class="java.lang.Double"/>
+	<field name="moneytransfer_totalexpences" class="java.lang.Double"/>
+	<field name="moneytransfer_cashinhand" class="java.lang.Double"/>
+	<field name="moneytransfer_profitorloss" class="java.lang.Double"/>
+	<field name="moneytransfer_entrydate" class="java.sql.Timestamp"/>
+	<field name="moneytransfer_modificationdate" class="java.sql.Timestamp"/>
+	<field name="sangh_ID" class="java.lang.Integer"/>
+	<field name="sangh_sname" class="java.lang.String"/>
+	<field name="sangh_cno" class="java.lang.String"/>
+	<field name="sangh_address" class="java.lang.String"/>
+	<field name="sangh_rtc_no" class="java.lang.Integer"/>
+	<field name="sangh_comission" class="java.lang.Double"/>
+	<field name="sangh_shareanamat" class="java.lang.Double"/>
+	<field name="sangh_rebate" class="java.lang.Double"/>
+	<field name="sangh_DateAdded" class="java.sql.Timestamp"/>
+	<field name="sangh_AddedByFK" class="java.lang.Integer"/>
+	<field name="sangh_DateModified" class="java.sql.Timestamp"/>
+	<field name="sangh_LastUserFK" class="java.lang.Integer"/>
+	<field name="moneytransfer_banckwidhrawdate" class="java.sql.Timestamp"/>
+	<field name="moneytransfer_shetkaribachat" class="java.lang.Double"/>
+	<variable name="PT_vartotmilkamt" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_totalmilkamt}]]></variableExpression>
+	</variable>
+	<variable name="GT_vartotmilkamt" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_totalmilkamt}]]></variableExpression>
+	</variable>
+	<variable name="PT_sharetotal" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_sharededuct}]]></variableExpression>
+	</variable>
+	<variable name="GT_sharededuct" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_sharededuct}]]></variableExpression>
+	</variable>
+	<variable name="PT_otherdeduct" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_otherdeduct}]]></variableExpression>
+	</variable>
+	<variable name="GT_otherdeduct" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_otherdeduct}]]></variableExpression>
+	</variable>
+	<variable name="PT_totalamtrecieved" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_totalamtrecieved}]]></variableExpression>
+	</variable>
+	<variable name="GT_totalamtrecieved" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_totalamtrecieved}]]></variableExpression>
+	</variable>
+	<variable name="PT_bankwidhraw" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_bankwithdrawamt}]]></variableExpression>
+	</variable>
+	<variable name="GT_totalbankwidhraw" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_bankwithdrawamt}]]></variableExpression>
+	</variable>
+	<variable name="PT_banbal" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_bankbalance}]]></variableExpression>
+	</variable>
+	<variable name="GT_bankbal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_bankbalance}]]></variableExpression>
+	</variable>
+	<variable name="PT_totalanamatghene" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_totalamtrecieved}]]></variableExpression>
+	</variable>
+	<variable name="GT_totalanamatrecieved" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_totalamtrecieved}]]></variableExpression>
+	</variable>
+	<variable name="PT_netpaym" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_netpayment}]]></variableExpression>
+	</variable>
+	<variable name="GT_netpaym" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_netpayment}]]></variableExpression>
+	</variable>
+	<variable name="PT_shetkaribachat" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_shetkaribachat}]]></variableExpression>
+	</variable>
+	<variable name="GT_shetkarianamat" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_shetkaribachat}]]></variableExpression>
+	</variable>
+	<variable name="PT_anamatdene" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_anamatpaid}]]></variableExpression>
+	</variable>
+	<variable name="GT_anamtpaid" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_anamatpaid}]]></variableExpression>
+	</variable>
+	<variable name="PT_expence" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_totalexpences}]]></variableExpression>
+	</variable>
+	<variable name="GT_expence" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_totalexpences}]]></variableExpression>
+	</variable>
+	<variable name="PT_cashinhand" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_cashinhand}]]></variableExpression>
+	</variable>
+	<variable name="GT_cashinhand" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_cashinhand}]]></variableExpression>
+	</variable>
+	<variable name="PT_PL" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_profitorloss}]]></variableExpression>
+	</variable>
+	<variable name="GT_PL" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{moneytransfer_profitorloss}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="160" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="dca7530c-586b-46a5-b444-4187f4812410" x="725" y="56" width="15" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ते]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="027dda91-63ac-4771-a5a7-c00fa2c21e23" x="740" y="56" width="62" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{tdate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="237c26dc-d0d2-4981-aace-9e325d5c0274" x="625" y="56" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{fdate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="a5c5cead-0370-47e6-833c-75a7012a30f5" mode="Opaque" x="0" y="76" width="802" height="30" backcolor="#CCFFFF"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="false" isItalic="false" isUnderline="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[मनी ट्रान्सफर रजिस्टर]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="17ff07a5-3629-488d-9c40-6d4dd1a9d280" mode="Transparent" x="0" y="127" width="54" height="33"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[एम. टी. दिनांक]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5ffe4c66-f118-4a61-affb-1ce02cf69496" mode="Transparent" x="108" y="127" width="54" height="33"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[शेअर्स]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0aedd1f7-58d7-4060-ab59-5cdedb2917a2" mode="Transparent" x="54" y="127" width="54" height="33"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[एकूण बिल रक्कम]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e7e1b25f-50ff-4201-ae15-b362d0cd312c" mode="Transparent" x="162" y="127" width="54" height="33"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[इतर कपात]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="98c52610-3697-408c-b2f8-514a0e4153b6" mode="Transparent" x="216" y="127" width="67" height="33"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[बँकेत जमा रक्कम]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8b25512e-6095-4584-9ad0-74b242114a06" mode="Transparent" x="283" y="127" width="54" height="33"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[पैसे काढले.दिनांक]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d20219e5-0b8f-4126-a41d-a24d6a60c9e6" mode="Transparent" x="391" y="127" width="54" height="33"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[बँकेत शिल्लक]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0b55e90f-7d8f-4979-9362-922c6275274f" mode="Transparent" x="544" y="127" width="50" height="33"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[शेतकरी बचत]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9535faf2-5a4d-471a-aaf7-671a4b8d9a27" mode="Transparent" x="490" y="127" width="54" height="33"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[पगार वाटप]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d233038b-2a8e-4204-bccd-22f3101c6fea" mode="Transparent" x="445" y="127" width="45" height="33"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[अनामत घेणे]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ab0f265d-ab9d-4ad4-9881-a7711762f4d3" mode="Transparent" x="594" y="127" width="45" height="33"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[अनामत देणे]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e88db09e-e930-40ec-93b0-84e2e6ca8980" mode="Transparent" x="639" y="127" width="50" height="33"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[डेअरी खर्च]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="768d6b12-9ca6-451f-8a3c-b38cc821f42d" mode="Transparent" x="689" y="127" width="51" height="33"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[हातावरील शिल्लक]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4b9823fe-e9b5-4c89-8821-9c8de5f0a2d8" mode="Transparent" x="740" y="127" width="62" height="33"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[नफा / तोटा]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="134c0f47-fcc4-4b75-97e6-96d537ba6acd" mode="Transparent" x="0" y="106" width="283" height="21"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[संघ बिल तपशील]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="78b03785-b017-415f-bf40-f532d2e58f7c" mode="Transparent" x="283" y="106" width="162" height="21"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[बँक तपशील]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1a83ee19-e963-4b17-ba30-4d9a3b71cfcc" mode="Transparent" x="337" y="127" width="54" height="33"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[रक्कम]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e40431d4-068b-44ee-815a-09e8d1293cb0" mode="Transparent" x="445" y="106" width="357" height="21"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[कॅश तपशील]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="09b425c5-66dd-411d-8dd9-e945fdf0d38d" x="0" y="0" width="802" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_firmname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1c626536-9fc0-4cef-af2f-da74f48b37e3" x="0" y="29" width="802" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1b55a828-58cb-4c5c-85b8-7656db9fbc51" x="0" y="56" width="407" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_contatno}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="a11415ca-a1f5-4dd7-96fe-25ba913acd66" x="0" y="0" width="54" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{moneytransfer_mtdate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="21c0b6bd-ba23-4a74-bef3-68b9919efb7d" x="54" y="0" width="54" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{moneytransfer_totalmilkamt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="3098beb2-3040-488c-a0d1-42619d254206" x="108" y="0" width="54" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{moneytransfer_sharededuct}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="3ffe0442-7b73-42e6-be12-6ba1b163744a" x="162" y="0" width="54" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{moneytransfer_otherdeduct}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="2fb53e6a-cae6-45e0-a7f7-c9b312542af8" x="216" y="0" width="67" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{moneytransfer_totalamtrecieved}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="c8ec4772-43b7-4810-84bc-9f0225de0763" x="283" y="0" width="54" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{moneytransfer_banckwidhrawdate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="1e3624b2-bb53-4f7e-9896-8e13d15e80cb" x="337" y="0" width="54" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{moneytransfer_bankwithdrawamt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="0eb714a1-140f-4236-be5d-976c522c2c12" x="391" y="0" width="54" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{moneytransfer_bankbalance}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="f9b3fd77-87d4-45c1-b2e3-3cd5d37a337d" x="445" y="0" width="45" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{moneytransfer_anamatrecieved}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="7c8f8015-daaf-4adb-9968-e29cd0cd7f7d" x="490" y="0" width="54" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{moneytransfer_netpayment}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="0a3433cc-ec7d-468e-96e2-02acd35913ed" x="544" y="0" width="50" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{moneytransfer_shetkaribachat}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="b1c9f630-cecc-44c4-b14e-3919184094be" x="594" y="0" width="45" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{moneytransfer_anamatpaid}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="97f2c3eb-5327-4697-a520-496f0c75d411" x="639" y="0" width="50" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{moneytransfer_totalexpences}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="b20a8312-31ee-4141-ae49-e18b6e072d49" x="689" y="0" width="51" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{moneytransfer_cashinhand}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="7f76fec6-6883-4f9c-9779-eace4c72029d" x="740" y="0" width="62" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{moneytransfer_profitorloss}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="49" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="fb578db3-8b7e-4679-bab5-134d8f40fa3b" x="0" y="9" width="54" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Page Total : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="01ddcf62-b83e-4688-a68e-c3845f4e21fa" x="0" y="29" width="54" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grant Total : ]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="8b87dbb8-5f57-4573-a841-139e933d228d" x="0" y="4" width="802" height="1"/>
+			</line>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="1d046aa6-c251-4f8e-a024-424c488f6331" x="54" y="9" width="54" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PT_vartotmilkamt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="af3e093d-d332-484b-a983-f12b551e26fd" x="54" y="29" width="54" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{GT_vartotmilkamt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="8f7a7aee-3919-4cf0-b1e9-07c46f77e51a" x="108" y="9" width="54" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PT_sharetotal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="34503fea-f33c-4443-ab28-eaceb358f53d" x="108" y="29" width="54" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{GT_sharededuct}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="9d8d33e2-1b60-4e00-beb1-a6c42fa2702a" x="162" y="9" width="54" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PT_otherdeduct}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="371cc9b2-1317-42cf-862c-d126bccb8f47" x="162" y="29" width="54" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{GT_otherdeduct}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="c5cfddda-233d-4db5-90f8-d7d83eb5b39e" x="216" y="9" width="67" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PT_totalamtrecieved}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="3c9aadb8-1aee-4da3-b630-8a0f3764306f" x="216" y="29" width="67" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{GT_totalamtrecieved}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="8cf9e786-a7c8-4e9f-8260-5fac85ca1914" x="283" y="9" width="54" height="20"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="9" isBold="true" isStrikeThrough="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5a6498d6-4f00-4352-bdb3-aeb492aeeb27" x="283" y="29" width="54" height="20"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="9" isBold="true" isStrikeThrough="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="d0391ae3-cb93-4451-a967-40e87352d162" x="337" y="9" width="54" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PT_bankwidhraw}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="9e605c41-8422-41c5-98b6-03af3146d453" x="337" y="29" width="54" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{GT_totalbankwidhraw}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="99450cd6-e56a-46d5-a3cc-df3cfd7fabad" x="391" y="9" width="54" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PT_banbal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="3d4ba11b-8151-41ff-97a9-827aeb23f689" x="391" y="29" width="54" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{GT_bankbal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="ed8293dd-3596-4b5f-85e3-4e08fae28fd7" x="445" y="9" width="46" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PT_totalanamatghene}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="df183e9c-c565-40ea-9e86-39e38c077681" x="445" y="29" width="46" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{GT_totalanamatrecieved}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="c8982c33-b386-44a1-a365-673788b44a1f" x="491" y="9" width="53" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PT_netpaym}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="194cd231-10c5-4bbd-8739-f2ef9ec0aa08" x="491" y="29" width="53" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{GT_netpaym}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="1f371c55-dd08-42b6-b473-2d80662d9947" x="544" y="9" width="50" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PT_shetkaribachat}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="02a700a7-31f2-40d2-b926-fb04529cb85b" x="544" y="29" width="50" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{GT_shetkarianamat}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="8e57b799-d3d1-4a9a-aeb5-26c3ef8bf3c9" x="594" y="9" width="45" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PT_anamatdene}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="f5fbeb4a-da18-4aee-a0b3-fbca1d3e2165" x="594" y="29" width="45" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{GT_anamtpaid}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="4892fba7-e13e-4fbf-b575-d68ba0aa0956" x="639" y="9" width="50" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PT_expence}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="4c140812-68e6-40c8-8803-ca130c68198e" x="639" y="29" width="50" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{GT_expence}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="df0d383f-8a54-4e21-b27d-fc307e27dcff" x="689" y="9" width="51" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PT_cashinhand}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="7767703f-8c58-4066-94e1-968aa5c43ea7" x="689" y="29" width="51" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{GT_cashinhand}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="13a3faa4-abbe-447a-95b8-de91827fbad9" x="740" y="9" width="62" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PT_PL}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="b88cd51c-38a5-4af6-b581-f9d872c4cd0d" x="740" y="29" width="62" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{GT_PL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bankpaymentreg_namuna_2" language="groovy" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="a1404685-a587-4798-9d91-585b2a060cb2">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="wherecondition" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     config.`firmname` AS config_firmname,
+     config.`address` AS config_address,
+     config.`contatno` AS config_contatno,
+     qry_bank_payment_reg_namuna_2.`prod_id` AS qry_bank_payment_reg_namuna_2_prod_id,
+     qry_bank_payment_reg_namuna_2.`ID` AS qry_bank_payment_reg_namuna_2_ID,
+     qry_bank_payment_reg_namuna_2.`pro_name` AS qry_bank_payment_reg_namuna_2_pro_name,
+     qry_bank_payment_reg_namuna_2.`producergroupid` AS qry_bank_payment_reg_namuna_2_producergroupid,
+     qry_bank_payment_reg_namuna_2.`bankid` AS qry_bank_payment_reg_namuna_2_bankid,
+     qry_bank_payment_reg_namuna_2.`acno` AS qry_bank_payment_reg_namuna_2_acno,
+     qry_bank_payment_reg_namuna_2.`branch` AS qry_bank_payment_reg_namuna_2_branch,
+     qry_bank_payment_reg_namuna_2.`ifsccode` AS qry_bank_payment_reg_namuna_2_ifsccode,
+     qry_bank_payment_reg_namuna_2.`from_date` AS qry_bank_payment_reg_namuna_2_from_date,
+     qry_bank_payment_reg_namuna_2.`to_date` AS qry_bank_payment_reg_namuna_2_to_date,
+     qry_bank_payment_reg_namuna_2.`tot_milk` AS qry_bank_payment_reg_namuna_2_tot_milk,
+     qry_bank_payment_reg_namuna_2.`avg_FAT` AS qry_bank_payment_reg_namuna_2_avg_FAT,
+     qry_bank_payment_reg_namuna_2.`avg_rate` AS qry_bank_payment_reg_namuna_2_avg_rate,
+     qry_bank_payment_reg_namuna_2.`tot_milkamount` AS qry_bank_payment_reg_namuna_2_tot_milkamount,
+     qry_bank_payment_reg_namuna_2.`tot_deduction` AS qry_bank_payment_reg_namuna_2_tot_deduction,
+     qry_bank_payment_reg_namuna_2.`amt_payable` AS qry_bank_payment_reg_namuna_2_amt_payable,
+     qry_bank_payment_reg_namuna_2.`bankname` AS qry_bank_payment_reg_namuna_2_bankname
+FROM
+     `config` config,
+     `qry_bank_payment_reg_namuna_2` qry_bank_payment_reg_namuna_2
+WHERE
+      $P!{wherecondition}]]>
+	</queryString>
+	<field name="config_firmname" class="java.lang.String"/>
+	<field name="config_address" class="java.lang.String"/>
+	<field name="config_contatno" class="java.lang.String"/>
+	<field name="qry_bank_payment_reg_namuna_2_prod_id" class="java.lang.Integer"/>
+	<field name="qry_bank_payment_reg_namuna_2_ID" class="java.lang.Integer"/>
+	<field name="qry_bank_payment_reg_namuna_2_pro_name" class="java.lang.String"/>
+	<field name="qry_bank_payment_reg_namuna_2_producergroupid" class="java.lang.Integer"/>
+	<field name="qry_bank_payment_reg_namuna_2_bankid" class="java.lang.Integer"/>
+	<field name="qry_bank_payment_reg_namuna_2_acno" class="java.lang.String"/>
+	<field name="qry_bank_payment_reg_namuna_2_branch" class="java.lang.String"/>
+	<field name="qry_bank_payment_reg_namuna_2_ifsccode" class="java.lang.String"/>
+	<field name="qry_bank_payment_reg_namuna_2_from_date" class="java.sql.Timestamp"/>
+	<field name="qry_bank_payment_reg_namuna_2_to_date" class="java.sql.Timestamp"/>
+	<field name="qry_bank_payment_reg_namuna_2_tot_milk" class="java.lang.Double"/>
+	<field name="qry_bank_payment_reg_namuna_2_avg_FAT" class="java.lang.Double"/>
+	<field name="qry_bank_payment_reg_namuna_2_avg_rate" class="java.lang.Double"/>
+	<field name="qry_bank_payment_reg_namuna_2_tot_milkamount" class="java.lang.Double"/>
+	<field name="qry_bank_payment_reg_namuna_2_tot_deduction" class="java.lang.Double"/>
+	<field name="qry_bank_payment_reg_namuna_2_amt_payable" class="java.lang.Double"/>
+	<field name="qry_bank_payment_reg_namuna_2_bankname" class="java.lang.String"/>
+	<variable name="TotalMilk" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{qry_bank_payment_reg_namuna_2_tot_milk}]]></variableExpression>
+	</variable>
+	<variable name="TotalDed" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{qry_bank_payment_reg_namuna_2_tot_deduction}]]></variableExpression>
+	</variable>
+	<variable name="TotalPaybleAmt" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{qry_bank_payment_reg_namuna_2_amt_payable}]]></variableExpression>
+	</variable>
+	<variable name="TotalMilkAmt" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{qry_bank_payment_reg_namuna_2_tot_milkamount}]]></variableExpression>
+	</variable>
+	<variable name="AvgRate" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="41" splitType="Stretch">
+			<textField>
+				<reportElement uuid="4fb65ab7-6dec-4a4a-8d81-f5a72fca6aa7" x="0" y="20" width="802" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="39603b0f-51c4-4d98-9eed-c67492f02af3" x="0" y="0" width="802" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_firmname}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="8c1ca1e5-c775-4fa8-9ee0-dd8ec6b8dcba" x="0" y="0" width="19" height="33"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sr.
+No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c30c8ad7-af0d-409f-a84f-4a28312490b5" x="19" y="0" width="102" height="33"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Producer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9b12be04-21cc-43b7-9379-1f598fcb9c84" x="121" y="0" width="102" height="33"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Payment Period]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bec953b6-2757-41a4-8f82-e221689829a9" x="223" y="0" width="44" height="33"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total
+Milk]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd411bdf-5b3a-4c94-954b-4e173bc159bf" x="293" y="0" width="51" height="33"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total
+Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7ca07287-5d1d-4349-a8c4-238e7fa2320d" x="344" y="0" width="44" height="33"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ded.
+If Any]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="51205b50-456b-4886-9336-5f5d671367e6" x="388" y="0" width="55" height="33"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Payble
+Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="df3809c3-0c10-4a12-83d3-58f8158e5b7d" x="267" y="0" width="26" height="33"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Avg
+Rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5ef87605-bf74-4f78-86c3-897141ac9d0c" x="443" y="0" width="93" height="33"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bank]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3d9c081a-971f-4ea7-ab37-c7d4b03eeac2" x="536" y="0" width="51" height="33"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Branch]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1568d8b0-37dc-426a-b36a-a6e3baecb0a2" x="587" y="0" width="78" height="33"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[A/C Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="36386fb2-31c8-4f70-a3cc-4c810622d4a5" x="665" y="0" width="78" height="33"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IFSC Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7f894fe5-ab67-4c15-a008-4eb400dbd0e0" x="743" y="0" width="59" height="33"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Remark]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="6974712e-53fb-4430-a0a5-752c64ee512e" x="19" y="0" width="102" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qry_bank_payment_reg_namuna_2_pro_name}]]></textFieldExpression>
+			</textField>
+			<elementGroup>
+				<textField pattern="dd/MM">
+					<reportElement uuid="741b88b0-7c83-4953-afd5-f2f349be1aa1" x="121" y="0" width="32" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{qry_bank_payment_reg_namuna_2_from_date}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="04657f40-b7fa-47d1-8035-041a0a91ab1e" x="153" y="0" width="37" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[TO]]></text>
+				</staticText>
+				<textField pattern="dd/MM">
+					<reportElement uuid="4ad72a76-4c56-4f98-b09c-ab635e94010c" x="190" y="0" width="33" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{qry_bank_payment_reg_namuna_2_to_date}]]></textFieldExpression>
+				</textField>
+			</elementGroup>
+			<textField>
+				<reportElement uuid="32cfaef9-4bcc-4ee8-9a9e-cea139c975cb" x="0" y="0" width="19" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="54a8a033-b0b8-4a80-9f3b-c6f4b99f39de" x="223" y="0" width="44" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qry_bank_payment_reg_namuna_2_tot_milk}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="29346582-eeea-4883-9cf9-c04d0d13dc94" x="267" y="0" width="26" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qry_bank_payment_reg_namuna_2_avg_rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d5c71c2c-7316-4e1b-ab3d-7a596ab3cd63" x="293" y="0" width="51" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qry_bank_payment_reg_namuna_2_tot_milkamount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="34cb77c6-9776-4b53-820c-c2bc659c641b" x="344" y="0" width="44" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qry_bank_payment_reg_namuna_2_tot_deduction}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="44541a76-af99-4d15-84bb-30e67acd1bbe" x="388" y="0" width="55" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qry_bank_payment_reg_namuna_2_amt_payable}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6656b8be-927a-4518-a7d0-28a631fac703" x="443" y="0" width="93" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qry_bank_payment_reg_namuna_2_bankname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="95f05d8e-9dee-4953-a37c-9216b50f7004" x="536" y="0" width="51" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qry_bank_payment_reg_namuna_2_branch}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8f8ccf6a-0fe3-4738-b264-a8fe100e5f14" x="587" y="0" width="78" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qry_bank_payment_reg_namuna_2_acno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="095df590-44af-403d-9c13-93d057513701" x="665" y="0" width="78" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qry_bank_payment_reg_namuna_2_ifsccode}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="b1993ea1-f0a5-419d-aee5-f4b31692466b" x="743" y="0" width="59" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="19" splitType="Stretch">
+			<textField>
+				<reportElement uuid="c2222881-522c-42af-a560-dfa89506c80d" x="223" y="0" width="44" height="17"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotalMilk}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="09c43d28-56da-4d88-89c5-cf9c5a51a0ab" x="344" y="0" width="44" height="17"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotalDed}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="64d0a82d-7ce2-4562-bebe-b23995198055" x="388" y="0" width="55" height="17"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotalPaybleAmt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5293e8d0-1bc7-49de-bcfc-49f47db5fb33" x="293" y="0" width="51" height="17"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotalMilkAmt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a5caf0e7-375a-4413-b1e7-0d2336f7680b" x="267" y="0" width="26" height="17"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotalMilkAmt}/$V{TotalMilk}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

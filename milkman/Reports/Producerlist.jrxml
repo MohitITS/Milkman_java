@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Producerlist" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="456783d4-40e5-4560-b802-502ca0ac87a1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<queryString>
+		<![CDATA[SELECT
+     producer.`ID` AS producer_ID,
+     producer.`pro_name` AS producer_pro_name,
+     producer.`m_name` AS producer_m_name,
+     producer.`addr` AS producer_addr,
+     producer.`contact_no` AS producer_contact_no,
+     producer.`member` AS producer_member,
+     producer.`rtc_no` AS producer_rtc_no,
+     producer.`comission` AS producer_comission,
+     producer.`ribet` AS producer_ribet,
+     producer.`share_amt` AS producer_share_amt,
+     producer.`chiling_amt` AS producer_chiling_amt,
+     producer.`DateAdded` AS producer_DateAdded,
+     producer.`AddedByFK` AS producer_AddedByFK,
+     producer.`DateModified` AS producer_DateModified,
+     producer.`LastUserFK` AS producer_LastUserFK,
+     producer.`Locked` AS producer_Locked,
+     producer.`producergroupid` AS producer_producergroupid,
+     producer.`legerType` AS producer_legerType,
+     producer.`lgr_gr_id` AS producer_lgr_gr_id,
+     producer.`opn_bal` AS producer_opn_bal,
+     producer.`cr_dr_ID` AS producer_cr_dr_ID,
+     producer.`perc` AS producer_perc,
+     producer.`bankid` AS producer_bankid,
+     producer.`acno` AS producer_acno,
+     producer.`veh_exp` AS producer_veh_exp,
+     producergroup.`ID` AS producergroup_ID,
+     producergroup.`grname` AS producergroup_grname,
+     config.`ID` AS config_ID,
+     config.`firmname` AS config_firmname,
+     config.`address` AS config_address,
+     config.`contatno` AS config_contatno,
+     config.`swcopycode` AS config_swcopycode,
+     config.`refno` AS config_refno,
+     config.`licenceno` AS config_licenceno,
+     config.`instalationdate` AS config_instalationdate,
+     config.`plantorcenter` AS config_plantorcenter,
+     config.`regpersonname` AS config_regpersonname,
+     config.`curryearfrom` AS config_curryearfrom,
+     config.`curryearto` AS config_curryearto,
+     config.`currdate` AS config_currdate,
+     config.`firmregno` AS config_firmregno,
+     config.`emailadd` AS config_emailadd,
+     config.`swlang` AS config_swlang
+FROM
+     `producer` producer INNER JOIN `producergroup` producergroup ON producer.`producergroupid` = producergroup.`ID`,
+     `config` config
+Order By
+     producer.producergroupid, producer.prod_id]]>
+	</queryString>
+	<field name="producer_ID" class="java.lang.Integer"/>
+	<field name="producer_pro_name" class="java.lang.String"/>
+	<field name="producer_m_name" class="java.lang.String"/>
+	<field name="producer_addr" class="java.lang.String"/>
+	<field name="producer_contact_no" class="java.lang.String"/>
+	<field name="producer_member" class="java.lang.Boolean"/>
+	<field name="producer_rtc_no" class="java.lang.Integer"/>
+	<field name="producer_comission" class="java.lang.Double"/>
+	<field name="producer_ribet" class="java.lang.Double"/>
+	<field name="producer_share_amt" class="java.lang.Double"/>
+	<field name="producer_chiling_amt" class="java.lang.Double"/>
+	<field name="producer_DateAdded" class="java.sql.Timestamp"/>
+	<field name="producer_AddedByFK" class="java.lang.Integer"/>
+	<field name="producer_DateModified" class="java.sql.Timestamp"/>
+	<field name="producer_LastUserFK" class="java.lang.Integer"/>
+	<field name="producer_Locked" class="java.lang.Boolean"/>
+	<field name="producer_producergroupid" class="java.lang.Integer"/>
+	<field name="producer_legerType" class="java.lang.String"/>
+	<field name="producer_lgr_gr_id" class="java.lang.Integer"/>
+	<field name="producer_opn_bal" class="java.lang.Double"/>
+	<field name="producer_cr_dr_ID" class="java.lang.Integer"/>
+	<field name="producer_perc" class="java.lang.Double"/>
+	<field name="producer_bankid" class="java.lang.Integer"/>
+	<field name="producer_acno" class="java.lang.String"/>
+	<field name="producer_veh_exp" class="java.lang.Double"/>
+	<field name="producergroup_ID" class="java.lang.Integer"/>
+	<field name="producergroup_grname" class="java.lang.String"/>
+	<field name="config_ID" class="java.lang.Integer"/>
+	<field name="config_firmname" class="java.lang.String"/>
+	<field name="config_address" class="java.lang.String"/>
+	<field name="config_contatno" class="java.lang.String"/>
+	<field name="config_swcopycode" class="java.lang.String"/>
+	<field name="config_refno" class="java.lang.String"/>
+	<field name="config_licenceno" class="java.lang.String"/>
+	<field name="config_instalationdate" class="java.sql.Timestamp"/>
+	<field name="config_plantorcenter" class="java.lang.Boolean"/>
+	<field name="config_regpersonname" class="java.lang.String"/>
+	<field name="config_curryearfrom" class="java.sql.Timestamp"/>
+	<field name="config_curryearto" class="java.sql.Timestamp"/>
+	<field name="config_currdate" class="java.sql.Timestamp"/>
+	<field name="config_firmregno" class="java.lang.String"/>
+	<field name="config_emailadd" class="java.lang.String"/>
+	<field name="config_swlang" class="java.lang.String"/>
+	<group name="producergroup_grname" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{producergroup_grname}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="145" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="7598492c-6f24-4733-9ff7-c328ad2a770a" mode="Transparent" x="0" y="73" width="554" height="25" forecolor="#0066FF" backcolor="#CCCCCC"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[उत्पादक रजिस्टर]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="bc96f0d7-ac31-4153-9558-894359140d78" x="0" y="29" width="555" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="86bf147b-5bee-4637-9353-b53679d01eb7" x="1" y="56" width="305" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_contatno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="dd165e0c-68a2-4bb1-bd2e-363aed493fc9" x="0" y="0" width="555" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_firmname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f155f77a-7ca8-445b-9fc9-7a7167003199" x="1" y="98" width="554" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{producergroup_grname}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="4c2c895c-f2c5-4eac-a2ac-61540c4c8c15" mode="Opaque" x="0" y="118" width="72" height="27"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="14" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[उत्पा. कोड]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="673a390c-7f41-4f95-bb11-00a66b24d909" mode="Opaque" x="72" y="118" width="333" height="27"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="14" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[उत्पादकाचे नाव]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="05798590-956a-4217-9736-fb3ffafddc56" mode="Opaque" x="405" y="118" width="149" height="27"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="14" isBold="true" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[बँक अकौंट नं]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement uuid="4b704911-ea8d-4bb4-a712-d5f3ebad7d25" mode="Opaque" x="72" y="0" width="333" height="26"/>
+				<box topPadding="1" leftPadding="10" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{producer_pro_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f0116a1b-ed57-4985-8a03-f018764a2208" mode="Opaque" x="0" y="0" width="72" height="26"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{producer_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0cff7bb6-3114-47f3-87cd-7675e481c988" x="405" y="0" width="149" height="26"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{producer_acno}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

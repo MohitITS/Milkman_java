@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rateChart" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ae7383e3-1fba-4217-8dd8-c8c8a159eb4e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="ratechart" uuid="ea360835-0844-47f2-916d-314767b78e5f">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     rateChart.`ID` AS rateChart_ID,
+     rateChart.`rtc_no` AS rateChart_rtc_no,
+     rateChart.`fat` AS rateChart_fat,
+     rateChart.`snf` AS rateChart_snf,
+     rateChart.`rate` AS rateChart_rate,
+     rateChart.`milktype_id` AS rateChart_milktype_id
+FROM
+     `rateChart` rateChart]]>
+		</queryString>
+		<field name="rateChart_ID" class="java.lang.Integer"/>
+		<field name="rateChart_rtc_no" class="java.lang.Integer"/>
+		<field name="rateChart_fat" class="java.lang.Double"/>
+		<field name="rateChart_snf" class="java.lang.Double"/>
+		<field name="rateChart_rate" class="java.lang.Double"/>
+		<field name="rateChart_milktype_id" class="java.lang.Integer"/>
+		<group name="rateChart_rtc_no">
+			<groupExpression><![CDATA[$F{rateChart_rtc_no}]]></groupExpression>
+		</group>
+		<group name="rateChart_milktype_id">
+			<groupExpression><![CDATA[$F{rateChart_milktype_id}]]></groupExpression>
+		</group>
+	</subDataset>
+	<queryString>
+		<![CDATA[SELECT
+     config.`ID` AS config_ID,
+     config.`firmname` AS config_firmname,
+     config.`address` AS config_address,
+     config.`contatno` AS config_contatno,
+     rateCharT.`ID` AS rateCharT_ID,
+     rateCharT.`rtc_no` AS rateCharT_rtc_no,
+     rateCharT.`fat` AS rateCharT_fat,
+     rateCharT.`snf` AS rateCharT_snf,
+     rateCharT.`rate` AS rateCharT_rate,
+     rateCharT.`milktype_id` AS rateCharT_milktype_id
+FROM
+     `config` config,
+     `rateCharT` rateCharT]]>
+	</queryString>
+	<field name="config_ID" class="java.lang.Integer"/>
+	<field name="config_firmname" class="java.lang.String"/>
+	<field name="config_address" class="java.lang.String"/>
+	<field name="config_contatno" class="java.lang.String"/>
+	<field name="rateCharT_ID" class="java.lang.Integer"/>
+	<field name="rateCharT_rtc_no" class="java.lang.Integer"/>
+	<field name="rateCharT_fat" class="java.lang.Double"/>
+	<field name="rateCharT_snf" class="java.lang.Double"/>
+	<field name="rateCharT_rate" class="java.lang.Double"/>
+	<field name="rateCharT_milktype_id" class="java.lang.Integer"/>
+	<variable name="variable1" class="java.lang.String"/>
+	<group name="rateCharT_rtc_no">
+		<groupExpression><![CDATA[$F{rateCharT_rtc_no}]]></groupExpression>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="rateCharT_milktype_id" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{rateCharT_milktype_id}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement uuid="3b88e55d-bb76-4a9a-8840-d90066c6178d" x="0" y="0" width="92" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["MILK TYPE : " + $F{rateCharT_milktype_id}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="93" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="933184b4-dbc3-4a6c-a1f3-dae3cf60f461" x="0" y="72" width="92" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Rate Chart No :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="6e4d503f-6e6a-4823-be04-4acd5bc283e6" x="92" y="72" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rateCharT_rtc_no}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="d0c03a56-833d-4abb-84a3-48d263115143" x="0" y="92" width="555" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="c0dc5462-82ea-4ae5-a68f-61c33f0d8458" mode="Opaque" x="0" y="50" width="555" height="21"/>
+				<box bottomPadding="0">
+					<pen lineWidth="0.0" lineStyle="Double"/>
+					<topPen lineWidth="0.0" lineStyle="Double"/>
+					<leftPen lineWidth="0.0" lineStyle="Double"/>
+					<bottomPen lineWidth="0.0" lineStyle="Double"/>
+					<rightPen lineWidth="0.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" isUnderline="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_contatno}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="669cc17d-7181-4df8-bf8a-f54ab8f08082" x="0" y="71" width="555" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="d022ba31-f839-44ff-a707-15604bf385ae" x="0" y="27" width="555" height="23"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ec579e28-2857-468a-a85c-a3e67dc1abe6" mode="Opaque" x="0" y="0" width="555" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_firmname}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<elementGroup/>
+			<staticText>
+				<reportElement uuid="70f178d9-871d-425f-bd00-78b53fb59edf" x="92" y="7" width="159" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[फॅट]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7e8b9d6b-438e-42db-b16e-db6deb9e7a6d" x="251" y="7" width="129" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[एस. एन. एफ.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="74ffc7aa-f1f5-4491-af46-100397bd13cd" x="380" y="7" width="175" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[रेट]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField pattern="###0.0;-###0.0">
+				<reportElement uuid="587359e5-5d03-4cdc-9aad-a94080ff07b9" x="92" y="0" width="159" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{rateCharT_fat}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0;-###0.0">
+				<reportElement uuid="729d3be2-e4f5-4a1f-9d07-9a47dd201fb7" x="251" y="0" width="129" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{rateCharT_snf}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="b722ce9e-9a65-473c-92c7-c41fb93da804" x="380" y="0" width="175" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{rateCharT_rate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band/>
+	</pageFooter>
+</jasperReport>

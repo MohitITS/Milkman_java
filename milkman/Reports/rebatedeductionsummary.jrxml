@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rebatedeductionsummary" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fca8c94e-ad9d-4276-bb91-8307583cb809">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="wherecondition" class="java.lang.String"/>
+	<parameter name="tdate" class="java.lang.String"/>
+	<parameter name="fdate" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     prodbilldeduction.`ID` AS prodbilldeduction_ID,
+     prodbilldeduction.`deddate` AS prodbilldeduction_deddate,
+     prodbilldeduction.`dedfromdate` AS prodbilldeduction_dedfromdate,
+     prodbilldeduction.`dedtodate` AS prodbilldeduction_dedtodate,
+     prodbilldeduction.`pro_code` AS prodbilldeduction_pro_code,
+     prodbilldeduction.`totamilk` AS prodbilldeduction_totamilk,
+     prodbilldeduction.`amount` AS prodbilldeduction_amount,
+     prodbilldeduction.`rebate` AS prodbilldeduction_rebate,
+     producer.`ID` AS producer_ID,
+     producer.`pro_name` AS producer_pro_name,
+     config.`ID` AS config_ID,
+     config.`firmname` AS config_firmname,
+     config.`address` AS config_address,
+     config.`contatno` AS config_contatno
+FROM
+     `prodbilldeduction` prodbilldeduction INNER JOIN `producer` producer ON prodbilldeduction.`pro_code` = producer.`ID`,
+     `config` config
+WHERE
+     $P!{wherecondition}
+ORDER BY
+     prodbilldeduction.`pro_code` ASC]]>
+	</queryString>
+	<field name="prodbilldeduction_ID" class="java.lang.Integer"/>
+	<field name="prodbilldeduction_deddate" class="java.sql.Timestamp"/>
+	<field name="prodbilldeduction_dedfromdate" class="java.sql.Timestamp"/>
+	<field name="prodbilldeduction_dedtodate" class="java.sql.Timestamp"/>
+	<field name="prodbilldeduction_pro_code" class="java.lang.Integer"/>
+	<field name="prodbilldeduction_totamilk" class="java.lang.Double"/>
+	<field name="prodbilldeduction_amount" class="java.lang.Double"/>
+	<field name="prodbilldeduction_rebate" class="java.lang.Double"/>
+	<field name="producer_ID" class="java.lang.Integer"/>
+	<field name="producer_pro_name" class="java.lang.String"/>
+	<field name="config_ID" class="java.lang.Integer"/>
+	<field name="config_firmname" class="java.lang.String"/>
+	<field name="config_address" class="java.lang.String"/>
+	<field name="config_contatno" class="java.lang.String"/>
+	<variable name="var_proname" class="java.lang.String">
+		<variableExpression><![CDATA[$F{prodbilldeduction_pro_code} + " - " + $F{producer_pro_name}]]></variableExpression>
+	</variable>
+	<variable name="gr_totalmilk" class="java.lang.Double" resetType="Group" resetGroup="prodbilldeduction_pro_code" calculation="Sum">
+		<variableExpression><![CDATA[$F{prodbilldeduction_totamilk}]]></variableExpression>
+	</variable>
+	<variable name="gr_totalmilkamt" class="java.lang.Double" resetType="Group" resetGroup="prodbilldeduction_pro_code" calculation="Sum">
+		<variableExpression><![CDATA[$F{prodbilldeduction_amount}]]></variableExpression>
+	</variable>
+	<variable name="gr_totalbachat" class="java.lang.Double" resetType="Group" resetGroup="prodbilldeduction_pro_code" calculation="Sum">
+		<variableExpression><![CDATA[$F{prodbilldeduction_rebate}]]></variableExpression>
+	</variable>
+	<variable name="pg_totalmilk" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{prodbilldeduction_totamilk}]]></variableExpression>
+	</variable>
+	<variable name="gd_totalmilk" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{prodbilldeduction_totamilk}]]></variableExpression>
+	</variable>
+	<variable name="pg_totalamt" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{prodbilldeduction_amount}]]></variableExpression>
+	</variable>
+	<variable name="gd_totalmlkamt" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{prodbilldeduction_amount}]]></variableExpression>
+	</variable>
+	<variable name="pg_totalbachat" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{prodbilldeduction_rebate}]]></variableExpression>
+	</variable>
+	<variable name="gd_totalrebate" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{prodbilldeduction_rebate}]]></variableExpression>
+	</variable>
+	<group name="prodbilldeduction_pro_code">
+		<groupExpression><![CDATA[$F{prodbilldeduction_pro_code}]]></groupExpression>
+		<groupFooter>
+			<band height="20">
+				<textField>
+					<reportElement uuid="2134dcb7-763a-4fd0-9c1b-08a071a15617" x="12" y="0" width="278" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{var_proname}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00;-###0.00">
+					<reportElement uuid="b9d39733-2ffe-4864-b597-a403644bb339" x="290" y="0" width="88" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{gr_totalmilk}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00;-###0.00">
+					<reportElement uuid="db992e91-91ed-4c40-af78-0173e8062dd8" x="378" y="0" width="86" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{gr_totalmilkamt}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00;-###0.00">
+					<reportElement uuid="87bda360-54a9-4483-a49e-a8c937c24a7f" x="464" y="0" width="91" height="20"/>
+					<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{gr_totalbachat}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="todate">
+		<groupExpression><![CDATA[$F{prodbilldeduction_dedtodate}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="74" splitType="Stretch">
+			<textField>
+				<reportElement uuid="12c63593-0643-474d-9538-3b8ddbd693a9" x="493" y="53" width="62" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{tdate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f960613f-4386-49b3-a5d3-4173407a5c80" x="478" y="53" width="15" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ते]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="6dc58f25-9644-4cb2-98e6-81cd7097a198" mode="Opaque" x="12" y="53" width="251" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_contatno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c75f8ec8-3eca-4a03-a205-92bddcd56107" mode="Opaque" x="12" y="27" width="543" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Mangal" size="14" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_address}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="c7269f7f-7e46-427d-80b3-605a1aae08b7" x="378" y="53" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{fdate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e5d93e55-df3f-4551-be30-c12c24c21184" mode="Opaque" x="12" y="0" width="543" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="18" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_firmname}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="68cba219-616e-4078-b902-4d0ebf915a69" mode="Opaque" x="12" y="0" width="543" height="30" backcolor="#FFFFFF"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="true" isItalic="false" isUnderline="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[शेतकरी बचत रजिस्टर समरी]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8b5e6629-ff10-4f2a-80ca-2678d3569673" x="12" y="30" width="278" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[उत्पादकाचे कोड व नाव ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="121dee22-65ef-4c6a-a672-a871c3149178" x="464" y="30" width="91" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[बचत]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c68091de-8500-4417-970e-5f714d9bb75d" x="290" y="30" width="88" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[एकूण दुध]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ac481649-0386-4fb7-8a5d-7a7efb730910" x="378" y="30" width="86" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[रक्कम]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<pageFooter>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="cef5547f-bd44-4da5-952b-90393245b35f" x="12" y="20" width="278" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grant Total : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e52fb9a9-f3d4-4982-8739-4f6d31589f34" x="12" y="0" width="278" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Page Total : ]]></text>
+			</staticText>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="3db0efcf-10e0-4831-b8d1-a0afdfe4a106" x="290" y="0" width="88" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{pg_totalmilk}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="23fd080e-ba0d-465e-9fe7-a02652412e9e" x="290" y="20" width="88" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{gd_totalmilk}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="fc320762-4d6c-4984-a6af-0a57929839be" x="378" y="0" width="86" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{pg_totalamt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="4a76b759-e355-45d5-af05-a6a75be7b2f3" x="378" y="20" width="86" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{gd_totalmlkamt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="cac66929-3a78-46d4-938f-89ba4b7cff7e" x="464" y="0" width="91" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{pg_totalbachat}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="d9585660-9791-4178-af9e-586e78edabbb" x="464" y="20" width="91" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{gd_totalrebate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,988 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dispatchreport" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1f8414f3-a3e5-4479-9242-3577a294d022">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="c0e131a1-a977-4329-9868-4d0cde21f78c"/>
+	<subDataset name="dispatch" uuid="835bc270-786b-49c2-bc6d-d6ade0035a73">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     milkdispatch.`ID` AS milkdispatch_ID,
+     milkdispatch.`disp_datetime` AS milkdispatch_disp_datetime,
+     milkdispatch.`shift_id` AS milkdispatch_shift_id,
+     milkdispatch.`chalanno` AS milkdispatch_chalanno,
+     milkdispatch.`vid` AS milkdispatch_vid,
+     milkdispatch.`scode` AS milkdispatch_scode,
+     milkdispatch.`mlktype_id` AS milkdispatch_mlktype_id,
+     milkdispatch.`qty1` AS milkdispatch_qty1,
+     milkdispatch.`qty2` AS milkdispatch_qty2,
+     milkdispatch.`fat1` AS milkdispatch_fat1,
+     milkdispatch.`fat2` AS milkdispatch_fat2,
+     milkdispatch.`clr1` AS milkdispatch_clr1,
+     milkdispatch.`clr2` AS milkdispatch_clr2,
+     milkdispatch.`snf1` AS milkdispatch_snf1,
+     milkdispatch.`snf2` AS milkdispatch_snf2,
+     milkdispatch.`rate1` AS milkdispatch_rate1,
+     milkdispatch.`rate2` AS milkdispatch_rate2,
+     milkdispatch.`amt1` AS milkdispatch_amt1,
+     milkdispatch.`amt2` AS milkdispatch_amt2,
+     milkdispatch.`saurmilk` AS milkdispatch_saurmilk,
+     milkdispatch.`saurmilkamt` AS milkdispatch_saurmilkamt,
+     milkdispatch.`DateAdded` AS milkdispatch_DateAdded,
+     milkdispatch.`AddedByFK` AS milkdispatch_AddedByFK,
+     milkdispatch.`DateModified` AS milkdispatch_DateModified,
+     milkdispatch.`LastUserFK` AS milkdispatch_LastUserFK,
+     milkdispatch.`Locked` AS milkdispatch_Locked
+FROM
+     `milkdispatch` milkdispatch]]>
+		</queryString>
+		<field name="milkdispatch_disp_datetime" class="java.sql.Timestamp"/>
+		<field name="milkdispatch_qty1" class="java.lang.Double"/>
+		<field name="milkdispatch_amt1" class="java.lang.Double"/>
+		<field name="milkdispatch_qty2" class="java.lang.Double"/>
+		<field name="milkdispatch_amt2" class="java.lang.Double"/>
+	</subDataset>
+	<parameter name="wherecondition" class="java.lang.String"/>
+	<parameter name="fdate" class="java.lang.String"/>
+	<parameter name="tdate" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     config.`ID` AS config_ID,
+     config.`firmname` AS config_firmname,
+     config.`address` AS config_address,
+     config.`contatno` AS config_contatno,
+     milkdispatch.`ID` AS milkdispatch_ID,
+     milkdispatch.`disp_datetime` AS milkdispatch_disp_datetime,
+     milkdispatch.`shift_id` AS milkdispatch_shift_id,
+     milkdispatch.`chalanno` AS milkdispatch_chalanno,
+     milkdispatch.`vid` AS milkdispatch_vid,
+     milkdispatch.`scode` AS milkdispatch_scode,
+     milkdispatch.`mlktype_id` AS milkdispatch_mlktype_id,
+     milkdispatch.`qty1` AS milkdispatch_qty1,
+     milkdispatch.`qty2` AS milkdispatch_qty2,
+     milkdispatch.`fat1` AS milkdispatch_fat1,
+     milkdispatch.`fat2` AS milkdispatch_fat2,
+     milkdispatch.`clr1` AS milkdispatch_clr1,
+     milkdispatch.`clr2` AS milkdispatch_clr2,
+     milkdispatch.`snf1` AS milkdispatch_snf1,
+     milkdispatch.`snf2` AS milkdispatch_snf2,
+     milkdispatch.`rate1` AS milkdispatch_rate1,
+     milkdispatch.`rate2` AS milkdispatch_rate2,
+     milkdispatch.`amt1` AS milkdispatch_amt1,
+     milkdispatch.`amt2` AS milkdispatch_amt2,
+     milkdispatch.`saurmilk` AS milkdispatch_saurmilk,
+     milkdispatch.`saurmilkamt` AS milkdispatch_saurmilkamt,
+     milkdispatch.`DateAdded` AS milkdispatch_DateAdded,
+     milkdispatch.`AddedByFK` AS milkdispatch_AddedByFK,
+     milkdispatch.`DateModified` AS milkdispatch_DateModified,
+     milkdispatch.`LastUserFK` AS milkdispatch_LastUserFK,
+     milkdispatch.`Locked` AS milkdispatch_Locked,
+     sangh.`sname` AS sangh_sname,
+     sangh.`cno` AS sangh_cno,
+     sangh.`address` AS sangh_address,
+     sangh.`rtc_no` AS sangh_rtc_no,
+     sangh.`comission` AS sangh_comission,
+     sangh.`shareanamat` AS sangh_shareanamat,
+     sangh.`rebate` AS sangh_rebate,
+     sangh.`DateAdded` AS sangh_DateAdded,
+     sangh.`AddedByFK` AS sangh_AddedByFK,
+     sangh.`DateModified` AS sangh_DateModified,
+     sangh.`LastUserFK` AS sangh_LastUserFK,
+     sangh.`ID` AS sangh_ID,
+     milkdispatch.`qty3` AS milkdispatch_qty3,
+     milkdispatch.`fat3` AS milkdispatch_fat3,
+     milkdispatch.`clr3` AS milkdispatch_clr3,
+     milkdispatch.`snf3` AS milkdispatch_snf3,
+     milkdispatch.`rate3` AS milkdispatch_rate3,
+     milkdispatch.`amt3` AS milkdispatch_amt3
+FROM
+     `milkdispatch` milkdispatch INNER JOIN `sangh` sangh ON milkdispatch.`scode` = sangh.`ID`,
+     `config` config
+WHERE
+     $P!{wherecondition}
+ORDER BY
+     milkdispatch.disp_datetime ASC]]>
+	</queryString>
+	<field name="config_ID" class="java.lang.Integer"/>
+	<field name="config_firmname" class="java.lang.String"/>
+	<field name="config_address" class="java.lang.String"/>
+	<field name="config_contatno" class="java.lang.String"/>
+	<field name="milkdispatch_ID" class="java.lang.Integer"/>
+	<field name="milkdispatch_disp_datetime" class="java.sql.Timestamp"/>
+	<field name="milkdispatch_shift_id" class="java.lang.Integer"/>
+	<field name="milkdispatch_chalanno" class="java.lang.Integer"/>
+	<field name="milkdispatch_vid" class="java.lang.Integer"/>
+	<field name="milkdispatch_scode" class="java.lang.Integer"/>
+	<field name="milkdispatch_mlktype_id" class="java.lang.Integer"/>
+	<field name="milkdispatch_qty1" class="java.lang.Double"/>
+	<field name="milkdispatch_qty2" class="java.lang.Double"/>
+	<field name="milkdispatch_fat1" class="java.lang.Double"/>
+	<field name="milkdispatch_fat2" class="java.lang.Double"/>
+	<field name="milkdispatch_clr1" class="java.lang.Double"/>
+	<field name="milkdispatch_clr2" class="java.lang.Double"/>
+	<field name="milkdispatch_snf1" class="java.lang.Double"/>
+	<field name="milkdispatch_snf2" class="java.lang.Double"/>
+	<field name="milkdispatch_rate1" class="java.lang.Double"/>
+	<field name="milkdispatch_rate2" class="java.lang.Double"/>
+	<field name="milkdispatch_amt1" class="java.lang.Double"/>
+	<field name="milkdispatch_amt2" class="java.lang.Double"/>
+	<field name="milkdispatch_saurmilk" class="java.lang.Double"/>
+	<field name="milkdispatch_saurmilkamt" class="java.lang.Double"/>
+	<field name="milkdispatch_DateAdded" class="java.sql.Timestamp"/>
+	<field name="milkdispatch_AddedByFK" class="java.lang.Integer"/>
+	<field name="milkdispatch_DateModified" class="java.sql.Timestamp"/>
+	<field name="milkdispatch_LastUserFK" class="java.lang.Integer"/>
+	<field name="milkdispatch_Locked" class="java.lang.Boolean"/>
+	<field name="sangh_sname" class="java.lang.String"/>
+	<field name="sangh_cno" class="java.lang.String"/>
+	<field name="sangh_address" class="java.lang.String"/>
+	<field name="sangh_rtc_no" class="java.lang.Integer"/>
+	<field name="sangh_comission" class="java.lang.Double"/>
+	<field name="sangh_shareanamat" class="java.lang.Double"/>
+	<field name="sangh_rebate" class="java.lang.Double"/>
+	<field name="sangh_DateAdded" class="java.sql.Timestamp"/>
+	<field name="sangh_AddedByFK" class="java.lang.Integer"/>
+	<field name="sangh_DateModified" class="java.sql.Timestamp"/>
+	<field name="sangh_LastUserFK" class="java.lang.Integer"/>
+	<field name="sangh_ID" class="java.lang.Integer"/>
+	<field name="milkdispatch_qty3" class="java.lang.Double"/>
+	<field name="milkdispatch_fat3" class="java.lang.Double"/>
+	<field name="milkdispatch_clr3" class="java.lang.Double"/>
+	<field name="milkdispatch_snf3" class="java.lang.Double"/>
+	<field name="milkdispatch_rate3" class="java.lang.Double"/>
+	<field name="milkdispatch_amt3" class="java.lang.Double"/>
+	<variable name="vartotalmilkdispatch" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{milkdispatch_qty2} + $F{milkdispatch_qty3} + $F{milkdispatch_saurmilk}]]></variableExpression>
+	</variable>
+	<variable name="vartotalamountdispatched" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{milkdispatch_amt2} + $F{milkdispatch_amt3} + $F{milkdispatch_saurmilkamt}]]></variableExpression>
+	</variable>
+	<variable name="varPL" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{vartotalamountdispatched} - $F{milkdispatch_amt1}]]></variableExpression>
+	</variable>
+	<variable name="vardudhghatvadh" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{vartotalmilkdispatch} - $F{milkdispatch_qty1}]]></variableExpression>
+	</variable>
+	<variable name="PT_vartotalmilkpur" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{milkdispatch_qty1}]]></variableExpression>
+	</variable>
+	<variable name="GT_vartotalmilkpur" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{milkdispatch_qty1}]]></variableExpression>
+	</variable>
+	<variable name="PT_vartotalmilkpuramt" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{milkdispatch_amt1}]]></variableExpression>
+	</variable>
+	<variable name="GT_vartotalmilkpuramt" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{milkdispatch_amt1}]]></variableExpression>
+	</variable>
+	<variable name="PT_vartotalmilkgrade1" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{milkdispatch_qty3}]]></variableExpression>
+	</variable>
+	<variable name="GT_vartotalmilkgrad1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{milkdispatch_qty3}]]></variableExpression>
+	</variable>
+	<variable name="PT_vartotalmilkgrade2" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{milkdispatch_qty2}]]></variableExpression>
+	</variable>
+	<variable name="GT_vartotalmilkgrad2" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{milkdispatch_qty2}]]></variableExpression>
+	</variable>
+	<variable name="PT_vartotalmilksuar" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{milkdispatch_saurmilk}]]></variableExpression>
+	</variable>
+	<variable name="GT_vartotalsaurmilk" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{milkdispatch_saurmilk}]]></variableExpression>
+	</variable>
+	<variable name="PT_vartotalmilksend" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$V{vartotalmilkdispatch}]]></variableExpression>
+	</variable>
+	<variable name="GT_vartotalmilksend" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$V{vartotalmilkdispatch}]]></variableExpression>
+	</variable>
+	<variable name="PT_vartotalmilksendamt" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$V{vartotalamountdispatched}]]></variableExpression>
+	</variable>
+	<variable name="GT_vartotalmilksendamt" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$V{vartotalamountdispatched}]]></variableExpression>
+	</variable>
+	<variable name="PT_varPL" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$V{varPL}]]></variableExpression>
+	</variable>
+	<variable name="GT_varPL" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$V{varPL}]]></variableExpression>
+	</variable>
+	<variable name="PT_varmilkghatvadh" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$V{vardudhghatvadh}]]></variableExpression>
+	</variable>
+	<variable name="GdudhghatvadhT_var" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$V{vardudhghatvadh}]]></variableExpression>
+	</variable>
+	<group name="Sangh">
+		<groupExpression><![CDATA[$F{milkdispatch_scode}]]></groupExpression>
+		<groupHeader>
+			<band height="23">
+				<textField>
+					<reportElement uuid="d9b64f29-4544-43c0-a7e8-91c6af112216" x="32" y="3" width="715" height="20"/>
+					<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="1">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{sangh_sname}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="date">
+		<groupExpression><![CDATA[$F{milkdispatch_disp_datetime}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="77" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="90bd8dfb-be92-4cd0-95cc-f62fbe8efecd" x="668" y="54" width="15" height="23"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ते]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="290b9fb7-3ba9-4e07-9958-eaaa0c5f9304" x="568" y="54" width="100" height="23"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{fdate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4f873e8b-ca80-402f-9135-df88ea7c6137" x="683" y="54" width="64" height="23"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{tdate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5e3fed77-32cc-4a7a-92aa-ee998aa09cca" x="32" y="27" width="716" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f570c36c-cbe0-4927-8bf1-97e1db610eb2" x="32" y="54" width="407" height="23"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_contatno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7c32b3c5-c588-4e85-83c4-397469a39286" x="31" y="0" width="716" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{config_firmname}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="67" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="f3969d7b-7e2f-4919-8549-71f6ab147199" mode="Opaque" x="32" y="2" width="715" height="22" backcolor="#FFFFFF"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="false" isItalic="false" isUnderline="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[दुध संकलन / वितरण / घट वाढ  तक्ता]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5dbad1b4-0c85-4ec0-8c19-4112769751c7" x="98" y="24" width="156" height="21"/>
+				<box topPadding="2" bottomPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[दुध खरेदी]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="671058bc-c9a7-4548-94f8-6d4546b22b96" x="168" y="45" width="86" height="21"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[रक्कम]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cdc13d38-e376-4650-8231-8c47b989e106" x="254" y="24" width="291" height="21"/>
+				<box topPadding="2" bottomPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[दुध पुरवठा (कि.)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a943b4ee-f73b-4dc4-9298-fd4731c241ca" x="473" y="45" width="72" height="21"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[रक्कम]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b45fe799-47c9-4f20-b854-e6375e00cac9" x="359" y="45" width="40" height="21"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[नाश दुध]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a2efe9c2-e7cf-48c7-8c7d-808149607f2c" x="545" y="24" width="75" height="42"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[नफा / तोटा]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="54b44ac2-d055-4f78-a8cc-32bc36c84ff6" x="649" y="24" width="69" height="42"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[दुध घट / वाठ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d58e357f-b7fe-478c-b982-62680dec5bec" x="98" y="45" width="70" height="21"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[दुध खरेदी (ली)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7f3b64a7-6a81-4b39-8d0f-dacb0b2b51ca" x="620" y="24" width="29" height="42"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d3095a1f-b55d-43e2-ab42-93597595101d" x="718" y="24" width="29" height="42"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1ccdcbb1-f622-4e61-8bca-743d98a996f8" x="399" y="45" width="74" height="21"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[एकूण दुध]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="40bd6cf7-418a-4878-8c86-257fad7cbef1" mode="Opaque" x="32" y="24" width="66" height="42"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[दिनांक]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="40171a1b-1a49-4adc-a8dc-07bb84592314" mode="Opaque" x="254" y="45" width="60" height="21"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ग्रेड १]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b3b44dc7-f50d-42fc-b713-fe9686d4b8c4" mode="Opaque" x="314" y="45" width="45" height="21"/>
+				<box topPadding="1" bottomPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="false" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ग्रेड २]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="d86dfdc2-74b5-4295-8b51-b79c64084cda" x="32" y="0" width="66" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{milkdispatch_disp_datetime}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="68156d42-a121-4b20-908b-f140c3ed9a09" x="98" y="0" width="70" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{milkdispatch_qty1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="d8b49a87-9148-45b1-a85d-b09fbba9f99c" x="168" y="0" width="86" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{milkdispatch_amt1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="3a87ef9e-1797-491e-87a4-3127a883afac" x="254" y="0" width="60" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{milkdispatch_qty2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="daa5d454-c50c-4bd3-b054-02a48ea4075a" x="359" y="0" width="40" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{milkdispatch_saurmilk}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="160aced3-3f16-4343-b2e4-3067bdb7dc69" x="620" y="0" width="29" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="58613dae-9a39-4768-9a17-7d7c2f9a672e" x="314" y="0" width="45" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{milkdispatch_qty3}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="75b60acc-c5f1-4424-bb77-2f4f34d0f0bf" x="718" y="0" width="29" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="ab7f79d8-63c9-49ff-9aeb-54e748c3670f" x="399" y="0" width="74" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{vartotalmilkdispatch}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="4d8622cb-3a0c-4414-9212-62abaf0daf60" x="473" y="0" width="72" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{vartotalamountdispatched}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="2463e0de-68af-4dc1-b1de-85f5d410fc75" x="545" y="0" width="75" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{varPL}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="64cf9cbe-3ba0-434f-a9ae-c69c254b2216" x="649" y="0" width="69" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{vardudhghatvadh}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="48" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="2affc0cd-aa23-4bba-b842-27f79d5083ef" x="31" y="7" width="67" height="21"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Page Total : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d5d19c2b-9ec0-4aab-adbd-31bcbc75ad85" x="31" y="28" width="67" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grant Total : ]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="bbb3281b-3d15-41ac-9455-f74b9f07b7b4" x="31" y="3" width="716" height="1"/>
+			</line>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="55adfd6a-88d1-4283-af34-34dca04aaa2d" x="98" y="7" width="70" height="21"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PT_vartotalmilkpur}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="603f7c13-28f6-453a-8f20-d291d543af39" x="98" y="28" width="70" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{GT_vartotalmilkpur}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="f9c9e4c7-31cb-46d1-a257-02da3ec3d40b" x="168" y="7" width="86" height="21"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PT_vartotalmilkpuramt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="4551d51c-0fb4-4edb-ad32-b927e86d6a31" x="168" y="28" width="86" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{GT_vartotalmilkpuramt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="8acf9717-305d-4e0d-81af-35e9c8520cea" x="314" y="7" width="45" height="21"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PT_vartotalmilkgrade1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="48b497d8-df42-4b3a-b06f-254366866c46" x="314" y="28" width="45" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{GT_vartotalmilkgrad1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="aa508a05-a6cd-42c0-94f8-89990b7f8572" x="254" y="7" width="60" height="21"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PT_vartotalmilkgrade2}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="d1068f25-a871-4597-b6bc-0b83d952c23d" x="254" y="28" width="60" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{GT_vartotalmilkgrad2}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="93dab46a-4f1a-4b6b-9511-fb6837e9ba6f" x="359" y="7" width="40" height="21"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PT_vartotalmilksuar}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="14b0da1a-43bc-4ed7-9698-504186f64a11" x="359" y="28" width="40" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{GT_vartotalsaurmilk}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="c482797b-6239-4271-a0ad-6c0b94e92510" x="399" y="7" width="74" height="21"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PT_vartotalmilksend}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="c4237304-ebfb-4c09-99a6-4c887d0a9e86" x="399" y="28" width="74" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{GT_vartotalmilksend}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="f24f6281-749a-4984-8a58-039bb5910f26" x="473" y="7" width="72" height="21"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PT_vartotalmilksendamt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="94989bfe-436f-4c60-85d6-612b5dcd22a5" x="473" y="28" width="72" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{GT_vartotalmilksendamt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="98ba63f1-0f9a-4a0f-9433-220825b61fe7" x="545" y="7" width="75" height="21"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PT_varPL}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="4dcadfeb-3da5-4e0c-83d7-3a4d046ca799" x="545" y="28" width="75" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{GT_varPL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="b1a09db5-468e-4b0e-80fa-b1a001dc732f" x="620" y="7" width="29" height="21"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="974ba9e7-e914-4042-a019-f5d64b3a8127" x="620" y="28" width="29" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="7c7502f5-ba85-4b3a-ad13-901faedd6bb9" x="649" y="7" width="69" height="21"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PT_varmilkghatvadh}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="62b18712-552a-4da2-a021-dd305590c495" x="649" y="28" width="69" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{GdudhghatvadhT_var}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="57211a42-8b11-4dce-8191-5391b058ffa6" x="718" y="7" width="29" height="21"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9137b5a5-1b84-42ac-afc9-96ca8445f8b3" x="718" y="28" width="29" height="20"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>
