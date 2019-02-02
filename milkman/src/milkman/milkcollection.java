@@ -2343,33 +2343,45 @@ public class milkcollection extends javax.swing.JInternalFrame {
                 
                 // get the date
                 int date_int = Cal.get(Calendar.DAY_OF_MONTH);
-                int curr_year = Cal.get(Calendar.YEAR);
-                int curr_month = Cal.get(Calendar.MONTH);
+                //int curr_year = Cal.get(Calendar.YEAR);
+                //int curr_month = Cal.get(Calendar.MONTH);
                 //System.out.println("Day of Month is " + date_int);
                 int month_days = Cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-                //System.out.println("Total Days in month " + month_days);
+                // System.out.println("Total Days in month " + month_days);
+                //System.err.println("Bill period : " + methods.bill_period);
                 // Get the total bill period
-                int tot_bill_period = month_days / methods.bill_period;
+                int tot_bill_period = (int)Math.round((double)month_days / methods.bill_period);
+                //System.out.println((double)month_days / methods.bill_period);
+                //System.out.println("Total Bill Period " + tot_bill_period);
+                //tot_bill_period = Math.round(tot_bill_period);
                 //System.out.println("Total Bill Period " + tot_bill_period);
 
-                switch (tot_bill_period) {
+                switch ((int)tot_bill_period) {
                     case 1:
                         // Means Monthly Bill
-                        // set the fromate to first of month and todate to last of month
-                        this.current_period_from_date = mdy.format(Cal.getActualMinimum(Calendar.DAY_OF_MONTH));
-                        this.current_period_to_date = mdy.format(Cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+                        // set the format to first of month and todate to last of month
+                        //this.current_period_from_date = mdy.format(Cal.getActualMinimum(Calendar.DAY_OF_MONTH));
+                        //this.current_period_to_date = mdy.format(Cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+                        Cal1.set(Calendar.DAY_OF_MONTH, 1);
+                        this.current_period_from_date = mdy.format(Cal1.getTime());
+                        Cal.set(Calendar.DATE, Cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+                        this.current_period_to_date = mdy.format(Cal.getTime());
 
                         break;
                     case 2:
                         // Means Half monthly Bill 15 days period
                         if (date_int >= 1 && date_int <= 15) {
-                            this.current_period_from_date = mdy.format(Cal.getActualMinimum(Calendar.DAY_OF_MONTH));
+//                            this.current_period_from_date = mdy.format(Cal.getActualMinimum(Calendar.DAY_OF_MONTH));
+                            Cal1.set(Calendar.DAY_OF_MONTH, 1);
+                            this.current_period_from_date = mdy.format(Cal1.getTime());
                             Cal1.set(Calendar.DAY_OF_MONTH, 15);
                             this.current_period_to_date = mdy.format(Cal1.getTime());
                         } else {
                             Cal1.set(Calendar.DAY_OF_MONTH, 16);
                             this.current_period_from_date = mdy.format(Cal1.getTime());
-                            this.current_period_to_date = mdy.format(Cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+                            //this.current_period_to_date = mdy.format(Cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+                            Cal.set(Calendar.DATE, Cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+                            this.current_period_to_date = mdy.format(Cal.getTime());
                         }
                         break;
                     case 3:
