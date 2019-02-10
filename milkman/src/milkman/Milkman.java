@@ -36,7 +36,7 @@ public class Milkman {
             
             // Get default path 
             methods.databasepath = new java.io.File("").getAbsolutePath();
-            
+            System.out.println(methods.databasepath);
             selectdairy sd = new selectdairy();
             sd.show();
             

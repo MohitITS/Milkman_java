@@ -70,13 +70,7 @@ public class main extends javax.swing.JFrame {
             jSeparator32.setVisible(false);
             jSeparator29.setVisible(false);
             jSeparator23.setVisible(false);
-            jButton3.setVisible(false);
-            jButton7.setVisible(false);
-            jButton8.setVisible(false);
-            jButton9.setVisible(false);
-            jSeparator3.setVisible(false);
-            jSeparator33.setVisible(false);
-            jSeparator35.setVisible(false);
+            jSeparator3.setVisible(true);
             
             Connection con = null;
             ResultSet rs;
@@ -278,19 +272,12 @@ public class main extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        jButton2 = new javax.swing.JButton();
-        jSeparator2 = new javax.swing.JToolBar.Separator();
-        jButton3 = new javax.swing.JButton();
-        jSeparator3 = new javax.swing.JToolBar.Separator();
         jButton4 = new javax.swing.JButton();
-        jSeparator4 = new javax.swing.JToolBar.Separator();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
+        jButton2 = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JToolBar.Separator();
         jButton5 = new javax.swing.JButton();
-        jSeparator27 = new javax.swing.JToolBar.Separator();
-        jButton7 = new javax.swing.JButton();
-        jSeparator33 = new javax.swing.JToolBar.Separator();
-        jButton8 = new javax.swing.JButton();
-        jSeparator35 = new javax.swing.JToolBar.Separator();
-        jButton9 = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JToolBar.Separator();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         exitMenuItem = new javax.swing.JMenuItem();
@@ -399,10 +386,10 @@ public class main extends javax.swing.JFrame {
         desktopPane.setBackground(new java.awt.Color(255, 255, 255));
         desktopPane.setBorder(new javax.swing.border.MatteBorder(null));
         desktopPane.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
+            public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
+            }
             public void ancestorResized(java.awt.event.HierarchyEvent evt) {
                 desktopPaneAncestorResized(evt);
-            }
-            public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
             }
         });
 
@@ -443,12 +430,31 @@ public class main extends javax.swing.JFrame {
         jToolBar1.add(jButton1);
         jToolBar1.add(jSeparator1);
 
+        jButton4.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(153, 153, 255));
+        jButton4.setText("उत्पादक बील ");
+        buttonGroup1.add(jButton4);
+        jButton4.setFocusable(false);
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.setMaximumSize(new java.awt.Dimension(167, 37));
+        jButton4.setMinimumSize(new java.awt.Dimension(167, 37));
+        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton4);
+        jToolBar1.add(jSeparator2);
+
         jButton2.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(153, 153, 255));
         jButton2.setText("वितरण");
         buttonGroup1.add(jButton2);
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setMaximumSize(new java.awt.Dimension(167, 37));
+        jButton2.setMinimumSize(new java.awt.Dimension(167, 37));
         jButton2.setPreferredSize(new java.awt.Dimension(200, 37));
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -457,32 +463,7 @@ public class main extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButton2);
-        jToolBar1.add(jSeparator2);
-
-        jButton3.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(153, 153, 255));
-        jButton3.setText("विक्री");
-        buttonGroup1.add(jButton3);
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton3);
         jToolBar1.add(jSeparator3);
-
-        jButton4.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(153, 153, 255));
-        jButton4.setText("उत्पादक बील ");
-        buttonGroup1.add(jButton4);
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButton4);
-        jToolBar1.add(jSeparator4);
 
         jButton5.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
         jButton5.setForeground(new java.awt.Color(153, 153, 255));
@@ -490,6 +471,8 @@ public class main extends javax.swing.JFrame {
         buttonGroup1.add(jButton5);
         jButton5.setFocusable(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton5.setMaximumSize(new java.awt.Dimension(167, 37));
+        jButton5.setMinimumSize(new java.awt.Dimension(167, 37));
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -497,51 +480,7 @@ public class main extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButton5);
-        jToolBar1.add(jSeparator27);
-
-        jButton7.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(153, 153, 255));
-        jButton7.setText("पोस्टिंग");
-        buttonGroup1.add(jButton7);
-        jButton7.setFocusable(false);
-        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButton7);
-        jToolBar1.add(jSeparator33);
-
-        jButton8.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(153, 153, 255));
-        jButton8.setText("पिग्मी");
-        buttonGroup1.add(jButton8);
-        jButton8.setFocusable(false);
-        jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton8.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButton8);
-        jToolBar1.add(jSeparator35);
-
-        jButton9.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
-        jButton9.setForeground(new java.awt.Color(153, 153, 255));
-        jButton9.setText("कस्टम SMS");
-        buttonGroup1.add(jButton9);
-        jButton9.setFocusable(false);
-        jButton9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton9.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButton9);
+        jToolBar1.add(jSeparator4);
 
         menuBar.setForeground(new java.awt.Color(204, 0, 51));
         menuBar.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
@@ -1424,17 +1363,6 @@ public class main extends javax.swing.JFrame {
         acc.show();
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        try {
-            posting p;
-            p = new posting();
-            this.desktopPane.add(p);
-            p.show();
-        } catch (SQLException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton7ActionPerformed
-
     private void jMenuItem25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem25ActionPerformed
         displayreportsingledate dsr = null;
         try {
@@ -1473,12 +1401,6 @@ public class main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem40ActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        pigmyinterface pi = new pigmyinterface();
-        this.desktopPane.add(pi);
-        pi.show();
-    }//GEN-LAST:event_jButton8ActionPerformed
-
     private void jMenuItem41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem41ActionPerformed
         // TODO add your handling code here:
         clrslab ss;
@@ -1486,12 +1408,6 @@ public class main extends javax.swing.JFrame {
         this.desktopPane.add(ss);
         ss.show();
     }//GEN-LAST:event_jMenuItem41ActionPerformed
-
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        customsms pi = new customsms();
-        this.desktopPane.add(pi);
-        pi.show();
-    }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         addition d;
@@ -1570,12 +1486,8 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JMenu helpMenu;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
@@ -1647,16 +1559,13 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator24;
     private javax.swing.JPopupMenu.Separator jSeparator25;
     private javax.swing.JPopupMenu.Separator jSeparator26;
-    private javax.swing.JToolBar.Separator jSeparator27;
     private javax.swing.JPopupMenu.Separator jSeparator28;
     private javax.swing.JPopupMenu.Separator jSeparator29;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator30;
     private javax.swing.JPopupMenu.Separator jSeparator31;
     private javax.swing.JPopupMenu.Separator jSeparator32;
-    private javax.swing.JToolBar.Separator jSeparator33;
     private javax.swing.JSeparator jSeparator34;
-    private javax.swing.JToolBar.Separator jSeparator35;
     private javax.swing.JSeparator jSeparator36;
     private javax.swing.JPopupMenu.Separator jSeparator38;
     private javax.swing.JToolBar.Separator jSeparator4;
