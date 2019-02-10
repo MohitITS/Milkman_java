@@ -31,8 +31,6 @@ public class sample extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
-        dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         jInternalFrame1.setVisible(true);
 
@@ -69,12 +67,6 @@ public class sample extends javax.swing.JInternalFrame {
 
         jTextField1.setText("jTextField1");
 
-        dateChooserCombo1.addSelectionChangedListener(new datechooser.events.SelectionChangedListener() {
-            public void onSelectionChange(datechooser.events.SelectionChangedEvent evt) {
-                dateChooserCombo1OnSelectionChange(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,12 +76,6 @@ public class sample extends javax.swing.JInternalFrame {
                 .addGap(54, 54, 54)
                 .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(dateChooserCombo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(127, 127, 127))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,11 +85,7 @@ public class sample extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(96, 96, 96)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(233, Short.MAX_VALUE))
         );
 
         pack();
@@ -114,8 +96,6 @@ public class sample extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_dateChooserCombo1OnSelectionChange
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private datechooser.beans.DateChooserCombo dateChooserCombo1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
