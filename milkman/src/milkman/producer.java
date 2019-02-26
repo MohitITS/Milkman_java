@@ -875,14 +875,16 @@ public class producer extends javax.swing.JInternalFrame {
 
                 // Validation - If the producer code exist with the same group
                 boolean producer_exist = false;
-                String valqry = "SELECT producer.ID, producer.producergroupid FROM producer" +
-                        " WHERE (((producer.ID)="+txtproducerid.getText().trim()+") AND ((producer.producergroupid)="+grid[cmbgroup.getSelectedIndex()]+"));";
-                PreparedStatement pr = conn.prepareStatement(valqry);
-                ResultSet rs = pr.executeQuery();
-                while (rs.next()) {
-                    producer_exist = true;
+                if(framestate == 1) {
+                    String valqry = "SELECT producer.ID, producer.producergroupid FROM producer" +
+                            " WHERE (((producer.ID)="+txtproducerid.getText().trim()+") AND ((producer.producergroupid)="+grid[cmbgroup.getSelectedIndex()]+"));";
+                    PreparedStatement pr = conn.prepareStatement(valqry);
+                    ResultSet rs = pr.executeQuery();
+                    while (rs.next()) {
+                        producer_exist = true;
+                    }
+                    rs.close();
                 }
-                rs.close();
                 if (producer_exist == false) {
                     // Insert new Record
                     if(framestate == 1) {
