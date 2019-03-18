@@ -450,13 +450,44 @@ public class methods {
             params = new HashMap<>();
             params.put("fdate", fdate);
             params.put("tdate", tdate);
-            params.put("ROOT_DIR",methods.reportpath);
+            params.put("ROOT_DIR", methods.reportpath);
+            params.put("duplicateBill", "No");
             params.put("SUBREPORT_DIR",methods.reportpath);
             //System.out.println("ROOT_DIR :"+methods.reportpath);
             params.put("wherecondition", qry);
 
             JasperPrint jasperprint;
-            String rname = methods.reportpath+"//"+reportname+".jrxml";
+            String rname = methods.reportpath+"\\"+reportname+".jrxml";
+            System.out.println(rname);
+            JasperReport jasperreport; 
+            jasperreport = JasperCompileManager.compileReport(rname);
+            jasperprint = JasperFillManager.fillReport(jasperreport, params, cn);
+            JasperViewer jv;            
+            jv = new JasperViewer(jasperprint, false);
+            jv.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            jv.setVisible(true);
+            
+        } catch (JRException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+            Logger.getLogger(methods.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void displayreport_subreport_duplicate(String reportname, Connection cn, String qry, String fdate, String tdate) throws SQLException {
+        try {
+            //System.out.println(qry);
+            Map<String, Object> params;
+            params = new HashMap<>();
+            params.put("fdate", fdate);
+            params.put("tdate", tdate);
+            params.put("ROOT_DIR",methods.reportpath);
+            params.put("duplicateBill","Yes");
+            params.put("SUBREPORT_DIR",methods.reportpath);
+            //System.out.println("ROOT_DIR :"+methods.reportpath);
+            params.put("wherecondition", qry);
+
+            JasperPrint jasperprint;
+            String rname = methods.reportpath+"\\"+reportname+".jrxml";
             JasperReport jasperreport; 
             jasperreport = JasperCompileManager.compileReport(rname);
             jasperprint = JasperFillManager.fillReport(jasperreport, params, cn);

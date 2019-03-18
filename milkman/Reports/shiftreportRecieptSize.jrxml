@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="shiftreport" language="groovy" pageWidth="288" pageHeight="841" columnWidth="232" leftMargin="36" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9eff3d3d-9437-4b53-982f-a3a7f0f78d32">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="shiftreport" language="groovy" pageWidth="288" pageHeight="841" columnWidth="260" leftMargin="14" rightMargin="14" topMargin="14" bottomMargin="14" uuid="9eff3d3d-9437-4b53-982f-a3a7f0f78d32">
 	<property name="ireport.zoom" value="1.2396694214876032"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -103,7 +103,7 @@ ORDER BY
 		<groupHeader>
 			<band height="15">
 				<textField>
-					<reportElement uuid="a51c9fed-c204-40f9-bc3d-97650757a8a5" x="0" y="0" width="232" height="15"/>
+					<reportElement uuid="a51c9fed-c204-40f9-bc3d-97650757a8a5" x="0" y="0" width="204" height="15"/>
 					<textElement>
 						<font size="10" isBold="true"/>
 					</textElement>
@@ -118,14 +118,14 @@ ORDER BY
 	<pageHeader>
 		<band height="95">
 			<textField>
-				<reportElement uuid="09f7d343-ac31-4d60-8c33-76c4bf91b17e" mode="Opaque" x="0" y="0" width="232" height="29"/>
+				<reportElement uuid="09f7d343-ac31-4d60-8c33-76c4bf91b17e" mode="Opaque" x="0" y="0" width="204" height="29"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11" isBold="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{config_firmname}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="29b05f59-c215-4993-91b0-c26bf4e398d4" mode="Opaque" x="0" y="29" width="232" height="27" backcolor="#CCFFFF"/>
+				<reportElement uuid="29b05f59-c215-4993-91b0-c26bf4e398d4" mode="Opaque" x="0" y="29" width="203" height="27" backcolor="#CCFFFF"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -146,7 +146,7 @@ ORDER BY
 				<text><![CDATA[दिनांक : ]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement uuid="c332d433-1ffd-4e40-bc66-1697fb962e5e" x="44" y="56" width="101" height="20"/>
+				<reportElement uuid="c332d433-1ffd-4e40-bc66-1697fb962e5e" x="44" y="56" width="66" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="10" isBold="false"/>
 				</textElement>
@@ -160,14 +160,14 @@ ORDER BY
 				<text><![CDATA[CODE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="97bdef2b-fedb-407a-aa08-288477cb9dd2" x="140" y="77" width="34" height="17"/>
+				<reportElement uuid="97bdef2b-fedb-407a-aa08-288477cb9dd2" x="88" y="77" width="34" height="17"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
 				</textElement>
 				<text><![CDATA[RATE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="80f9a7bf-8b4d-49c0-a41a-218d0781fa9b" x="175" y="77" width="57" height="17"/>
+				<reportElement uuid="80f9a7bf-8b4d-49c0-a41a-218d0781fa9b" x="122" y="78" width="57" height="17"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
 				</textElement>
@@ -181,7 +181,7 @@ ORDER BY
 				<text><![CDATA[WT]]></text>
 			</staticText>
 			<line>
-				<reportElement uuid="6be004ab-59a0-42ea-be61-060aca305875" x="0" y="94" width="232" height="1"/>
+				<reportElement uuid="6be004ab-59a0-42ea-be61-060aca305875" x="0" y="94" width="204" height="1"/>
 			</line>
 			<staticText>
 				<reportElement uuid="00119347-5542-4e09-a3de-f37e18dd8c56" x="64" y="77" width="24" height="17"/>
@@ -190,32 +190,18 @@ ORDER BY
 				</textElement>
 				<text><![CDATA[FAT]]></text>
 			</staticText>
-			<staticText>
-				<reportElement uuid="d04cf0e5-d4fe-4d87-8611-e2b54baabc03" x="89" y="77" width="26" height="17"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
-				</textElement>
-				<text><![CDATA[CLR]]></text>
-			</staticText>
 			<line>
-				<reportElement uuid="76fe0b64-e5bd-41ee-83f3-1aab401f49b3" x="0" y="76" width="232" height="1"/>
+				<reportElement uuid="76fe0b64-e5bd-41ee-83f3-1aab401f49b3" x="0" y="76" width="204" height="1"/>
 			</line>
-			<staticText>
-				<reportElement uuid="f426a490-5449-472b-ae60-63ecf54104d7" x="116" y="77" width="23" height="17"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="10" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
-				</textElement>
-				<text><![CDATA[SNF]]></text>
-			</staticText>
 			<textField>
-				<reportElement uuid="1808f3f4-9577-494e-941d-9fd502f19d90" x="162" y="56" width="70" height="20">
+				<reportElement uuid="1808f3f4-9577-494e-941d-9fd502f19d90" x="111" y="56" width="70" height="20">
 					<printWhenExpression><![CDATA[$F{mlkCollection_shift_id}==1]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA["MORNING"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="2d0203aa-56be-4f3c-a8a0-6c74142ad1b1" x="162" y="56" width="70" height="20">
+				<reportElement uuid="2d0203aa-56be-4f3c-a8a0-6c74142ad1b1" x="112" y="56" width="70" height="20">
 					<printWhenExpression><![CDATA[$F{mlkCollection_shift_id}==2]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
@@ -283,22 +269,8 @@ ORDER BY
 				</textElement>
 				<textFieldExpression><![CDATA[$F{mlkCollection_fat}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.0;-###0.0">
-				<reportElement uuid="fa4a2b63-6709-45a3-9fe9-8c584817b0db" x="89" y="0" width="26" height="20"/>
-				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="2">
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{mlkCollection_degree}]]></textFieldExpression>
-			</textField>
 			<textField pattern="###0.00;-###0.00">
-				<reportElement uuid="41e7ea8b-9555-4579-93f0-0fc1b9ce4049" x="140" y="0" width="34" height="20"/>
+				<reportElement uuid="41e7ea8b-9555-4579-93f0-0fc1b9ce4049" x="88" y="0" width="34" height="20"/>
 				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="2">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -312,7 +284,7 @@ ORDER BY
 				<textFieldExpression><![CDATA[$F{mlkCollection_rate}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00;-###0.00">
-				<reportElement uuid="bfcb504a-b22c-400d-bc7e-6ebfe3bf52e3" x="175" y="0" width="57" height="20"/>
+				<reportElement uuid="bfcb504a-b22c-400d-bc7e-6ebfe3bf52e3" x="122" y="1" width="57" height="20"/>
 				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="2">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -324,20 +296,6 @@ ORDER BY
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{amount}]]></textFieldExpression>
-			</textField>
-			<textField pattern="###0.0;-###0.0">
-				<reportElement uuid="7f88f279-0276-4a01-9cf5-83236e88f517" x="116" y="0" width="23" height="20"/>
-				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="2">
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{mlkCollection_snf}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="c94d8685-75d0-43d1-945f-42ad29d1e7dd" x="22" y="0" width="14" height="20">
@@ -363,7 +321,7 @@ ORDER BY
 	<summary>
 		<band height="89" splitType="Stretch">
 			<line>
-				<reportElement uuid="f81fa655-de52-478b-aff7-b9e2cae17aa3" x="0" y="5" width="231" height="1"/>
+				<reportElement uuid="f81fa655-de52-478b-aff7-b9e2cae17aa3" x="0" y="5" width="204" height="1"/>
 			</line>
 			<staticText>
 				<reportElement uuid="3623495a-93c5-4512-93f1-53b2716a2661" x="0" y="6" width="64" height="20"/>
@@ -380,7 +338,7 @@ ORDER BY
 				<text><![CDATA[TOTAL MILK :]]></text>
 			</staticText>
 			<textField pattern="###0.00;-###0.00">
-				<reportElement uuid="1158e468-2cbb-4396-b670-85799f664a8a" x="133" y="7" width="98" height="20"/>
+				<reportElement uuid="1158e468-2cbb-4396-b670-85799f664a8a" x="133" y="7" width="71" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{tot_milk}]]></textFieldExpression>
 			</textField>
@@ -406,22 +364,22 @@ ORDER BY
 				<text><![CDATA[AMOUNT :]]></text>
 			</staticText>
 			<textField pattern="###0.0;-###0.0">
-				<reportElement uuid="4f664373-86f8-48e0-8e5e-7a610e0bbb4f" x="133" y="27" width="98" height="20"/>
+				<reportElement uuid="4f664373-86f8-48e0-8e5e-7a610e0bbb4f" x="133" y="27" width="71" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{avg_fat}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00;-###0.00">
-				<reportElement uuid="20e56992-852d-45bb-ac2a-acf0b04b907b" x="133" y="67" width="98" height="20"/>
+				<reportElement uuid="20e56992-852d-45bb-ac2a-acf0b04b907b" x="133" y="67" width="71" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{tot_amt}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00;-###0.00">
-				<reportElement uuid="d994e065-544c-4cd2-b10a-614074bee512" x="133" y="47" width="98" height="20"/>
+				<reportElement uuid="d994e065-544c-4cd2-b10a-614074bee512" x="133" y="47" width="71" height="20"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{avg_rate}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement uuid="b2289d2b-0f26-469b-9d48-f79cd0a39d04" x="0" y="87" width="231" height="1"/>
+				<reportElement uuid="b2289d2b-0f26-469b-9d48-f79cd0a39d04" x="0" y="87" width="204" height="1"/>
 			</line>
 		</band>
 	</summary>

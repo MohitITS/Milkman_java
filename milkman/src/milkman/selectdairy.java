@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.net.InetAddress;
@@ -50,7 +51,7 @@ public class selectdairy extends javax.swing.JFrame {
             String part2;
             //String part3;
 
-            br = new BufferedReader(new FileReader(p+"\\milkmansetting.txt"));
+            br = new BufferedReader(new FileReader(p+"\\milkman.jar.config"));
             while ((sCurrentLine = br.readLine()) != null) {
                 parts = sCurrentLine.split("=");
                 part1 = parts[0];
@@ -73,6 +74,8 @@ public class selectdairy extends javax.swing.JFrame {
             cmbdairy.addItem("Select Dairy");
             if (methods.maintaindatabase == 1) {
                 cmbdairy.addItem(methods.database1name);
+                cmbdairy.setSelectedItem(methods.database1name);
+                jButton1.doClick(0);
             } else {
                 cmbdairy.addItem(methods.database1name);
                 cmbdairy.addItem(methods.database2name);
@@ -250,7 +253,7 @@ public class selectdairy extends javax.swing.JFrame {
                 "DBQ");
             //System.out.println(value);
             
-            dispose();
+            //dispose();
             
             
 //            // Execute command
@@ -495,7 +498,7 @@ public class selectdairy extends javax.swing.JFrame {
                         login l;
                         l = new login();
                         l.setVisible(true);
-                        
+                        dispose();
 //                    } else {
 //                        activation act;
 //                        act = new activation(srno);
@@ -572,6 +575,7 @@ public class selectdairy extends javax.swing.JFrame {
                             activation act;
                             act = new activation(srno);
                             act.show();
+                            dispose();
                             //System.exit(0);
                             //JOptionPane.showMessageDialog(null, "act code is null");
                         } else if (actcode.equals(act_key)) {
@@ -579,7 +583,7 @@ public class selectdairy extends javax.swing.JFrame {
                             login l;
                             l = new login();
                             l.setVisible(true);
-
+                            dispose();
         //                    main m;
         //                    m = new main();
         //                    m.setVisible(true);   
@@ -594,6 +598,7 @@ public class selectdairy extends javax.swing.JFrame {
                         activation act;
                         act = new activation(srno);
                         act.show();
+                        dispose();
                     } else {
                         JOptionPane.showMessageDialog(null, "Serial Key does not match. Please contact author");
                         System.exit(0);
@@ -607,22 +612,13 @@ public class selectdairy extends javax.swing.JFrame {
                 activation act;
                 act = new activation(srno);
                 act.show();
+                dispose();
             }
-
+            this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Please Select Dairy");
             }
-        } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException ex) {
-            Logger.getLogger(selectdairy.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(selectdairy.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(selectdairy.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(selectdairy.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(selectdairy.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InterruptedException ex) {
+        } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException | NoSuchAlgorithmException | SQLException | ParseException | IOException | InterruptedException ex) {
             Logger.getLogger(selectdairy.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public class PrintReceipt_bill implements Printable {
     
+    private int linesPerPage = 80;
+    
     //String[] reciept_data;
     ArrayList<String> reciept_data = new ArrayList<String>();
     
@@ -20,33 +22,44 @@ public class PrintReceipt_bill implements Printable {
 //        g.drawString("Page " + (pageIndex+1), 100, 100);      
 //        return Printable.PAGE_EXISTS;
         
-        if (pageIndex > 0) { /* We have only one page, and 'page' is zero-based */
+        if (pageIndex * linesPerPage >= reciept_data.size()) { 
             return NO_SUCH_PAGE;
         }
+
+//        if (pageIndex > 0) { /* We have only one page, and 'page' is zero-based */
+//            return NO_SUCH_PAGE;
+//        }
 
         Graphics2D g2d = (Graphics2D)g;
         g2d.translate((int)pf.getImageableX(), (int)pf.getImageableY());
         
-        double width = pf.getImageableWidth();
-        double height = pf.getImageableHeight();
+//        double width = pf.getImageableWidth();
+//        double height = pf.getImageableHeight();
         
         Font typeface = new Font("Dotrice", Font.PLAIN, 10);
         FontMetrics fm = g2d.getFontMetrics(typeface);
         g2d.setFont(typeface);
         int fontHeight = fm.getHeight();
-        int fontDescent = fm.getDescent();
+//        int fontDescent = fm.getDescent();
         int curHeight = 30;
-        double x = 0; //width - fm.stringWidth(data0);
-        double y = fm.getHeight();// + fm.getAscent();
-        //g2d.drawString(printdata, (int)x, (int)y);
-        for (String reciept_data1 : reciept_data) {
-            if (reciept_data1 != null) {
-                //g2d.drawGlyphVector(reciept_data1, 0, curHeight);
-                g2d.drawString(reciept_data1, 0, curHeight);
-                curHeight += fontHeight;
-            }
-        }
+//        double x = 0; //width - fm.stringWidth(data0);
+//        double y = fm.getHeight();// + fm.getAscent();
+//        g2d.drawString(printdata, (int)x, (int)y);
+//        for (String reciept_data1 : reciept_data) {
+//            if (reciept_data1 != null) {
+//                //g2d.drawGlyphVector(reciept_data1, 0, curHeight);
+//                g2d.drawString(reciept_data1, 0, curHeight);
+//                curHeight += fontHeight;
+//            }
+//        }
+        //linesPerPage = ((int)pf.getHeight())/fontHeight;
         
+        for (int i = linesPerPage * pageIndex; i < reciept_data.size()
+                && i < linesPerPage * (pageIndex + 1); i++) {
+            g2d.drawString(reciept_data.get(i), 0, curHeight);
+            curHeight += fontHeight;
+        }
+
         /* tell the caller that this page is part of the printed document */
         return PAGE_EXISTS;
     }

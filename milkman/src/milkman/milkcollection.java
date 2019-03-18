@@ -14,7 +14,6 @@ import java.awt.print.PrinterJob;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -47,7 +46,7 @@ public class milkcollection extends javax.swing.JInternalFrame {
     SimpleDateFormat mdy = new SimpleDateFormat("MM/dd/yyyy");
     SimpleDateFormat dmy = new SimpleDateFormat("dd/MM/yyyy");
     DecimalFormat onedf = new DecimalFormat("#.#");
-    DecimalFormat twodf = new DecimalFormat("#0.##");
+    DecimalFormat twodf = new DecimalFormat("#0.00");
     Connection conn;
     PreparedStatement INSERT_QRY;
     int prod_ratechartno;
@@ -2021,7 +2020,7 @@ public class milkcollection extends javax.swing.JInternalFrame {
         
         public sendsms_way2sms (String smsstr) {
             this.smsstr = smsstr;
-            System.out.println("Lenght : " + smsstr.length());
+            //System.out.println("Lenght : " + smsstr.length());
         }
         
         public void run() {
@@ -2187,13 +2186,19 @@ public class milkcollection extends javax.swing.JInternalFrame {
         }
         
         if (methods.drp == true) {
-            PrintWriter writer = null;
+            //PrintWriter writer = null;
             PrinterJob job = PrinterJob.getPrinterJob();
             PageFormat pf = job.defaultPage();
-            Paper paper = pf.getPaper();
-            double width = 4d * 72d;
-            double height = 3.9d * 72d;
-            double margin = 0.25d * 72d;
+            //Paper paper = pf.getPaper();
+            Paper paper = new Paper();
+            //double width = 4d * 72d;
+            //double height = 3.9d * 72d;
+            //double margin = 0.25d * 72d;
+            
+            double width = 4 * 72;
+            double height = 4 * 72;
+            double margin = 0.25 * 72;
+            
             paper.setSize(width, height);
             paper.setImageableArea(
                     margin,
@@ -2260,7 +2265,7 @@ public class milkcollection extends javax.swing.JInternalFrame {
                 pr.data6 = "FAT  : " + txtfat.getText();
                 pr.data7 = "CLR  : " + txtclr.getText() + "";
                 pr.data8 = "SNF  : " + txtsnf.getText() + "";
-                pr.data9 = "RATE : " + txtrate.getText() + "";
+                pr.data9 = "RATE : " + twodf.format(Double.parseDouble(txtrate.getText())) + "";
                 pr.amt = Double.parseDouble(txtweight.getText()) * Double.parseDouble(txtrate.getText());
                 //txtamount.setText("" + );
                 pr.data10 = "AMT  : " + twodf.format(pr.amt);

@@ -14,6 +14,7 @@
 		<defaultValueExpression><![CDATA[$P{ROOT_DIR}]]></defaultValueExpression>
 	</parameter>
 	<parameter name="wherecondition" class="java.lang.String"/>
+	<parameter name="duplicateBill" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
      config.`ID` AS config_ID,
@@ -468,13 +469,13 @@ WHERE
 					<textFieldExpression><![CDATA[$F{milkCollectionBill_docfee}]]></textFieldExpression>
 				</textField>
 				<line>
-					<reportElement uuid="c4ac6bb1-76fa-462c-9182-e6a440cb1e4d" x="0" y="13" width="555" height="1"/>
+					<reportElement uuid="c4ac6bb1-76fa-462c-9182-e6a440cb1e4d" x="0" y="4" width="555" height="1"/>
 				</line>
 				<line>
 					<reportElement uuid="726309e5-1929-4166-9260-511795eb6d3d" x="0" y="199" width="555" height="1"/>
 				</line>
 				<line>
-					<reportElement uuid="86fafa86-fdaf-401f-805d-9a4c96cdadd4" x="279" y="14" width="1" height="186"/>
+					<reportElement uuid="86fafa86-fdaf-401f-805d-9a4c96cdadd4" x="279" y="6" width="1" height="186"/>
 				</line>
 				<staticText>
 					<reportElement uuid="5717288b-237a-4a96-b634-b86dd33874e2" x="14" y="74" width="76" height="20"/>
@@ -638,6 +639,9 @@ WHERE
 				<subreportParameter name="SUBREPORT_DIR">
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="duplicateBill">
+					<subreportParameterExpression><![CDATA[$P{duplicateBill}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="Producer Id">
 					<subreportParameterExpression><![CDATA[$F{milkCollectionBill_prod_id}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -654,6 +658,9 @@ WHERE
 				<reportElement uuid="70620107-0cfb-43ce-842a-a7783cc3feb0" x="279" y="0" width="276" height="15"/>
 				<subreportParameter name="SUBREPORT_DIR">
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="duplicateBill">
+					<subreportParameterExpression><![CDATA[$P{duplicateBill}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="Producer Id">
 					<subreportParameterExpression><![CDATA[$F{milkCollectionBill_prod_id}]]></subreportParameterExpression>

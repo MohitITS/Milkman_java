@@ -59,6 +59,7 @@ public class main extends javax.swing.JFrame {
             // Hide the menu
             
             jMenuItem3.setVisible(false);
+            mnuMilkSell.setVisible(false);
             jMenuItem12.setVisible(false);
             jMenuItem13.setVisible(false);
             jMenuItem14.setVisible(false);
@@ -251,7 +252,7 @@ public class main extends javax.swing.JFrame {
             Logger.getLogger(methods.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        setTitle(methods.firmname + " - Milkman - Verson 3.2.0");
+        setTitle(methods.firmname + " - Milkman - Verson 3.5.1");
         this.desktopPane.setBounds(0, 0, this.getWidth(), this.getHeight());
     }
 
@@ -268,14 +269,17 @@ public class main extends javax.swing.JFrame {
         jSeparator34 = new javax.swing.JSeparator();
         desktopPane = new javax.swing.JDesktopPane();
         lbllogo = new javax.swing.JLabel(new ImageIcon("backlogo.jpg") );
-        jSeparator36 = new javax.swing.JSeparator();
         jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        jButton4 = new javax.swing.JButton();
-        jSeparator2 = new javax.swing.JToolBar.Separator();
         jButton2 = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
+        jButton6 = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
+        jButton7 = new javax.swing.JButton();
+        jSeparator33 = new javax.swing.JToolBar.Separator();
+        jButton4 = new javax.swing.JButton();
+        jSeparator27 = new javax.swing.JToolBar.Separator();
         jButton5 = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JToolBar.Separator();
         menuBar = new javax.swing.JMenuBar();
@@ -305,7 +309,7 @@ public class main extends javax.swing.JFrame {
         jMenuItem13 = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
+        mnuMilkSell = new javax.swing.JMenuItem();
         jSeparator11 = new javax.swing.JPopupMenu.Separator();
         jMenuItem7 = new javax.swing.JMenuItem();
         jSeparator12 = new javax.swing.JPopupMenu.Separator();
@@ -368,10 +372,12 @@ public class main extends javax.swing.JFrame {
         jMenuItem32 = new javax.swing.JMenuItem();
         jSeparator24 = new javax.swing.JPopupMenu.Separator();
         jMenuItem35 = new javax.swing.JMenuItem();
+        jSeparator36 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem43 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("MilkMan version 2.0");
+        setTitle("MilkMan version 3.5");
         setBackground(new java.awt.Color(0, 0, 255));
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setExtendedState(MAXIMIZED_BOTH);
@@ -400,8 +406,6 @@ public class main extends javax.swing.JFrame {
         lbllogo.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         desktopPane.add(lbllogo);
         lbllogo.setBounds(10, 0, 680, 540);
-        desktopPane.add(jSeparator36);
-        jSeparator36.setBounds(660, 180, 0, 2);
 
         jToolBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jToolBar1.setFloatable(false);
@@ -430,23 +434,6 @@ public class main extends javax.swing.JFrame {
         jToolBar1.add(jButton1);
         jToolBar1.add(jSeparator1);
 
-        jButton4.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(153, 153, 255));
-        jButton4.setText("उत्पादक बील ");
-        buttonGroup1.add(jButton4);
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setMaximumSize(new java.awt.Dimension(167, 37));
-        jButton4.setMinimumSize(new java.awt.Dimension(167, 37));
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButton4);
-        jToolBar1.add(jSeparator2);
-
         jButton2.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(153, 153, 255));
         jButton2.setText("वितरण");
@@ -463,7 +450,58 @@ public class main extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButton2);
+        jToolBar1.add(jSeparator2);
+
+        jButton6.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(153, 153, 255));
+        jButton6.setText("कपात");
+        buttonGroup1.add(jButton6);
+        jButton6.setFocusable(false);
+        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton6.setMaximumSize(new java.awt.Dimension(167, 37));
+        jButton6.setMinimumSize(new java.awt.Dimension(167, 37));
+        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton6);
         jToolBar1.add(jSeparator3);
+
+        jButton7.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(153, 153, 255));
+        jButton7.setText("उचल / पशुखाद्य");
+        buttonGroup1.add(jButton7);
+        jButton7.setFocusable(false);
+        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton7.setMaximumSize(new java.awt.Dimension(167, 37));
+        jButton7.setMinimumSize(new java.awt.Dimension(167, 37));
+        jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton7);
+        jToolBar1.add(jSeparator33);
+
+        jButton4.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(153, 153, 255));
+        jButton4.setText("उत्पादक बील ");
+        buttonGroup1.add(jButton4);
+        jButton4.setFocusable(false);
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.setMaximumSize(new java.awt.Dimension(167, 37));
+        jButton4.setMinimumSize(new java.awt.Dimension(167, 37));
+        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton4);
+        jToolBar1.add(jSeparator27);
 
         jButton5.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
         jButton5.setForeground(new java.awt.Color(153, 153, 255));
@@ -659,10 +697,15 @@ public class main extends javax.swing.JFrame {
         });
         helpMenu.add(contentMenuItem);
 
-        aboutMenuItem.setFont(new java.awt.Font("Mangal", 1, 14)); // NOI18N
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("किरकोळ विक्री");
-        helpMenu.add(aboutMenuItem);
+        mnuMilkSell.setFont(new java.awt.Font("Mangal", 1, 14)); // NOI18N
+        mnuMilkSell.setMnemonic('a');
+        mnuMilkSell.setText("किरकोळ विक्री");
+        mnuMilkSell.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuMilkSellActionPerformed(evt);
+            }
+        });
+        helpMenu.add(mnuMilkSell);
         helpMenu.add(jSeparator11);
 
         jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
@@ -686,7 +729,7 @@ public class main extends javax.swing.JFrame {
         helpMenu.add(jMenuItem8);
 
         jMenuItem9.setFont(new java.awt.Font("Mangal", 1, 14)); // NOI18N
-        jMenuItem9.setText("अतिरिक्त");
+        jMenuItem9.setText("उचल / पशुखाद्य");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem9ActionPerformed(evt);
@@ -994,6 +1037,16 @@ public class main extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem35);
+        jMenu4.add(jSeparator36);
+
+        jMenuItem43.setFont(new java.awt.Font("Mangal", 1, 14)); // NOI18N
+        jMenuItem43.setText("अपडेट रेट्स");
+        jMenuItem43.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem43ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem43);
 
         menuBar.add(jMenu4);
 
@@ -1435,6 +1488,22 @@ public class main extends javax.swing.JFrame {
         dsr.show(); 
     }//GEN-LAST:event_jMenuItem44ActionPerformed
 
+    private void mnuMilkSellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuMilkSellActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnuMilkSellActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        jMenuItem8ActionPerformed(evt);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        jMenuItem9ActionPerformed(evt);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jMenuItem43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem43ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem43ActionPerformed
+
     private static void setframe_size(JDesktopPane jdp, JInternalFrame jif) {
         jif.setSize(jdp.getWidth(), jdp.getHeight());
         jif.setLocation(0,0);
@@ -1474,7 +1543,6 @@ public class main extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JMenuItem copyMenuItem;
@@ -1488,6 +1556,8 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
@@ -1534,6 +1604,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem40;
     private javax.swing.JMenuItem jMenuItem41;
     private javax.swing.JMenuItem jMenuItem42;
+    private javax.swing.JMenuItem jMenuItem43;
     private javax.swing.JMenuItem jMenuItem44;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
@@ -1559,14 +1630,16 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator24;
     private javax.swing.JPopupMenu.Separator jSeparator25;
     private javax.swing.JPopupMenu.Separator jSeparator26;
+    private javax.swing.JToolBar.Separator jSeparator27;
     private javax.swing.JPopupMenu.Separator jSeparator28;
     private javax.swing.JPopupMenu.Separator jSeparator29;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator30;
     private javax.swing.JPopupMenu.Separator jSeparator31;
     private javax.swing.JPopupMenu.Separator jSeparator32;
+    private javax.swing.JToolBar.Separator jSeparator33;
     private javax.swing.JSeparator jSeparator34;
-    private javax.swing.JSeparator jSeparator36;
+    private javax.swing.JPopupMenu.Separator jSeparator36;
     private javax.swing.JPopupMenu.Separator jSeparator38;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
@@ -1577,6 +1650,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lbllogo;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem mnuMilkSell;
     private javax.swing.JMenuItem mnusetting;
     private javax.swing.JMenuItem mnuusermanagement;
     // End of variables declaration//GEN-END:variables
