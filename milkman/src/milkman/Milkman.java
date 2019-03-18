@@ -32,13 +32,13 @@ public class Milkman {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             //javax.swing.UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
             
-//            String motherBoardSerial = methods.getMotherBoardSerial();
+            //String motherBoardSerial = methods.getMotherBoardSerial();
             
             // Get default path 
             methods.databasepath = new java.io.File("").getAbsolutePath();
-            System.out.println(methods.databasepath);
+            //System.out.println(methods.databasepath);
             selectdairy sd = new selectdairy();
-            sd.show();
+            //sd.show();
             
 //            methods.maintaindatabase = 1;
 //            methods.database1name = "milkdata";

@@ -8,6 +8,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="tdate" class="java.lang.String"/>
+	<parameter name="duplicateBill" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
      mlkCollection.`ID` AS mlkCollection_ID,
@@ -120,7 +121,9 @@ ORDER BY
 				<textFieldExpression><![CDATA[$F{mlkCollection_trn_date}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00;-###0.00">
-				<reportElement uuid="57d7cf71-fed3-4c38-ab54-1f9f020b68d7" x="169" y="0" width="38" height="15"/>
+				<reportElement uuid="57d7cf71-fed3-4c38-ab54-1f9f020b68d7" x="169" y="0" width="38" height="15">
+					<printWhenExpression><![CDATA[$P{duplicateBill} == "No"]]></printWhenExpression>
+				</reportElement>
 				<box bottomPadding="0" rightPadding="2">
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -160,6 +163,15 @@ ORDER BY
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{var_amt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="c614888e-5d32-4058-8e52-d5390d46a229" x="169" y="0" width="38" height="15">
+					<printWhenExpression><![CDATA[$P{duplicateBill} == "Yes"]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mlkCollection_dummyrate}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
