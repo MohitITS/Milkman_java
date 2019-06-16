@@ -1081,7 +1081,7 @@ public class displayreportdatecriteria extends javax.swing.JInternalFrame {
                 }
             }
             
-            //System.out.println(qry);
+            System.out.println(qry);
                     
             PreparedStatement getproducer;
             getproducer = conn.prepareStatement(qry);
@@ -1129,6 +1129,8 @@ public class displayreportdatecriteria extends javax.swing.JInternalFrame {
                 // -------------------------------------------------------------
                 // Update Dummy rate
                 // -------------------------------------------------------------
+                
+                System.out.println("Processiong producer - " + prod_code);
                 
                 // STEP - 1 GET THE COLLECTION DETAIL
                 qry = "SELECT mlkCollection.ID, "

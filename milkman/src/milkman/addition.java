@@ -387,6 +387,11 @@ public class addition extends javax.swing.JInternalFrame {
 
         cmb_deductionType.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_deductionType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Auto", "Manual" }));
+        cmb_deductionType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_deductionTypeActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
         jLabel2.setText("ग्रुप :");
@@ -478,15 +483,13 @@ public class addition extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(dtpDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnShowReports, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(cmbgroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))))
+                                .addComponent(cmbgroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2))
+                            .addComponent(btnShowReports))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtproducercode)
@@ -824,6 +827,16 @@ public class addition extends javax.swing.JInternalFrame {
     private void cmbgroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbgroupActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbgroupActionPerformed
+
+    private void cmb_deductionTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_deductionTypeActionPerformed
+        if (cmb_deductionType.getSelectedItem() == "Auto") {
+            txt_billDeduction.setText("0");
+            txt_billDeduction.setEditable(true);
+        } else {
+            txt_billDeduction.setText("0");
+            txt_billDeduction.setEditable(false);
+        }
+    }//GEN-LAST:event_cmb_deductionTypeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox add_type;

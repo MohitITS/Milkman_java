@@ -314,9 +314,11 @@ public class main extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jSeparator12 = new javax.swing.JPopupMenu.Separator();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jSeparator37 = new javax.swing.JPopupMenu.Separator();
         jMenuItem9 = new javax.swing.JMenuItem();
         jSeparator14 = new javax.swing.JPopupMenu.Separator();
         jMenuItem10 = new javax.swing.JMenuItem();
+        jSeparator39 = new javax.swing.JPopupMenu.Separator();
         jMenuItem11 = new javax.swing.JMenuItem();
         jSeparator10 = new javax.swing.JPopupMenu.Separator();
         jMenuItem14 = new javax.swing.JMenuItem();
@@ -374,7 +376,8 @@ public class main extends javax.swing.JFrame {
         jMenuItem35 = new javax.swing.JMenuItem();
         jSeparator36 = new javax.swing.JPopupMenu.Separator();
         jMenuItem43 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        jSeparator35 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem45 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MilkMan version 3.5");
@@ -401,11 +404,12 @@ public class main extends javax.swing.JFrame {
 
         lbllogo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbllogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/milkman/Milk_River12.jpg"))); // NOI18N
-        lbllogo.setToolTipText("Arete Software & System Proprietor Rakesh Pawar");
+        lbllogo.setToolTipText("Mohit ITS, Nashik. Proprietor Rakesh Pawar");
         lbllogo.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         lbllogo.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         desktopPane.add(lbllogo);
         lbllogo.setBounds(10, 0, 680, 540);
+        lbllogo.getAccessibleContext().setAccessibleDescription("Mohit ITS, Nashik");
 
         jToolBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jToolBar1.setFloatable(false);
@@ -727,6 +731,7 @@ public class main extends javax.swing.JFrame {
             }
         });
         helpMenu.add(jMenuItem8);
+        helpMenu.add(jSeparator37);
 
         jMenuItem9.setFont(new java.awt.Font("Mangal", 1, 14)); // NOI18N
         jMenuItem9.setText("उचल / पशुखाद्य");
@@ -747,6 +752,7 @@ public class main extends javax.swing.JFrame {
             }
         });
         helpMenu.add(jMenuItem10);
+        helpMenu.add(jSeparator39);
 
         jMenuItem11.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
         jMenuItem11.setFont(new java.awt.Font("Mangal", 1, 14)); // NOI18N
@@ -891,6 +897,11 @@ public class main extends javax.swing.JFrame {
 
         jMenuItem28.setFont(new java.awt.Font("Mangal", 1, 14)); // NOI18N
         jMenuItem28.setText("संघ बिल");
+        jMenuItem28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem28ActionPerformed(evt);
+            }
+        });
         jMenu8.add(jMenuItem28);
         jMenu8.add(jSeparator22);
 
@@ -1047,12 +1058,18 @@ public class main extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem43);
+        jMenu4.add(jSeparator35);
+
+        jMenuItem45.setFont(new java.awt.Font("Mangal", 1, 14)); // NOI18N
+        jMenuItem45.setText("सॉंफ्टवेअर विषयी");
+        jMenuItem45.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem45ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem45);
 
         menuBar.add(jMenu4);
-
-        jMenu3.setText("   सॉंफ्टवेअर विषयी   ");
-        jMenu3.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
-        menuBar.add(jMenu3);
 
         setJMenuBar(menuBar);
 
@@ -1112,7 +1129,9 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuusermanagementActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        displayreportdatecriteria dsr = new displayreportdatecriteria("Dispatch Register");
+        this.desktopPane.add(dsr);
+        dsr.show();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -1501,8 +1520,24 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jMenuItem43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem43ActionPerformed
-        // TODO add your handling code here:
+        UpdateRates cs;
+        cs = new UpdateRates();
+        this.desktopPane.add(cs);
+        cs.show();
     }//GEN-LAST:event_jMenuItem43ActionPerformed
+
+    private void jMenuItem45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem45ActionPerformed
+        AboutSoftware cs;
+        cs = new AboutSoftware();
+        this.desktopPane.add(cs);
+        cs.show();
+    }//GEN-LAST:event_jMenuItem45ActionPerformed
+
+    private void jMenuItem28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem28ActionPerformed
+        displayreportdatecriteria dsr = new displayreportdatecriteria("Dispatch Register");
+        this.desktopPane.add(dsr);
+        dsr.show();
+    }//GEN-LAST:event_jMenuItem28ActionPerformed
 
     private static void setframe_size(JDesktopPane jdp, JInternalFrame jif) {
         jif.setSize(jdp.getWidth(), jdp.getHeight());
@@ -1560,7 +1595,6 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
@@ -1606,6 +1640,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem42;
     private javax.swing.JMenuItem jMenuItem43;
     private javax.swing.JMenuItem jMenuItem44;
+    private javax.swing.JMenuItem jMenuItem45;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
@@ -1639,8 +1674,11 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator32;
     private javax.swing.JToolBar.Separator jSeparator33;
     private javax.swing.JSeparator jSeparator34;
+    private javax.swing.JPopupMenu.Separator jSeparator35;
     private javax.swing.JPopupMenu.Separator jSeparator36;
+    private javax.swing.JPopupMenu.Separator jSeparator37;
     private javax.swing.JPopupMenu.Separator jSeparator38;
+    private javax.swing.JPopupMenu.Separator jSeparator39;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JPopupMenu.Separator jSeparator6;

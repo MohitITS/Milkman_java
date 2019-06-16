@@ -45,7 +45,7 @@ public class ratechart extends javax.swing.JInternalFrame implements TableModelL
     private DefaultTableModel rowheader;
     //private String rowData[][];
     DecimalFormat onedf = new DecimalFormat("#.#");
-    DecimalFormat twodf = new DecimalFormat("#.##");
+    DecimalFormat twodf = new DecimalFormat("#.000");
 ////    String mask = "##:##";
 ////    MaskFormatter timeFormatter;
     

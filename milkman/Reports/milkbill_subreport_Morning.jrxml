@@ -58,6 +58,7 @@ ORDER BY
 	<variable name="var_amt" class="java.lang.Double">
 		<variableExpression><![CDATA[$F{mlkCollection_weight}*$F{mlkCollection_rate}]]></variableExpression>
 	</variable>
+	<variable name="var_dupAmt" class="java.lang.String"/>
 	<group name="mlkCollection_trn_date">
 		<groupExpression><![CDATA[$F{mlkCollection_trn_date}]]></groupExpression>
 	</group>
@@ -159,7 +160,9 @@ ORDER BY
 				<textFieldExpression><![CDATA[$F{mlkCollection_rate}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00;-###0.00">
-				<reportElement uuid="cb591e51-cb61-4781-8d33-4cd637d4a9bc" x="207" y="0" width="56" height="15"/>
+				<reportElement uuid="cb591e51-cb61-4781-8d33-4cd637d4a9bc" x="207" y="0" width="56" height="15">
+					<printWhenExpression><![CDATA[$P{duplicateBill} == "No"]]></printWhenExpression>
+				</reportElement>
 				<box bottomPadding="0" rightPadding="2">
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -180,6 +183,15 @@ ORDER BY
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{mlkCollection_dummyrate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="5541b929-69ce-4090-b455-595bce1efbef" x="207" y="0" width="56" height="15">
+					<printWhenExpression><![CDATA[$P{duplicateBill} == "Yes"]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mlkCollection_weight}*$F{mlkCollection_dummyrate}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

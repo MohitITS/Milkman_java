@@ -597,7 +597,7 @@ public class producermilkbill extends javax.swing.JInternalFrame {
             
             }
             
-            System.out.println(qry);
+            //System.out.println(qry);
                     
             PreparedStatement getproducer;
             getproducer = conn.prepareStatement(qry);
@@ -651,6 +651,7 @@ public class producermilkbill extends javax.swing.JInternalFrame {
                       " WHERE (((mlkCollection.trn_date)>=#"+mdy.format(dtpfromdate.getDate())+"# And"+
                       " (mlkCollection.trn_date)<=#"+mdy.format(dtptodate.getDate())+"#) AND"+
                       " ((mlkCollection.prod_id)="+prod_id+"));";
+                System.out.println(qry);
                 PreparedStatement getbill;
                 getbill = conn.prepareStatement(qry);                
                 rs_prod_bill = getbill.executeQuery();
@@ -715,7 +716,10 @@ public class producermilkbill extends javax.swing.JInternalFrame {
                 // calculate advance
                 String qry2 = "SELECT Sum(addition.amount) AS SumOfamount, Sum(addition.ded_amt) AS SumOfded_amt" +
                         " FROM addition INNER JOIN producer ON addition.pro_code = producer.prod_id" +     
-                        " WHERE (((addition.pro_code)="+prod_id+") AND deduction_type like 'Auto' AND add_type like 'Uchal');";
+                        " WHERE (((addition.pro_code)="+prod_id+") AND add_type like 'Uchal');"; 
+                //AND deduction_type like 'Auto' 
+                
+                
                 //System.out.println(qry2);
                 PreparedStatement getmilkdetail;
                 getmilkdetail = conn.prepareStatement(qry2);
@@ -733,7 +737,8 @@ public class producermilkbill extends javax.swing.JInternalFrame {
                 // Toatal Pashukhadya 
                 qry2 = "SELECT Sum(addition.amount) AS SumOfamount, Sum(addition.ded_amt) AS SumOfded_amt" +
                         " FROM addition INNER JOIN producer ON addition.pro_code = producer.prod_id" +     
-                        " WHERE (((addition.pro_code)="+prod_id+") AND deduction_type like 'Auto' AND add_type like 'Pashukhadya Vikri');";
+                        " WHERE (((addition.pro_code)="+prod_id+") AND add_type like 'Pashukhadya Vikri');";
+                // deduction_type like 'Auto' AND
                 //System.out.println(qry2);
                 getmilkdetail = conn.prepareStatement(qry2);
                 rspname = getmilkdetail.executeQuery();

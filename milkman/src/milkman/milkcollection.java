@@ -46,7 +46,7 @@ public class milkcollection extends javax.swing.JInternalFrame {
     SimpleDateFormat mdy = new SimpleDateFormat("MM/dd/yyyy");
     SimpleDateFormat dmy = new SimpleDateFormat("dd/MM/yyyy");
     DecimalFormat onedf = new DecimalFormat("#.#");
-    DecimalFormat twodf = new DecimalFormat("#0.00");
+    DecimalFormat twodf = new DecimalFormat("#0.000");
     Connection conn;
     PreparedStatement INSERT_QRY;
     int prod_ratechartno;
@@ -644,11 +644,11 @@ public class milkcollection extends javax.swing.JInternalFrame {
             }
         });
         txtproducercode.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtproducercodeFocusGained(evt);
-            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtproducercodeFocusLost(evt);
+            }
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtproducercodeFocusGained(evt);
             }
         });
         txtproducercode.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -847,24 +847,23 @@ public class milkcollection extends javax.swing.JInternalFrame {
         });
 
         txtrate.setForeground(new java.awt.Color(51, 51, 255));
-        txtrate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtrate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.000"))));
         txtrate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtrate.setText("0.0");
         txtrate.setFocusable(false);
         txtrate.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
         txtrate.setNextFocusableComponent(btnsave);
-        txtrate.setPreferredSize(null);
         txtrate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtrateActionPerformed(evt);
             }
         });
         txtrate.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtrateFocusLost(evt);
-            }
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtrateFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtrateFocusLost(evt);
             }
         });
 
@@ -1305,13 +1304,12 @@ public class milkcollection extends javax.swing.JInternalFrame {
         });
 
         txtrate1.setForeground(new java.awt.Color(51, 51, 255));
-        txtrate1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtrate1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.000"))));
         txtrate1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtrate1.setText("0.0");
         txtrate1.setFocusable(false);
         txtrate1.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
         txtrate1.setNextFocusableComponent(btnsave);
-        txtrate1.setPreferredSize(null);
         txtrate1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtrate1ActionPerformed(evt);
@@ -1371,7 +1369,7 @@ public class milkcollection extends javax.swing.JInternalFrame {
         txtfat1.setForeground(new java.awt.Color(51, 51, 255));
         txtfat1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
         txtfat1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtfat1.setText("0.00");
+        txtfat1.setText("0.0");
         txtfat1.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
         txtfat1.setNextFocusableComponent(txtclr);
         txtfat1.setSelectionEnd(txtfat.getText().length());
@@ -1482,7 +1480,7 @@ public class milkcollection extends javax.swing.JInternalFrame {
                                                 .addComponent(jLabel4)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(txtrate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(txtrate, javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(txtsnf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
                                                     .addComponent(txtclr, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                     .addComponent(txtfat)
@@ -1576,13 +1574,13 @@ public class milkcollection extends javax.swing.JInternalFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtrate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                            .addComponent(txtrate)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(txtclr1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtsnf1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtrate1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addComponent(txtrate1)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtamount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

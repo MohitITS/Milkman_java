@@ -30,7 +30,7 @@ public class fatslab extends javax.swing.JInternalFrame {
         cmbmilktype.setSelectedIndex(0);
         txtfromfat.setText("0.0");
         txttofat.setText("0.0");
-        txtdiff.setText("0.00");
+        txtdiff.setText("0.000");
     }
     
     private void ED_BUTTONS(boolean f1, boolean f2) {
@@ -385,9 +385,8 @@ public class fatslab extends javax.swing.JInternalFrame {
             }
         });
 
-        txtdiff.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.##"))));
+        txtdiff.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.000"))));
         txtdiff.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtdiff.setText("0.00");
         txtdiff.setToolTipText("");
         txtdiff.setFont(new java.awt.Font("Mangal", 1, 14)); // NOI18N
         txtdiff.addFocusListener(new java.awt.event.FocusAdapter() {

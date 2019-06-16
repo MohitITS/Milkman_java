@@ -1109,7 +1109,7 @@ public class deduction extends javax.swing.JInternalFrame {
 
     private void getpaybleamt() {
         
-        if(!txtanamat.getText().equals("") && !txtrebate.getText().equals("") && !txtchilingcharges.getText().equals("")
+        if(!txtamt.getText().equals("") && !txtanamat.getText().equals("") && !txtrebate.getText().equals("") && !txtchilingcharges.getText().equals("")
                 && !txtvehicalcharges.getText().equals("") && !txtpashukhadya.getText().equals("")
                 && !txtdocfee.getText().equals("") && !txtother.getText().equals("")
                 && !txtadvance.getText().equals("")) {

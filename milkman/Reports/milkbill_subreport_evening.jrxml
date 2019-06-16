@@ -151,7 +151,9 @@ ORDER BY
 				<textFieldExpression><![CDATA[$F{mlkCollection_degree}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00;-###0.00">
-				<reportElement uuid="cdcad59b-b9e1-40d7-a65d-05a27a71a68c" x="207" y="0" width="70" height="15"/>
+				<reportElement uuid="cdcad59b-b9e1-40d7-a65d-05a27a71a68c" x="207" y="0" width="70" height="15">
+					<printWhenExpression><![CDATA[$P{duplicateBill} == "No"]]></printWhenExpression>
+				</reportElement>
 				<box bottomPadding="0" rightPadding="2">
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -172,6 +174,15 @@ ORDER BY
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{mlkCollection_dummyrate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement uuid="3404e764-df92-44a6-8a35-88bee06d61e5" x="207" y="0" width="70" height="15">
+					<printWhenExpression><![CDATA[$P{duplicateBill} == "Yes"]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mlkCollection_weight}*$F{mlkCollection_dummyrate}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

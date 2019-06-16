@@ -37,6 +37,39 @@ public class Milkman {
             // Get default path 
             methods.databasepath = new java.io.File("").getAbsolutePath();
             //System.out.println(methods.databasepath);
+            
+            // -----------------------------------------------------------------
+            // Check the environment 
+            // -----------------------------------------------------------------
+            
+//            methods.environmentDirectoryPath = methods.databasepath + "\runtime\bin";
+//            String directoryName = methods.environmentDirectoryPath.concat("env");
+//            String fileName = "ID.json";
+//
+//            File directory = new File(directoryName);
+//            if (! directory.exists()){
+//                directory.mkdir();
+//                // If you require it to make the entire directory path including parents,
+//                // use directory.mkdirs(); here instead.
+//            }
+//
+//            File file = new File(directoryName + "/" + fileName);
+//            if (!file.exists()) {
+//                
+//            } else{
+//                
+//            }
+//            
+//            try {
+//                FileWriter fw = new FileWriter(file.getAbsoluteFile());
+//                BufferedWriter bw = new BufferedWriter(fw);
+//                //bw.write(value);
+//                bw.close();
+//            }
+//            catch (IOException e){
+//                System.exit(-1);
+//            }
+            
             selectdairy sd = new selectdairy();
             //sd.show();
             

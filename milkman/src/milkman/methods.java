@@ -46,21 +46,24 @@ public class methods {
     static int userid = 1;
     static int usertype = 1;
     
+    // Activation
+    static boolean sw_activated = false;
+    
     // firm detail
-    static int firmid;
-    static String firmname;
-    static String firmadd;
-    static String firmcontactno;
-    static String regpersonname;
-    static String curryearfrom;
-    static String curryearto;
+    static int      firmid;
+    static String   firmname;
+    static String   firmadd;
+    static String   firmcontactno;
+    static String   regpersonname;
+    static String   curryearfrom;
+    static String   curryearto;
     static java.util.Date currdate;
-    static String firmregno;
-    static String swlang;
-    static String reportpath;
-    static String databasepath;
-    static int producerdefaultlgrid;
-    static int milkpurchasedefaultlgrid;
+    static String   firmregno;
+    static String   swlang;
+    static String   reportpath;
+    static String   databasepath;
+    static int      producerdefaultlgrid;
+    static int      milkpurchasedefaultlgrid;
     static int milkselldefaultlgrid;
     static int cashdefaultlgrid;
     static int sanghdefaultlgrid;
@@ -128,6 +131,8 @@ public class methods {
     
     public static boolean deduct_rebate_from_bill = false;
     public static boolean print_total_amount_in_reciept = false;
+    
+    public static String environmentDirectoryPath = "";
     
     public static Connection getConnection() throws SQLException
     {
