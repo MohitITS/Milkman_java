@@ -7,6 +7,7 @@ package milkman;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.KeyboardFocusManager;
+import java.awt.event.KeyEvent;
 import java.awt.print.PageFormat;
 import java.awt.print.Paper;
 import java.awt.print.PrinterException;
@@ -14,6 +15,8 @@ import java.awt.print.PrinterJob;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -63,6 +66,14 @@ public class milkcollection extends javax.swing.JInternalFrame {
     Vector sms_vector;
     private String current_period_from_date;
     private String current_period_to_date;
+
+    private static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
     
     class way2sms_user {
         String way2sms_username;
@@ -121,6 +132,13 @@ public class milkcollection extends javax.swing.JInternalFrame {
                 }
             }
             cmbgroup.setSelectedIndex(0);
+            
+            // enable the milk type combo box
+            if (methods.prod_seperate_for_C_M.equals("Yes")) {
+                cmbmilktype.setEnabled(true);
+            } else {
+                cmbmilktype.setEnabled(false);
+            }
 
             // Prepate statement for inserting record
             qry = "INSERT INTO mlkCollection (trn_date, shift_id, prod_code,"
@@ -187,20 +205,21 @@ public class milkcollection extends javax.swing.JInternalFrame {
 
             getshiftreport();
             
-            txtproducercode.requestFocus();
+            txtproducercode.requestFocusInWindow();
             
             // Get way2smsusername
-            qry = "SELECT mobno, password FROM way2smsm_user;";
-            PreparedStatement way2sms = conn.prepareStatement(qry);
-            i = 0;
-            try (ResultSet rscombo = way2sms.executeQuery()) {
-                
-                while (rscombo.next()) {
-                    sms_vector.addElement(
-                            new way2sms_user(rscombo.getString("mobno"), rscombo.getString("password"))
-                    );
-                }
-            }
+            // Not in use as wwe are implementing api directly
+//            qry = "SELECT mobno, password FROM way2smsm_user;";
+//            PreparedStatement way2sms = conn.prepareStatement(qry);
+//            i = 0;
+//            try (ResultSet rscombo = way2sms.executeQuery()) {
+//                
+//                while (rscombo.next()) {
+//                    sms_vector.addElement(
+//                            new way2sms_user(rscombo.getString("mobno"), rscombo.getString("password"))
+//                    );
+//                }
+//            }
             
         } catch (SQLException ex) {
             Logger.getLogger(milkcollection.class.getName()).log(Level.SEVERE, null, ex);
@@ -255,14 +274,14 @@ public class milkcollection extends javax.swing.JInternalFrame {
         txtproducercode.setText(null);
         txtproducercode1.setText(null);
         txtproducername.setText(null);
-        txtweight.setText("0.0");
-        txtfat.setText("0.0");
-        txtclr.setText("0.0");
-        txtsnf.setText("0.0");
-        txtrate.setText("0.0");
-        txtamount.setText("0.0");
+        txtweight.setText("");
+        txtfat.setText("");
+        txtclr.setText("");
+        txtsnf.setText("");
+        txtrate.setText("");
+        txtamount.setText("");
         txtsaurmilk.setText("0.0");
-        txtsaurmilkrate.setText("0.0");
+        txtsaurmilkrate.setText("0.00");
         txtproducercode.requestFocus();
         
         txtweight1.setText("0.0");
@@ -353,18 +372,22 @@ public class milkcollection extends javax.swing.JInternalFrame {
         if (!txtfat.getText().equals("") || txtfat.getText().trim() != null) {
             // get the fat
             calfat = Double.parseDouble(txtfat.getText());
-            calclr = Double.parseDouble(txtclr.getText());
+            if (txtclr.getText().equals("")) {
+                calclr = 0;
+            } else {
+                calclr = Double.parseDouble(txtclr.getText());
+            }
             if (!methods.is_clr_not_mandatory) {
             
                 if (!txtclr.getText().equals(""+0)) {
                     calclr = Double.parseDouble(txtclr.getText());
                 }
                 if (txtfat.getText().equals("" + 0)) {
-                    calcsnf = 0;
-                    txtsnf.setText("" + onedf.format(calcsnf));
+                    calcsnf = 0.0;
+                    txtsnf.setText("" + onedf.format(round(calcsnf,1)));
                 } else if (methods.fix_clr == false && methods.fix_snf == false) {
                     calcsnf = 0.21 * calfat + 0.25 * calclr + 0.36;
-                    txtsnf.setText("" + onedf.format(calcsnf));
+                    txtsnf.setText("" + onedf.format(round(calcsnf,1)));
                 } else if (methods.fix_clr == true && methods.fix_snf == false) {
                     if (cmbmilktype.getSelectedIndex() == 0) {
                         txtclr.setText("" + methods.std_CMCLR);
@@ -373,7 +396,7 @@ public class milkcollection extends javax.swing.JInternalFrame {
                     }
                     calclr = Double.parseDouble(txtclr.getText());
                     calcsnf = 0.21 * calfat + 0.25 * calclr + 0.36;
-                    txtsnf.setText("" + onedf.format(calcsnf));
+                    txtsnf.setText("" + onedf.format(round(calcsnf,1)));
                 } else if (methods.fix_clr == false && methods.fix_snf == true) {
                     if (cmbmilktype.getSelectedIndex() == 0) {
                         txtsnf.setText("" + methods.std_CMSNF);
@@ -644,11 +667,11 @@ public class milkcollection extends javax.swing.JInternalFrame {
             }
         });
         txtproducercode.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtproducercodeFocusLost(evt);
-            }
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtproducercodeFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtproducercodeFocusLost(evt);
             }
         });
         txtproducercode.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -684,9 +707,22 @@ public class milkcollection extends javax.swing.JInternalFrame {
         cmbmilktype.setForeground(new java.awt.Color(51, 51, 255));
         cmbmilktype.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "गाय", "म्हैस" }));
         cmbmilktype.setEnabled(false);
+        cmbmilktype.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbmilktypeItemStateChanged(evt);
+            }
+        });
         cmbmilktype.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbmilktypeActionPerformed(evt);
+            }
+        });
+        cmbmilktype.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cmbmilktypeKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cmbmilktypeKeyReleased(evt);
             }
         });
 
@@ -735,7 +771,6 @@ public class milkcollection extends javax.swing.JInternalFrame {
         txtweight.setForeground(new java.awt.Color(51, 51, 255));
         txtweight.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtweight.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtweight.setText("0.00");
         txtweight.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
         txtweight.setNextFocusableComponent(txtfat);
         txtweight.setSelectionEnd(txtweight.getText().length());
@@ -761,7 +796,6 @@ public class milkcollection extends javax.swing.JInternalFrame {
         txtfat.setForeground(new java.awt.Color(51, 51, 255));
         txtfat.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
         txtfat.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtfat.setText("0.0");
         txtfat.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
         txtfat.setNextFocusableComponent(txtclr);
         txtfat.setSelectionEnd(txtfat.getText().length());
@@ -797,11 +831,8 @@ public class milkcollection extends javax.swing.JInternalFrame {
         txtclr.setForeground(new java.awt.Color(51, 51, 255));
         txtclr.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
         txtclr.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtclr.setText("0.0");
         txtclr.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
         txtclr.setNextFocusableComponent(txtamount);
-        txtclr.setPreferredSize(null);
-        txtclr.setSelectionEnd(4);
         txtclr.setSelectionStart(0);
         txtclr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -809,11 +840,11 @@ public class milkcollection extends javax.swing.JInternalFrame {
             }
         });
         txtclr.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtclrFocusLost(evt);
-            }
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtclrFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtclrFocusLost(evt);
             }
         });
         txtclr.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -828,28 +859,24 @@ public class milkcollection extends javax.swing.JInternalFrame {
         txtsnf.setForeground(new java.awt.Color(51, 51, 255));
         txtsnf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
         txtsnf.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtsnf.setText("0.0");
         txtsnf.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
-        txtsnf.setPreferredSize(null);
-        txtsnf.setSelectionStart(1);
         txtsnf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtsnfActionPerformed(evt);
             }
         });
         txtsnf.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtsnfFocusLost(evt);
-            }
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtsnfFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtsnfFocusLost(evt);
             }
         });
 
         txtrate.setForeground(new java.awt.Color(51, 51, 255));
         txtrate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.000"))));
         txtrate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtrate.setText("0.0");
         txtrate.setFocusable(false);
         txtrate.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
         txtrate.setNextFocusableComponent(btnsave);
@@ -1273,11 +1300,11 @@ public class milkcollection extends javax.swing.JInternalFrame {
             }
         });
         txtproducercode1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtproducercode1FocusLost(evt);
-            }
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtproducercode1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtproducercode1FocusLost(evt);
             }
         });
         txtproducercode1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1369,7 +1396,6 @@ public class milkcollection extends javax.swing.JInternalFrame {
         txtfat1.setForeground(new java.awt.Color(51, 51, 255));
         txtfat1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
         txtfat1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtfat1.setText("0.0");
         txtfat1.setFont(new java.awt.Font("Mangal", 1, 18)); // NOI18N
         txtfat1.setNextFocusableComponent(txtclr);
         txtfat1.setSelectionEnd(txtfat.getText().length());
@@ -1482,7 +1508,7 @@ public class milkcollection extends javax.swing.JInternalFrame {
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                     .addComponent(txtrate, javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(txtsnf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                                                    .addComponent(txtclr, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(txtclr, javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(txtfat)
                                                     .addComponent(txtweight)
                                                     .addComponent(txtsampleno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1566,11 +1592,11 @@ public class milkcollection extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtclr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(txtclr))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtsnf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(txtsnf))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1604,7 +1630,7 @@ public class milkcollection extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        pack();
+        setBounds(0, 0, 874, 680);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btncloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncloseActionPerformed
@@ -1677,6 +1703,7 @@ public class milkcollection extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtproducercodeKeyReleased
 
     private void txtweightKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtweightKeyReleased
+
     }//GEN-LAST:event_txtweightKeyReleased
 
     private void txtfatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfatKeyReleased
@@ -1715,9 +1742,9 @@ public class milkcollection extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnsaveFocusLost
 
     private void txtweightFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtweightFocusGained
-        int selend = txtweight.getText().length();
-        txtweight.select(0, selend);
-        //txtweight.selectAll();
+        //int selend = txtweight.getText().length();
+        //txtweight.select(0, selend);
+        txtweight.selectAll();
         txtweight.setBackground(Color.CYAN);
     }//GEN-LAST:event_txtweightFocusGained
 
@@ -1732,36 +1759,36 @@ public class milkcollection extends javax.swing.JInternalFrame {
 
     private void txtfatFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfatFocusLost
         txtfat.setBackground(Color.WHITE);
-        try {
-            if (!txtfat.getText().equals("") || txtfat.getText().trim() == null) {
-                try {
-                    switch (methods.prod_seperate_for_C_M) {
-                        case "No":
-                            double ft = Double.parseDouble(txtfat.getText());
-                            if (ft >= methods.min_CMFAT && ft <= methods.max_CMFAT) {
-                                cmbmilktype.setSelectedIndex(0);
-                            } else if (ft >= methods.min_BMFAT && ft <= methods.max_BMFAT) {
-                                cmbmilktype.setSelectedIndex(1);
-                            }
-                            break;
-                        case "Yes":
-                            //System.out.println(prod_milktype);
-                            if (prod_milktype.equals("COW")) {
-                                cmbmilktype.setSelectedIndex(0);
-                            } else {
-                                cmbmilktype.setSelectedIndex(1);
-                            }
-                            break;
-                    }
-                    if (!getrate()) {
-                    }
-                    
-                } catch (SQLException | ParseException ex) {
-                    Logger.getLogger(milkcollection.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        } catch (NumberFormatException nfe) {
-        }
+//        try {
+//            if (!txtfat.getText().equals("") || txtfat.getText().trim() == null) {
+//                try {
+//                    switch (methods.prod_seperate_for_C_M) {
+//                        case "No":
+//                            double ft = Double.parseDouble(txtfat.getText());
+//                            if (ft >= methods.min_CMFAT && ft <= methods.max_CMFAT) {
+//                                cmbmilktype.setSelectedIndex(0);
+//                            } else if (ft >= methods.min_BMFAT && ft <= methods.max_BMFAT) {
+//                                cmbmilktype.setSelectedIndex(1);
+//                            }
+//                            break;
+//                        case "Yes":
+////                            //System.out.println(prod_milktype);
+////                            if (prod_milktype.equals("COW")) {
+////                                cmbmilktype.setSelectedIndex(0);
+////                            } else {
+////                                cmbmilktype.setSelectedIndex(1);
+////                            }
+//                            break;
+//                    }
+//                    if (!getrate()) {
+//                    }
+//                    
+//                } catch (SQLException | ParseException ex) {
+//                    Logger.getLogger(milkcollection.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        } catch (NumberFormatException nfe) {
+//        }
     }//GEN-LAST:event_txtfatFocusLost
 
     private void txtclrFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtclrFocusGained
@@ -1771,19 +1798,19 @@ public class milkcollection extends javax.swing.JInternalFrame {
 
     private void txtclrFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtclrFocusLost
         txtclr.setBackground(Color.WHITE);
-        if (!txtclr.getText().equals("")) {
-            try {
-                if (!getrate()) {
-                    clearscreen();
-                    txtsampleno.setText("" + getsampleno());
-                    txtproducercode.requestFocus();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(milkcollection.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParseException ex) {
-                Logger.getLogger(milkcollection.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+//        if (!txtclr.getText().equals("")) {
+//            try {
+//                if (!getrate()) {
+//                    clearscreen();
+//                    txtsampleno.setText("" + getsampleno());
+//                    txtproducercode.requestFocus();
+//                }
+//            } catch (SQLException ex) {
+//                Logger.getLogger(milkcollection.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (ParseException ex) {
+//                Logger.getLogger(milkcollection.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
     }//GEN-LAST:event_txtclrFocusLost
 
     private void optmorningStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_optmorningStateChanged
@@ -2077,7 +2104,9 @@ public class milkcollection extends javax.swing.JInternalFrame {
                         //String url = "http://localhost/way2sms_2/sendsms.php?msg="+ URLEncoder.encode(smsstr, "UTF-8") +"&rec="+contactno+"&username="+obj.getWay2SMS_username()+"&password="+obj.getWay2SMS_password();
                         //String url = "http://login.wishbysms.com/api/sendhttp.php?authkey="+methods.sms_authkey+"&mobiles="+contactno+"&message="+ URLEncoder.encode(smsstr, "UTF-8") +"&sender=" + methods.sms_senderid + "&route=4&country=91";
                         //String url = "http://smslogin.pcexpert.in/api/mt/SendSMS?user="+methods.sms_username+"&password="+methods.sms_password+"&senderid=" + methods.sms_senderid + "&channel=Trans&DCS=0&flashsms=0&number="+contactno+"&text="+ URLEncoder.encode(smsstr, "UTF-8") +"&route=02";
-                        String url = "http://smslogin.pcexpert.in/api/mt/SendSMS?user="+methods.sms_username.replace(" ", "%20")+"&password="+methods.sms_password+"&senderid="+methods.sms_senderid+"&channel=Trans&DCS=0&flashsms=0&number="+contactno+"&text="+URLEncoder.encode(smsstr, "UTF-8")+"&route02";
+                        //String url = "http://smslogin.pcexpert.in/api/mt/SendSMS?user="+methods.sms_username.replace(" ", "%20")+"&password="+methods.sms_password+"&senderid="+methods.sms_senderid+"&channel=Trans&DCS=0&flashsms=0&number="+contactno+"&text="+URLEncoder.encode(smsstr, "UTF-8")+"&route=02";
+                        String url = methods.sms_url.replace("{msg}", URLEncoder.encode(smsstr, "UTF-8")).replace("{mobno}", contactno).replace("{senderid}", methods.sms_senderid).replace("{authkey}", methods.sms_authkey).replace("{username}", methods.sms_username).replace("{password}", methods.sms_password);
+                        System.out.println(url);
                         URL sms = new URL(url);
                         URLConnection yc = sms.openConnection();
                         System.out.println(url);
@@ -2178,7 +2207,15 @@ public class milkcollection extends javax.swing.JInternalFrame {
             String shft, mtype;
             shft = shiftid == 1 ? "M" : "E";
             mtype = milkid == 1 ? "COW" : "BUFELOW";
-            smsstr = methods.smssendby + "\n" + dmy.format(dtpdate.getDate()) + " " + shft + "\nCode-" + txtproducercode.getText() + "\nMilk-" + mtype + "\nLtr-" + Double.parseDouble(txtweight.getText()) + "\nFAT-" + Double.parseDouble(txtfat.getText()) + "\nSNF-" + Double.parseDouble((txtsnf.getText())) + "\nRate-" + Double.parseDouble(txtrate.getText()) + "\nAMT-" + Double.parseDouble(txtamount.getText());
+            if (!methods.print_total_amount_in_reciept) {
+                smsstr = methods.smssendby + "\n" + dmy.format(dtpdate.getDate()) + " " + shft + "\nCode-" + txtproducercode.getText() + "\nMilk-" + mtype + "\nLtr-" + Double.parseDouble(txtweight.getText()) + "\nFAT-" + Double.parseDouble(txtfat.getText()) + "\nSNF-" + Double.parseDouble((txtsnf.getText())) + "\nRate-" + Double.parseDouble(txtrate.getText()) + "\nAMT-" + Double.parseDouble(txtamount.getText());
+            } else {
+                try {
+                    smsstr = methods.smssendby + "\n" + dmy.format(dtpdate.getDate()) + " " + shft + "\nCode-" + txtproducercode.getText() + "\nMilk-" + mtype + "\nLtr-" + Double.parseDouble(txtweight.getText()) + "\nFAT-" + Double.parseDouble(txtfat.getText()) + "\nSNF-" + Double.parseDouble((txtsnf.getText())) + "\nRate-" + Double.parseDouble(txtrate.getText()) + "\nAMT-" + Double.parseDouble(txtamount.getText()) + "\n" + getTotalMilkForCurrentPeriod("E");
+                } catch (SQLException ex) {
+                    Logger.getLogger(milkcollection.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
             Runnable sms = new sendsms_way2sms (smsstr);
             new Thread(sms).start();
         }
@@ -2186,24 +2223,47 @@ public class milkcollection extends javax.swing.JInternalFrame {
         if (methods.drp == true) {
             //PrintWriter writer = null;
             PrinterJob job = PrinterJob.getPrinterJob();
-            PageFormat pf = job.defaultPage();
+            //PageFormat pf = job.defaultPage();
+            PageFormat pf = new PageFormat();
+            
+            int resolution = 72; // dpi            
             //Paper paper = pf.getPaper();
             Paper paper = new Paper();
-            //double width = 4d * 72d;
-            //double height = 3.9d * 72d;
-            //double margin = 0.25d * 72d;
             
-            double width = 4 * 72;
-            double height = 4 * 72;
-            double margin = 0.25 * 72;
+            //paper.setSize(UnitConv.mm2px(62, resolution), UnitConv.mm2px(40, resolution));
+            //paper.setImageableArea(0, 0, UnitConv.mm2px(102, resolution), UnitConv.mm2px(102, resolution));
+            
+            double width = 4d * 72d;
+            double height = 4d * 72d;
+            double margin = 0.25d * 72d;
+            
+            //paper.setSize(384, 384);
+            //paper.setImageableArea(0, 0, 384, 384);
+            
+//            double paperWidth = 4.3; //8.50;
+//            double paperHeight = 4.3;
+//            double leftMargin = 0.10;
+//            double rightMargin = 0.10;
+//            double topMargin = 0;
+//            double bottomMargin = 0.01;
+//            
+//            double width = 6 * 72;
+//            double height = 4.2 * 72;
+//            double margin = 0.25 * 72;
+//            paper.setImageableArea(leftMargin * 72.0, topMargin * 72.0,
+//             (paperWidth - leftMargin - rightMargin) * 72.0,
+//             (paperHeight - topMargin - bottomMargin) * 72.0);
             
             paper.setSize(width, height);
             paper.setImageableArea(
                     margin,
                     margin,
-                    width - (margin * 2),
-                    height - (margin * 2));
+                    width - (margin * 1),
+                    height - (margin * 1));
             pf.setOrientation(PageFormat.PORTRAIT);
+//            PrintRequestAttributeSet aset = new HashPrintRequestAttributeSet();
+//            aset.add(OrientationRequested.PORTRAIT);
+//            aset.add(new MediaPrintableArea(10,10, 102, 102,Size2DSyntax.MM));
             pf.setPaper(paper);
             
             //System.out.println("Page Height - "+pf.getHeight());
@@ -2276,10 +2336,14 @@ public class milkcollection extends javax.swing.JInternalFrame {
                     }
                 }
             }
+            pf = job.validatePage(pf);
             job.setPrintable(pr, pf);
+            //job.setPrintable(pr);
+            //job.setPageable((Pageable) pr);
             boolean ok = job.printDialog();
             if (ok) {
                 try {
+                    //job.print(aset);
                     job.print();
                 } catch (PrinterException ex) {
                     /* The job did not successfully complete */
@@ -2450,7 +2514,7 @@ public class milkcollection extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtsnfFocusGained
 
     private void txtsnfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtsnfFocusLost
-//        txtsnf.setBackground(Color.WHITE);
+        txtsnf.setBackground(Color.WHITE);
 //        if (!txtsnf.getText().equals("")) {
 //            try {
 //                if (!getrate()) {
@@ -2473,11 +2537,11 @@ public class milkcollection extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtrateFocusLost
 
     private void txtsaurmilkFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtsaurmilkFocusGained
-        txtsaurmilk.setBackground(Color.CYAN);
+        //txtsaurmilk.setBackground(Color.CYAN);
     }//GEN-LAST:event_txtsaurmilkFocusGained
 
     private void txtsaurmilkFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtsaurmilkFocusLost
-        txtsaurmilk.setBackground(Color.WHITE);
+        //txtsaurmilk.setBackground(Color.WHITE);
     }//GEN-LAST:event_txtsaurmilkFocusLost
 
     private void table_shiftreportKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_table_shiftreportKeyReleased
@@ -2500,8 +2564,17 @@ public class milkcollection extends javax.swing.JInternalFrame {
                             delete_qry.execute();
 
 //                            getshiftreport();
-                            btnclearscreenActionPerformed(null);
-
+                            //btnclearscreenActionPerformed(null);
+                            clearscreen();
+                            try {
+                                txtsampleno.setText("" + getsampleno());
+                                gettotalcollection();
+                                getshiftreport();
+                                fatnumber = 0;
+                            } catch (SQLException ex) {
+                                Logger.getLogger(milkcollection.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            this.framemode = 1;
 
                         }
                     } catch (SQLException ex) {
@@ -2522,15 +2595,13 @@ public class milkcollection extends javax.swing.JInternalFrame {
             if (row_sampleno != 0) {
                 displayforediting(row_sampleno);
             } else {
-                clearscreen();
-                try {
-                    txtsampleno.setText("" + getsampleno());
-
-
-                } catch (SQLException ex) {
-                    Logger.getLogger(milkcollection.class
-                            .getName()).log(Level.SEVERE, null, ex);
-                }
+//                clearscreen();
+//                try {
+//                    txtsampleno.setText("" + getsampleno());
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(milkcollection.class
+//                            .getName()).log(Level.SEVERE, null, ex);
+//                }
             }
         }
     }//GEN-LAST:event_table_shiftreportMouseClicked
@@ -2627,12 +2698,32 @@ public class milkcollection extends javax.swing.JInternalFrame {
                         if (rspname.next()) {
                             int ans = JOptionPane.showConfirmDialog(null, "सदर उत्पादकाने पहिले दुध दिले आहे. दुध स्वीकरणे?", "Milkman", JOptionPane.YES_NO_OPTION);
                             if (ans == JOptionPane.YES_OPTION) {
-                                txtweight.requestFocus();
+                                if (methods.prod_seperate_for_C_M.equals("Yes")) {
+                                    cmbmilktype.requestFocus();
+                                } else {
+                                    txtweight.selectAll();
+                                    txtweight.requestFocus();
+                                }
                             } else {
-                                btnclearscreenActionPerformed(evt);
+                                //btnclearscreenActionPerformed(evt);
+                                clearscreen();
+                                try {
+                                    txtsampleno.setText("" + getsampleno());
+                                    //gettotalcollection();
+                                    //getshiftreport();
+                                    fatnumber = 0;
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(milkcollection.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                this.framemode = 1;                                
                             }
                         } else {
-                            txtweight.requestFocus();
+                            if (methods.prod_seperate_for_C_M.equals("Yes")) {
+                                cmbmilktype.requestFocus();
+                            } else {
+                                txtweight.selectAll();
+                                txtweight.requestFocus();
+                            }
                         }
                         rspname.close();
                         
@@ -2640,6 +2731,7 @@ public class milkcollection extends javax.swing.JInternalFrame {
                         cal.add(Calendar.DATE, -1);
                         //System.out.println("Yesterday's date was "+mdy.format(cal.getTime())); 
                         
+                        // Code to show previouse day collection
                         String qry_edit;
                         qry_edit = "SELECT mlkCollection.sample_no, mlkCollection.prod_code,"
                                 + "mlkCollection.mlkType_id, mlkCollection.weight, mlkCollection.fat,"
@@ -2647,17 +2739,17 @@ public class milkcollection extends javax.swing.JInternalFrame {
                                 + "FROM mlkCollection "
                                 + "WHERE (((mlkCollection.trn_date)=#" + mdy.format(cal.getTime()) + "#)"
                                 + " AND ((mlkCollection.shift_id)=" + shiftid + ") AND ((mlkCollection.prod_code)=" + txtproducercode.getText().trim() + "));";
-                        System.out.println(qry_edit);
+                        //System.out.println(qry_edit);
                         PreparedStatement editqry = conn.prepareStatement(qry_edit);
-                        ResultSet rsedit = editqry.executeQuery();
-                        if (rsedit.next()) {
-                            txtweight1.setText(rsedit.getString("weight"));
-                            txtfat1.setText(rsedit.getString("fat"));
-                            txtclr1.setText(rsedit.getString("degree"));
-                            txtsnf1.setText(rsedit.getString("snf"));
-                            txtrate1.setText(rsedit.getString("rate"));
+                        try (ResultSet rsedit = editqry.executeQuery()) {
+                            if (rsedit.next()) {
+                                txtweight1.setText(rsedit.getString("weight"));
+                                txtfat1.setText(rsedit.getString("fat"));
+                                txtclr1.setText(rsedit.getString("degree"));
+                                txtsnf1.setText(rsedit.getString("snf"));
+                                txtrate1.setText(rsedit.getString("rate"));
+                            }
                         }
-                        rsedit.close();
                     }
 //                    txtweight.requestFocus();
                 }
@@ -2680,7 +2772,7 @@ public class milkcollection extends javax.swing.JInternalFrame {
 
     private void txtfatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfatActionPerformed
         if (!txtfat.getText().equals("") || txtfat.getText().trim() == null) {
-            //System.out.println(methods.prod_seperate_for_C_M);
+            System.out.println(methods.prod_seperate_for_C_M);
             switch (methods.prod_seperate_for_C_M) {
                 case "No":
                     double ft = Double.parseDouble(txtfat.getText());
@@ -2692,24 +2784,27 @@ public class milkcollection extends javax.swing.JInternalFrame {
                     break;
                 case "Yes":
                     //System.out.println(prod_milktype);
-                    if (prod_milktype.equals("COW")) {
-                        cmbmilktype.setSelectedIndex(0);
-                    } else {
-                        cmbmilktype.setSelectedIndex(1);
-                    }
+//                    if (prod_milktype.equals("COW")) {
+//                        cmbmilktype.setSelectedIndex(0);
+//                    } else {
+//                        cmbmilktype.setSelectedIndex(1);
+//                    }
                     break;
             }
         }
-        KeyboardFocusManager manager;
-        manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();        
+        //KeyboardFocusManager manager;
+        //manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();        
         //System.out.println(methods.is_clr_not_mandatory);
         if (methods.is_clr_not_mandatory) {
             //System.out.println("in loop");
             txtsnf.requestFocus();
+            txtsnf.selectAll();
             //manager.focusNextComponent();
             //manager.focusNextComponent(txtsnf);
         } else {
-            manager.focusNextComponent();
+            //manager.focusNextComponent();
+            txtclr.requestFocus();
+            txtclr.selectAll();
         }
     }//GEN-LAST:event_txtfatActionPerformed
 
@@ -2718,9 +2813,24 @@ public class milkcollection extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtsamplenoActionPerformed
 
     private void txtclrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtclrActionPerformed
-        KeyboardFocusManager manager;
-        manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
-        manager.focusNextComponent();
+//        KeyboardFocusManager manager;
+//        manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+//        manager.focusNextComponent();
+          
+
+        if (!txtclr.getText().equals("")) {
+            try {
+                if (!getrate()) {
+                    clearscreen();
+                    txtsampleno.setText("" + getsampleno());
+                    txtproducercode.requestFocus();
+                } else {
+                    btnsave.requestFocus();
+                }
+            } catch (SQLException | ParseException ex) {
+                Logger.getLogger(milkcollection.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_txtclrActionPerformed
 
     private void txtamountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtamountActionPerformed
@@ -2853,7 +2963,7 @@ public class milkcollection extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtweight1KeyReleased
 
     private void cmbmilktypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbmilktypeActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_cmbmilktypeActionPerformed
 
     private void txtsnfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsnfActionPerformed
@@ -2895,6 +3005,28 @@ public class milkcollection extends javax.swing.JInternalFrame {
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btntotalcollection1ActionPerformed
+
+    private void cmbmilktypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbmilktypeItemStateChanged
+//        txtweight.requestFocus();
+//        txtweight.selectAll();
+    }//GEN-LAST:event_cmbmilktypeItemStateChanged
+
+    private void cmbmilktypeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbmilktypeKeyReleased
+//        System.out.println(evt.getKeyCode());
+//        if (evt.getKeyCode() == 10) {
+//            txtweight.requestFocus();
+//            txtweight.selectAll();
+//        }
+        
+    }//GEN-LAST:event_cmbmilktypeKeyReleased
+
+    private void cmbmilktypeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbmilktypeKeyPressed
+        System.out.println(evt.getKeyCode());
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtweight.requestFocus();
+            txtweight.selectAll();
+        }
+    }//GEN-LAST:event_cmbmilktypeKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnclearscreen;

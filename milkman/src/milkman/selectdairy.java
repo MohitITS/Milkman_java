@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.InputStreamReader;
+import java.awt.event.KeyEvent;
 import java.lang.reflect.InvocationTargetException;
 import java.net.InetAddress;
 import java.security.NoSuchAlgorithmException;
@@ -67,18 +67,29 @@ public class selectdairy extends javax.swing.JFrame {
                         methods.database1name = part2;
                     case "data2": 
                         methods.database2name = part2;
+                    case "data3": 
+                        methods.database3name = part2;
                     case "databasepath":
                         methods.databasepath = part2;
                 }
             }
             cmbdairy.addItem("Select Dairy");
-            if (methods.maintaindatabase == 1) {
-                cmbdairy.addItem(methods.database1name);
-                cmbdairy.setSelectedItem(methods.database1name);
-                jButton1.doClick(0);
-            } else {
-                cmbdairy.addItem(methods.database1name);
-                cmbdairy.addItem(methods.database2name);
+            switch (methods.maintaindatabase) {
+                case 1:
+                    cmbdairy.addItem(methods.database1name);
+                    cmbdairy.setSelectedItem(methods.database1name);
+                    jButton1.doClick();
+                    //jButton1ActionPerformed()
+                    break;
+                case 2:
+                    cmbdairy.addItem(methods.database1name);
+                    cmbdairy.addItem(methods.database2name);
+                    break;
+                default:
+                    cmbdairy.addItem(methods.database1name);
+                    cmbdairy.addItem(methods.database2name);
+                    cmbdairy.addItem(methods.database3name);
+                    break;
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(selectdairy.class.getName()).log(Level.SEVERE, null, ex);
@@ -373,8 +384,8 @@ public class selectdairy extends javax.swing.JFrame {
 //            l = new login();            
 //            l.setVisible(true);
 
-            methods.maintaindatabase = 1;
-            methods.database1name = "milkdata";
+            //methods.maintaindatabase = 1;
+            //methods.database1name = "milkdata";
             String motherBoardSerial = methods.getMotherBoardSerial();
             macid = motherBoardSerial;
             //System.out.println(macid);

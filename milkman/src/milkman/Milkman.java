@@ -71,7 +71,9 @@ public class Milkman {
 //            }
             
             selectdairy sd = new selectdairy();
-            //sd.show();
+            if(methods.maintaindatabase > 1) {
+                sd.show();   
+            }
             
 //            methods.maintaindatabase = 1;
 //            methods.database1name = "milkdata";

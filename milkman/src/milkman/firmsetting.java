@@ -54,8 +54,10 @@ public class firmsetting extends javax.swing.JInternalFrame {
             String accname;
             try (PreparedStatement loadcombo = conn.prepareStatement(qry);ResultSet rslc = loadcombo.executeQuery()) {
                 int i=0;
-                acctypeid = new int[100];acctypeid1 = new int[100];
-                acctypeid3 = new int[100];acctypeid2 = new int[100];
+                acctypeid = new int[100];
+                acctypeid1 = new int[100];
+                acctypeid2 = new int[100];
+                acctypeid3 = new int[100];
                 acctypeid4 = new int[100];
                 while (rslc.next()) {
                    accname = rslc.getString("accname");
@@ -110,6 +112,11 @@ public class firmsetting extends javax.swing.JInternalFrame {
                 txtbackgrounimage.setText(rs.getString("backroundimage"));
                 txtdatabasepath.setText(rs.getString("databasepath"));
                 
+                cbacctype.setSelectedIndex(0);
+                cbacctype1.setSelectedIndex(1);
+                cbacctype2.setSelectedIndex(3);
+                cbacctype3.setSelectedIndex(2);
+                cbacctype4.setSelectedIndex(4);
                 
             }
             rs.close();
@@ -586,7 +593,9 @@ public class firmsetting extends javax.swing.JInternalFrame {
 //                    " cashdefaultlgrid=?,sanghdefaultid=? WHERE ID="+Integer.parseInt(txtfirmid.getText())+";";
             qry = "UPDATE config SET firmname=?, address=?, contatno=?, plantorcenter=?,"+
                     " regpersonname=?, curryearfrom=?, curryearto=?, firmregno=?, swlang=?,"+
-                    " reportspath=?, bank=?, bankacno=?, backroundimage=?, databasepath=?"+
+                    " reportspath=?, bank=?, bankacno=?, backroundimage=?, databasepath=?,"
+                    + " producerdefaultlgrid=?, milkpurchasedefaultlgrid=?, milkselldefaultlgrid=?,"
+                    + " cashdefaultlgrid=?, sanghdefaultid=?"+
                     " WHERE ID="+Integer.parseInt(txtfirmid.getText())+";";
             STATEMENT = conn.prepareStatement(qry);
             STATEMENT.setString(1, txtfirmname.getText());
@@ -603,20 +612,22 @@ public class firmsetting extends javax.swing.JInternalFrame {
             STATEMENT.setString(12, txtbankacno.getText());
             STATEMENT.setString(13, txtbackgrounimage.getText());
             STATEMENT.setString(14, txtdatabasepath.getText());
-//            int acctid = acctypeid[cbacctype.getSelectedIndex()];
-//            System.out.println(acctid);   
-//            STATEMENT.setInt(15, acctypeid2[cbacctype2.getSelectedIndex()]);
-//            acctid = acctypeid2[cbacctype2.getSelectedIndex()];
-//            System.out.println(acctid);   
-//            STATEMENT.setInt(16, acctypeid[cbacctype.getSelectedIndex()]);
-//            acctid = acctypeid3[cbacctype3.getSelectedIndex()];
-//            System.out.println(acctid);   
-//            STATEMENT.setInt(17, acctypeid3[cbacctype3.getSelectedIndex()]);
-//            acctid = acctypeid1[cbacctype1.getSelectedIndex()];
-//            System.out.println(acctid);   
-//            STATEMENT.setInt(18, acctypeid1[cbacctype1.getSelectedIndex()]);
-//            STATEMENT.setInt(19, acctypeid4[cbacctype4.getSelectedIndex()]);
+            int acctid = acctypeid[cbacctype.getSelectedIndex()];
+            //System.out.println(acctid);   
+            STATEMENT.setInt(15, acctypeid2[acctid]);
+            //acctid = acctypeid2[cbacctype2.getSelectedIndex()];
+            //System.out.println(acctid);   
+            STATEMENT.setInt(16, acctypeid[cbacctype.getSelectedIndex()]);
+            //acctid = acctypeid3[cbacctype3.getSelectedIndex()];
+            //System.out.println(acctid);   
+            STATEMENT.setInt(17, acctypeid3[cbacctype3.getSelectedIndex()]);
+            //acctid = acctypeid1[cbacctype1.getSelectedIndex()];
+            //System.out.println(acctid);   
+            STATEMENT.setInt(18, acctypeid1[cbacctype1.getSelectedIndex()]);
+            STATEMENT.setInt(19, acctypeid4[cbacctype4.getSelectedIndex()]);
 
+            
+            System.out.println("milkman.firmsetting.jButton2ActionPerformed() : " + qry);
             
             STATEMENT.execute();
             STATEMENT.close();

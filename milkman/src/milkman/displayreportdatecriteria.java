@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.standard.OrientationRequested;
 import javax.swing.JOptionPane;
 
 /**
@@ -840,6 +843,9 @@ public class displayreportdatecriteria extends javax.swing.JInternalFrame {
             PageFormat pf = new PageFormat();
             Paper paper = new Paper(); //pf.getPaper();
             
+            PrintRequestAttributeSet aset = new HashPrintRequestAttributeSet();
+            aset.add(OrientationRequested.PORTRAIT);
+            
             double width = 4 * 72;
             //double height = 8 * 72;
             double height = rows * (72 / 4);
@@ -861,13 +867,14 @@ public class displayreportdatecriteria extends javax.swing.JInternalFrame {
             pf.setPaper(paper);
             PrintReceipt_bill pr = new PrintReceipt_bill();
             pr.reciept_data = obj;
+            pf = job.validatePage(pf);
             book.append(pr, pf);
             job.setPrintable(pr, pf);
             //job.setPageable(book);
             boolean ok = job.printDialog();
             if (ok) {
                 try {
-                     job.print();
+                     job.print(aset);
                 } catch (PrinterException ex) {
                  /* The job did not successfully complete */
                 }

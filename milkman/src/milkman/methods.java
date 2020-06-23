@@ -100,6 +100,7 @@ public class methods {
     static int maintaindatabase;
     static String database1name;
     static String database2name;
+    static String database3name;
     static String currdatabase;
     static boolean prodcodegroupwise;
     static boolean prodcodemanual;
@@ -110,6 +111,7 @@ public class methods {
     static String sms_username;
     static String sms_password;
     static String smssendby;
+    static String sms_url;
     static String ratechartcalcbase_CM;
     static double max_cmclr;
     static double min_cmclr;

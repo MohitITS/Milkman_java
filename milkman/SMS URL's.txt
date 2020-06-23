@@ -1,0 +1,4 @@
+http://www.smsjust.com/sms/user/urlsms.php?username=kiran700&pass=Kiran@123&type=0&dlr=0&senderid=SAMRTH&message={msg}&dest_mobileno={mobno}&response=Y
+http://login.wishbysms.com/api/sendhttp.php?authkey={authkey}&mobiles={mobno}&message={msg}&sender={senderid}&route=4&country=91
+
+7709270773

@@ -1,0 +1,25 @@
+Handore
+
+Link
+http://mysms.webtechadvertising.in
+
+SENDER ID - Dwarka
+
+API
+http://mysms.webtechadvertising.in/API/WebSMS/Http/v1.0a/index.php?username=Dwarkadhish&password=Dwarka&sender={senderid}&to={mobno}&message={msg}&reqid=1&format=text&route_id=297&sendondate=15-09-2019T10:37:22
+
+http://mysms.webtechadvertising.in/API/WebSMS/Http/v1.0a/index.php?username=Dwarkadhish&password=DWARKA&sender=Dwarka&to=8208079038&message=Test From Handore&reqid=1&format=text&route_id=1
+
+http://mysms.webtechadvertising.in/API/WebSMS/Http/v1.0a/index.php?username=Dwarkadhish&password=DWARKA&sender=Dwarka&to=8208079038&message=Test%20From%20Handore&reqid=1&format=text&route_id=297
+
+http://mysms.webtechadvertising.in/API/WebSMS/Http/v1.0a/index.php?username={username}&password={password}&sender={senderid}&to={mobno}&message={msg}&reqid=1&format=text&route_id=297
+
+http://login.wishbysms.com/user/index.php#api
+
+http://login.wishbysms.com/api/sendhttp.php?authkey={authkey}&mobiles={mobno}&message={msg}&sender={senderid}&route=4&country=0
+
+http://smslogin.pcexpert.in/api/mt/SendSMS?user={username}&password={password}&senderid={senderid}&channel=Trans&DCS=0&flashsms=0&number={mobno}&text={msg}&route=02
+amolkhairnar
+amol@123
+
+http://smslogin.pcexpert.in/api/mt/SendSMS?user=amolkhairnar&password=amol@123&senderid=KANHAA&channel=Trans&DCS=0&flashsms=0&number=8208079038&text=HI&route=02

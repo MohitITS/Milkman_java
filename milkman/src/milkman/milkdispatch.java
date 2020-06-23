@@ -1637,35 +1637,38 @@ private boolean getrate2() throws SQLException {
             }
             
             System.out.println("Shift : " + condition);
-            
-            int r;
-            int c;
-            for(r=0; r<table_shiftreport.getRowCount(); r++) {
-                for (c=0; c<table_shiftreport.getColumnCount(); c++) {
-                    table_shiftreport.setValueAt("", r, c);
-                }
-            }            
-            qry = "SELECT milkdispatch.chalanno, milkdispatch.scode, milkdispatch.qty2,"+
-                    "milkdispatch.fat2, milkdispatch.snf2, milkdispatch.clr2,"+
-                    "milkdispatch.rate2, milkdispatch.amt2 " +
-                    "FROM milkdispatch " +
-                    "WHERE ("+ condition +") " +
-                    "ORDER BY milkdispatch.chalanno;";
-            SHIFT_REPORT = conn.prepareStatement(qry, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            try (ResultSet rsshiftreport = SHIFT_REPORT.executeQuery()) {
-                if(rsshiftreport.next()) {
-                    rsshiftreport.beforeFirst();
-                    int i = 0;
-                    int j;
-                    while(rsshiftreport.next()) { // i loop
-                        for (j=1; j<=table_shiftreport.getColumnCount(); j++) {
-                            table_shiftreport.setValueAt(rsshiftreport.getString(j), i, j-1);
-                        }
-                        i++;
+            if (!condition.equals("")) {
+                int r;
+                int c;
+                for(r=0; r<table_shiftreport.getRowCount(); r++) {
+                    for (c=0; c<table_shiftreport.getColumnCount(); c++) {
+                        table_shiftreport.setValueAt("", r, c);
                     }
-                } 
+                }            
+                qry = "SELECT milkdispatch.chalanno, milkdispatch.scode, milkdispatch.qty2,"+
+                        "milkdispatch.fat2, milkdispatch.snf2, milkdispatch.clr2,"+
+                        "milkdispatch.rate2, milkdispatch.amt2 " +
+                        "FROM milkdispatch " +
+                        "WHERE ("+ condition +") " +
+                        "ORDER BY milkdispatch.chalanno;";
+                System.out.println(qry);
+                SHIFT_REPORT = conn.prepareStatement(qry, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                try (ResultSet rsshiftreport = SHIFT_REPORT.executeQuery()) {
+                    if(rsshiftreport.next()) {
+                        rsshiftreport.beforeFirst();
+                        int i = 0;
+                        int j;
+                        while(rsshiftreport.next()) { // i loop
+                            for (j=1; j<=table_shiftreport.getColumnCount(); j++) {
+                                table_shiftreport.setValueAt(rsshiftreport.getString(j), i, j-1);
+                            }
+                            i++;
+                        }
+                    } 
+                }
+                SHIFT_REPORT.close();
             }
-            SHIFT_REPORT.close();
+            
             gettotalcollection();
         } catch (SQLException ex) {
             Logger.getLogger(milkdispatch.class.getName()).log(Level.SEVERE, null, ex);
@@ -1784,10 +1787,12 @@ private boolean getrate2() throws SQLException {
             
             //System.err.println(condition);
             
-            if ((dtpdate.getDate() != null || !dtpdate.getDate().equals("")) 
-                    && (dtpdate1.getDate() != null || !dtpdate1.getDate().equals(""))) {
-                
-                //System.out.println(dtpdate.getDate());
+            System.out.println(dtpdate.getDate());
+            
+            Date date1 = dtpdate.getDate();
+            Date date2 = dtpdate1.getDate();
+            
+            if (date1 != null && date2 != null && !condition.equals("")) {
                 
                 coll_qry = "SELECT Sum(milkdispatch.qty1) AS SumOfqty1 " +
                     "FROM milkdispatch " +

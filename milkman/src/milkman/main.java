@@ -110,12 +110,12 @@ public class main extends javax.swing.JFrame {
                      lbllogo.setVerticalAlignment((int) JFrame.BOTTOM_ALIGNMENT);
                      lbllogo.setBounds(0, 0, this.desktopPane.getWidth(), this.desktopPane.getHeight());
                }
-               //methods.producerdefaultlgrid = rs.getInt("producerdefaultlgrid");
-               //methods.milkpurchasedefaultlgrid = rs.getInt("milkpurchasedefaultlgrid");
-               //methods.milkselldefaultlgrid = rs.getInt("milkselldefaultlgrid");
-               //methods.cashdefaultlgrid = rs.getInt("cashdefaultlgrid");
-               //methods.sanghdefaultlgrid = rs.getInt("sanghdefaultid");
-               //methods.CSCS_command = rs.getBoolean("CSCS_command");
+               methods.producerdefaultlgrid = rs.getInt("producerdefaultlgrid");
+               methods.milkpurchasedefaultlgrid = rs.getInt("milkpurchasedefaultlgrid");
+               methods.milkselldefaultlgrid = rs.getInt("milkselldefaultlgrid");
+               methods.cashdefaultlgrid = rs.getInt("cashdefaultlgrid");
+               methods.sanghdefaultlgrid = rs.getInt("sanghdefaultid");
+               methods.CSCS_command = rs.getBoolean("CSCS_command");
                
                break;   
             }
@@ -229,6 +229,7 @@ public class main extends javax.swing.JFrame {
                 methods.sms_senderid = rs.getString("sms_senderid");
                 methods.sms_username = rs.getString("sms_userid");
                 methods.sms_password = rs.getString("sms_password");
+                methods.sms_url = rs.getString("sms_url");
 
                 methods.ratechartcalcbase_CM = rs.getString("ratechartcalcbase_CM");
                 methods.max_cmclr = rs.getDouble("max_cmclr");

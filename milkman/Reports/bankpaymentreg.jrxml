@@ -19,7 +19,9 @@
      producer.`bankid` AS producer_bankid,
      producer.`acno` AS producer_acno,
      config.`bank` AS config_bank,
-     config.`bankacno` AS config_bankacno
+     config.`bankacno` AS config_bankacno,
+     producer.`ifsccode` AS producer_ifsccode,
+     producer.`branch` AS producer_branch
 FROM
      `milkCollectionBill` milkCollectionBill INNER JOIN `producer` producer ON milkCollectionBill.`prod_code` = producer.`ID`,
      `config` config
@@ -40,6 +42,8 @@ WHERE
 	<field name="producer_acno" class="java.lang.String"/>
 	<field name="config_bank" class="java.lang.String"/>
 	<field name="config_bankacno" class="java.lang.String"/>
+	<field name="producer_ifsccode" class="java.lang.String"/>
+	<field name="producer_branch" class="java.lang.String"/>
 	<variable name="var_recordno" class="java.lang.Integer" calculation="Count">
 		<variableExpression><![CDATA[$F{producer_ID}]]></variableExpression>
 	</variable>
@@ -68,7 +72,7 @@ WHERE
 				<text><![CDATA[देयक रक्कम]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="9364c632-996c-4304-bad5-732a8cc22469" mode="Opaque" x="305" y="128" width="121" height="27"/>
+				<reportElement uuid="9364c632-996c-4304-bad5-732a8cc22469" mode="Opaque" x="234" y="128" width="121" height="27"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
 				</textElement>
@@ -142,13 +146,20 @@ WHERE
 				</textElement>
 				<textFieldExpression><![CDATA[$F{config_firmname}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement uuid="4bb22af3-e2ec-4bac-afd1-8cf72e5cf9ac" mode="Opaque" x="358" y="128" width="81" height="27"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[IFSC Code]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="29" splitType="Stretch">
 			<printWhenExpression><![CDATA[$F{producer_acno} != ""]]></printWhenExpression>
 			<textField>
-				<reportElement uuid="ba9aa28a-2f57-4358-9fdb-6cc9a5d30219" mode="Opaque" x="305" y="2" width="121" height="20"/>
+				<reportElement uuid="ba9aa28a-2f57-4358-9fdb-6cc9a5d30219" mode="Opaque" x="232" y="2" width="121" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="12" pdfFontName="Helvetica" isPdfEmbedded="true"/>
 				</textElement>
@@ -165,11 +176,18 @@ WHERE
 				<reportElement uuid="a1ebd39b-a084-4efd-95f2-12871c88f07c" x="0" y="26" width="555" height="1"/>
 			</line>
 			<textField>
-				<reportElement uuid="4afd0bf1-adbb-4de4-b034-3ccb4e61b6b7" x="0" y="2" width="246" height="20"/>
+				<reportElement uuid="4afd0bf1-adbb-4de4-b034-3ccb4e61b6b7" x="0" y="2" width="228" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{producer_ID} + " - " + $F{milkCollectionBill_prod_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0098a361-c4db-4ab6-b7b4-65c72dc05340" x="357" y="2" width="82" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{producer_ifsccode}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

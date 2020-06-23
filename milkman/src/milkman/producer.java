@@ -93,7 +93,7 @@ public class producer extends javax.swing.JInternalFrame {
             PreparedStatement loadcombo = conn.prepareStatement(qry);
             rscombo = loadcombo.executeQuery();
             i = 0;
-            bankid = new String[10][3];
+            bankid = new String[20][3];
             while (rscombo.next()) {
                cmbbank.insertItemAt(rscombo.getString("bankname"), i);
                bankid[i][0] = ""+rscombo.getInt("ID");

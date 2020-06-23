@@ -73,8 +73,8 @@ public class PrintReceipt implements Printable {
          * translate by the X and Y values in the PageFormat to avoid clipping
          */
         Graphics2D g2d = (Graphics2D)g;
-        //g2d.translate(pf.getImageableX(), pf.getImageableY());
-        g2d.translate((int)pf.getImageableX(), (int)pf.getImageableY());
+        g2d.translate(pf.getImageableX(), pf.getImageableY());
+        //g2d.translate((int)pf.getImageableX(), (int)pf.getImageableY());
         
         double width = pf.getImageableWidth();
         double height = pf.getImageableHeight();
@@ -85,16 +85,16 @@ public class PrintReceipt implements Printable {
         //g2d.drawRect(0, 0, (int)pf.getImageableWidth() - 1, (int)pf.getImageableHeight() - 1);
         Font typeface;
         if ("Marathi".equals(methods.reciept_lang)) {
-            typeface = new Font("Mangal", Font.PLAIN, 10);
+            typeface = new Font("Mangal", Font.PLAIN, 8);
         } else {
             //typeface = new Font("Monospaced", Font.PLAIN, 8);
             //typeface = new Font("Serif Dot Digital-7", Font.PLAIN, 9);
-            typeface = new Font("Dotrice", Font.PLAIN, 10);
+            typeface = new Font("Dotrice", Font.PLAIN, 12);
         }
         FontMetrics fm = g2d.getFontMetrics(typeface);
         //g2d.setFont(g.getFont().deriveFont(10f));
         g2d.setFont(typeface);
-        int fontHeight = fm.getHeight()+2;
+        int fontHeight = fm.getHeight();
         int fontDescent = fm.getDescent();
         int curHeight = 30;
         //String text = "top";
@@ -140,7 +140,7 @@ public class PrintReceipt implements Printable {
         //g2d.drawString(data4, 0, fm.getDescent()+5);
         
         /* tell the caller that this page is part of the printed document */
-        return PAGE_EXISTS;
+        return Printable.PAGE_EXISTS;
     }
     
 }
